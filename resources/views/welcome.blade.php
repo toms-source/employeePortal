@@ -16,6 +16,7 @@
 
     </head>
     <body class="antialiased">
+
         @livewireScripts
     </body>
 </html>
