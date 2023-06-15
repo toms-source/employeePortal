@@ -1,7 +1,8 @@
 <div>
     <form wire:submit.prevent="save">
         <label for="reason">Document Type</label>
-        <textarea wire:model="reason" id="reason" cols="100" rows="5"></textarea>
+        <p>Note: </p>
+        <textarea wire:model="reason" id="reason" cols="50" rows="5"></textarea>
      
         <button type="submit">Submit</button>
     </form>
