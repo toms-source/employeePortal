@@ -14,8 +14,13 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-
+                        <h3>Leave Request</h3>
                         @livewire('timeoff')
+                            <br>
+                            <br>
+                            <br>
+                        <h3>Document Request</h3>
+                        @livewire('document-request-form')
 
                     </div>
                 </div>
