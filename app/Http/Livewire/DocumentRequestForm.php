@@ -8,7 +8,7 @@ use App\Models\DocumentRequest;
 class DocumentRequestForm extends Component
 {
     public $reason;
-
+  
     public function save()
     {
         $this->validate([
@@ -25,6 +25,8 @@ class DocumentRequestForm extends Component
 
         // Clear the form input
         $this->reset(['reason']);
+        
+        $this->emit('newAdded');
     }
 
     public function render()

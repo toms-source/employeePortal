@@ -27,6 +27,9 @@ class Loan extends Component
 
       
         $this->reset(['amount', 'reason']);
+
+        
+        $this->emit('newAdded');
     }
 
     public function render()

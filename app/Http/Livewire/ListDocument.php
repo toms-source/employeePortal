@@ -8,11 +8,28 @@ use Livewire\WithPagination;
 
 class ListDocument extends Component
 {
-use WithPagination;
+    use WithPagination;
+    public $idDelete;
+    protected $listeners = ['newAdded' => 'refreshList'];
 
+    public function refreshList(){
+        $this->resetPage();
+    }
+    public function deleteRequ($id)
+    { 
+        $this->emit('deleteReq');
+        $this->idDelete = $id;
+    }
 
-    
-    
+    public function deleteRequest(){
+        $query = DocumentRequest::query();
+
+        $id = '%' . $this->idDelete . '%';
+        $query  = DocumentRequest::where('id', 'like', $id)->delete();
+        
+        $this->resetPage();
+    }
+
     public function render()
     {
         $query = DocumentRequest::query();
