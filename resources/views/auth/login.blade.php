@@ -2,10 +2,17 @@
 
 @section('content')
 <div class="container">
+    
     <div class="row justify-content-center">
-        <div class="col-md-8">
+       
+        <div class="col-md-6"> 
+            <div class="text-center">
+                <i class="fa-solid fa-users" style="color: #404040; font-size: 3rem;" ></i>
+                 <h4>Employee Management System</h4>
+            </div>
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+               
+                <div class="card-header fw-bold"  style="background-color: #0079FF; color:white;"> <i class="fa-solid fa-lock px-1"></i>Admin</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -52,7 +59,7 @@
                         </div>
 
                         <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
+                            <div class=" offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
