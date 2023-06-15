@@ -22,12 +22,19 @@
                         @endif
                         <h3>Leave Request</h3>
                         @livewire('timeoff')
+                        @livewire('list-leave')
                             <br>
                             <br>
                             <br>
                         <h3>Document Request</h3>
                         @livewire('document-request-form')
-
+                        @livewire('list-document')
+                        <br>
+                        <br>
+                        <br>
+                        <h3>Loan Request</h3>
+                        @livewire('loan')
+                        @livewire('list-loan')
                     </div>
                 </div>
             </div>

@@ -1,36 +1,39 @@
 <?php
 
 namespace App\Http\Livewire;
-
+use App\Models\Payadvance;
 use Livewire\Component;
-use App\Models\DocumentRequest;
 
-class DocumentRequestForm extends Component
+class Loan extends Component
 {
+    public $amount;
     public $reason;
-  
+
     public function save()
     {
         $this->validate([
+            'amount' => 'required|numeric|min:0',
             'reason' => 'required|string',
         ]);
 
-        DocumentRequest::create([
+        Payadvance::create([
             'user_id' => auth()->id(),
+            'amount' => $this->amount,
             'reason' => $this->reason,
             'status' => 'Pending',
         ]);
 
-        session()->flash('message', 'Document Request successfully submitted.');
+        session()->flash('message', 'Pay Advance Request successfully submitted.');
 
-        // Clear the form input
-        $this->reset(['reason']);
+      
+        $this->reset(['amount', 'reason']);
+
         
         $this->emit('newAdded');
     }
 
     public function render()
     {
-        return view('livewire.document-request-form');
+        return view('livewire.loan');
     }
 }

@@ -1,9 +1,11 @@
 <div>
     <form wire:submit.prevent="save">
-        <label for="reason">Document Type</label>
-        <p>Note: </p>
-        <textarea wire:model="reason" id="reason" cols="50" rows="5"></textarea>
-     
+        <label for="amount">Amount</label>
+        <input type="number" id="amount" wire:model="amount" required>
+        
+        <label for="reason">Reason</label>
+        <textarea id="reason" wire:model="reason" required></textarea>
+        
         <button type="submit">Submit</button>
     </form>
     

@@ -30,7 +30,10 @@ class Timeoff extends Component
 
         session()->flash('message', 'Leave Request successfully submitted.');
         
+
         $this->reset(['start_date', 'end_date', 'reason']);
+        
+        $this->emit('newAdded');
     }
     public function render()
     {
