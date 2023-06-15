@@ -16,6 +16,8 @@
 
     </head>
     <body class="antialiased">
+
+        @livewire('timeoff')
         @livewireScripts
     </body>
 </html>
