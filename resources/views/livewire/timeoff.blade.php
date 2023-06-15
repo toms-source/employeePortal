@@ -9,7 +9,7 @@
         <label for="reason">Reason</label>
         <textarea id="reason" wire:model="reason" required></textarea>
 
-        <button type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
     </form>
 
 
