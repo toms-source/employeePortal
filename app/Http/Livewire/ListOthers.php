@@ -35,7 +35,7 @@ class ListOthers extends Component
     {
         $query = OtherRequests::query();
         return view('livewire.list-others', [
-            'otherReq' => $query->paginate(5,['*'],'other'),
+            'otherReq' => $query->paginate(5),
             //,['*'],'docu'
         ]);
     }
