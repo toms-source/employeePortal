@@ -12,7 +12,8 @@ class DocumentRequest extends Model
     protected $fillable = [
         'user_id', 
         'reason', 
-        'status'
+        'status',
+        'file_path'
     ];
 
 }

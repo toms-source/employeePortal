@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('reason');
             $table->string('status')->default('pending');
+            $table->string('file_path')->nullable();
             $table->timestamps();
         });
     }
