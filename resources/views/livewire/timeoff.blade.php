@@ -1,15 +1,22 @@
 <div>
     <form wire:submit.prevent="save">
-        <label for="start_date">Start Date</label>
-        <input type="date" id="start_date" wire:model="start_date" required>
+       
+       {{-- Date --}}
+        <div class="text-center">
+            <label for="start_date" class="fw-bold">Start Date</label>
+            <input type="date" id="start_date" wire:model="start_date" required>
+        
+            <label for="end_date" class="fw-bold">End Date</label>
+            <input type="date" id="end_date" wire:model="end_date" required>
+        </div>
 
-        <label for="end_date">End Date</label>
-        <input type="date" id="end_date" wire:model="end_date" required>
-
-        <label for="reason">Reason</label>
-        <textarea id="reason" wire:model="reason" required></textarea>
-
-        <button class="btn btn-primary" type="submit">Submit</button>
+        {{-- Reason --}}
+        <div class="my-3">
+            <input type="text" class="form-control"placeholder="Reason"wire:model="reason">
+        </div>
+        <div class="d-flex justify-content-end">
+             <button class="btn btn-success" type="submit">Submit</button>
+        </div>
     </form>
 
 
