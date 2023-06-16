@@ -18,10 +18,24 @@
                     </div>
                 </div>
 
-                <div class="col-md-12">
+                <div class="col-md-12 mt-3">
                     <div class="card">
                         <div class="card-header">{{ __('Leave Request') }}</div>
                         @livewire('admin-leave-requests')
+                    </div>
+                </div>
+
+                <div class="col-md-12 mt-3">
+                    <div class="card">
+                        <div class="card-header">{{ __('Loan Request') }}</div>
+                        @livewire('admin-loan-requests')
+                    </div>
+                </div>
+
+                <div class="col-md-12 mt-3">
+                    <div class="card">
+                        <div class="card-header">{{ __('Loan Request') }}</div>
+                        @livewire('admin-other-requests')
                     </div>
                 </div>
 

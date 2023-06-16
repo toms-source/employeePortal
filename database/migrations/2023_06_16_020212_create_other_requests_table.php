@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('request_type');
             $table->text('request_details');
+            $table->text('answer')->nullable();
             $table->string('status')->default('pending');
             $table->timestamps();
         });

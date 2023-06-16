@@ -12,7 +12,8 @@ class OtherRequests extends Model
         'user_id', 
         'request_type', 
         'request_details', 
-        'status'
+        'status',
+        'answer'
     ];
 
 }

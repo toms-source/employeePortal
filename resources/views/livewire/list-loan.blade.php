@@ -3,6 +3,7 @@
         <table class="table table-striped table-bordered">
             <thead>
                 <tr class="text-center">
+                    <th>Amount</th>
                     <th>Reason</th>
                     <th>Status</th>
                     <th>Actions</th>
@@ -14,6 +15,7 @@
         
                         <td>{{ $loans->amount }}</td>
                         <td>{{ $loans->reason }}</td>
+                        <td>{{ $loans->status }}</td>
                         <td> 
                             {{-- <button class="fa fa-edit border-0" data-target="#ope" type="button" data-toggle="modal"></button> --}}
                             <a><i class="fa-solid fa-trash-can"style="color: #e61919;" wire:click="deleteRequestLoan({{$loans->id}})"></i></a>
