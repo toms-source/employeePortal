@@ -3,6 +3,12 @@
 @section('content')
     <div class="container">
     
+        <nav class="navbar" style="color: aqua">
+            <div class="container-fluid">
+              <span class="navbar-brand mb-0 h1">Navbar</span>
+            </div>
+          </nav>
+    
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -29,6 +35,11 @@
                         <h3>Loan Request</h3>
                         @livewire('loan')
                         @livewire('list-loan')
+                  
+
+                        <h3>Other Request</h3>
+                        @livewire('other-request')
+                
                     </div>
                 </div>
             </div>
