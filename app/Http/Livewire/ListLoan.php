@@ -16,9 +16,9 @@ class ListLoan extends Component
         $this->resetPage();
     }
 
-    public function deleteRequ($id)
+    public function deleteRequestLoan($id)
     { 
-        $this->emit('deleteReq');
+        $this->emit('deleteReqLo');
         $this->idDelete = $id;
     }
 

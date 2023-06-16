@@ -15,9 +15,9 @@ class ListDocument extends Component
     public function refreshList(){
         $this->resetPage();
     }
-    public function deleteRequ($id)
+    public function deleteRequestDocu($id)
     { 
-        $this->emit('deleteReq');
+        $this->emit('deleteReqD');
         $this->idDelete = $id;
     }
 
@@ -35,6 +35,7 @@ class ListDocument extends Component
         $query = DocumentRequest::query();
         return view('livewire.list-document', [
             'docuReq' => $query->paginate(5),
+            //,['*'],'docu'
         ]);
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @livewireStyles
 @section('content')
-    <div class="">
+    <div class="container">
     
         <div class="">
             <div class="container-fluid">
@@ -67,7 +67,7 @@
                         <h3>Loan Request</h3>
                         @livewire('loan')
                         @livewire('list-loan')
-                    </div> --}}
+                    </div>
                 </div>
             </div>
         </div>
