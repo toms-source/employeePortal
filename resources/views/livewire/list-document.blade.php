@@ -5,6 +5,7 @@
                 <tr class="text-center">
                     <th>Reason</th>
                     <th>Status</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>

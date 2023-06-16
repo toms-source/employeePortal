@@ -7,7 +7,7 @@
                     <th>Status</th>
                     <th>Start Date</th>
                     <th>End Date</th>
-                    <th>Action</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -18,8 +18,7 @@
                         <td>{{ $leaves->status }}</td>
                         <td>{{ $leaves->start_date }}</td>
                         <td>{{ $leaves->end_date }}</td>
-                        <td> 
-                            {{-- <button class="fa fa-edit border-0" data-target="#ope" type="button" data-toggle="modal"></button> --}}
+                        <td>
                             <a><i class="fa-solid fa-trash-can"style="color: #e61919;" wire:click="deleteRequ({{$leaves->id}})"></i></a>
                         </td>
                     </tr>
