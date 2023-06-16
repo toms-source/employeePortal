@@ -17,6 +17,10 @@
     </head>
     <body class="antialiased">
 
+
+        <h3>Other Request</h3>
+        @livewire('other-request')
+
         @livewireScripts
     </body>
 </html>
