@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\models\OtherRequests;
+use App\Models\OtherRequests;
 
 
 class OtherRequest extends Component
@@ -29,6 +29,8 @@ class OtherRequest extends Component
 
    
         $this->reset(['request_type', 'request_details']);
+
+        $this->emit('newAdded');
     }
 
     public function render()
