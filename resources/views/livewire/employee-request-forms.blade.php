@@ -34,6 +34,14 @@
                             </div>
                         </div>
 
+                        <div class="card my-4">
+                            <div class="card-body">
+                                <h5>Other Request</h5>
+                                @livewire('other-request')
+                                @livewire('list-others')
+                            </div>
+                        </div>
+
                     </div>
 
 
