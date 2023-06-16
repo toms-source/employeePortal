@@ -31,10 +31,10 @@
 <body>
     
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #3d4ecc;">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #0079FF;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}" style="color:white;">
-                    <i class="fa-solid fa-scale-unbalanced" style="padding: 5px"></i>BND Legislative
+                    <i class="fa-solid fa-users mx-3" style="color:white;" ></i>BND Employee Portal
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
