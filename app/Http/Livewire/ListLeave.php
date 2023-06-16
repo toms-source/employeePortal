@@ -28,7 +28,7 @@ class ListLeave extends Component
         $id = '%' . $this->idDelete . '%';
         $query  = LeaveRequest::where('id', 'like', $id)->delete();
         
-        $this->resetPage();
+        $this->refreshList();
     }
 
     public function render()

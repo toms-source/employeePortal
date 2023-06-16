@@ -3,38 +3,37 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\DocumentRequest;
+use App\Models\OtherRequests;
 use Livewire\WithPagination;
-
-class ListDocument extends Component
-{
+class ListOthers extends Component
+{   
     use WithPagination;
     public $idDelete;
     protected $listeners = ['newAdded' => 'refreshList'];
 
     public function refreshList(){
-        $this->resetPage();
+        $this->resetPage('other');
     }
-    public function deleteRequestDocu($id)
+    public function deleteRequestOth($id)
     { 
-        $this->emit('deleteReqD');
+        $this->emit('deleteReqO');
         $this->idDelete = $id;
     }
 
     public function deleteRequest(){
-        $query = DocumentRequest::query();
+        $query = OtherRequests::query();
 
         $id = '%' . $this->idDelete . '%';
-        $query  = DocumentRequest::where('id', 'like', $id)->delete();
+        $query  = OtherRequests::where('id', 'like', $id)->delete();
         
         $this->refreshList();
     }
 
     public function render()
     {
-        $query = DocumentRequest::query();
-        return view('livewire.list-document', [
-            'docuReq' => $query->paginate(5),
+        $query = OtherRequests::query();
+        return view('livewire.list-others', [
+            'otherReq' => $query->paginate(5,['*'],'other'),
             //,['*'],'docu'
         ]);
     }

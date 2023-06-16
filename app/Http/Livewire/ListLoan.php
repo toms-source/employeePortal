@@ -28,7 +28,7 @@ class ListLoan extends Component
         $id = '%' . $this->idDelete . '%';
         $query  = Payadvance::where('id', 'like', $id)->delete();
         
-        $this->resetPage();
+        $this->refreshList();
     }
     public function render()
     {
