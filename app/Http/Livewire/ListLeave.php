@@ -11,7 +11,9 @@ class ListLeave extends Component
     use WithPagination;
     public $idDelete;
     protected $listeners = ['newAdded' => 'refreshList'];
+    protected $paginationTheme = 'bootstrap';
 
+    
     public function refreshList(){
         $this->resetPage();
     }

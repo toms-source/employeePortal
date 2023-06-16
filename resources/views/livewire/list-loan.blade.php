@@ -22,7 +22,7 @@
                 @endforeach
             </tbody>
         </table>
-        <div>{{ $loan->links('pagination::bootstrap-5') }}</div>
+        <div>{{ $loan->links() }}</div>
         
     </div>
     <div class="modal fade" id="deleteReqLo" tabindex="-1" role="dialog"

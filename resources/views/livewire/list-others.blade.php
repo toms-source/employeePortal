@@ -22,7 +22,7 @@
                 @endforeach
             </tbody>
         </table>
-        <div>{{ $otherReq->links('pagination::bootstrap-5') }}</div>
+        <div>{{ $otherReq->links() }}</div>
         
     </div>
     <div class="modal fade" id="deleteReqO" tabindex="-1" role="dialog"

@@ -26,7 +26,7 @@
                 @endforeach
             </tbody>
         </table>
-        <div>{{ $leave->links('pagination::bootstrap-5') }}</div>
+        <div>{{ $leave->links() }}</div>
         
     </div>
     <div class="modal fade" id="deleteReqLe" tabindex="-1" role="dialog"
