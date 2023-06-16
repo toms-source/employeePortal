@@ -15,7 +15,7 @@
                         <td>{{ $loans->reason }}</td>
                         <td> 
                             {{-- <button class="fa fa-edit border-0" data-target="#ope" type="button" data-toggle="modal"></button> --}}
-                            <a><i class="fa-solid fa-trash-can"style="color: #e61919;" wire:click="deleteRequ({{$loans->id}})"></i></a>
+                            <a><i class="fa-solid fa-trash-can"style="color: #e61919;" wire:click="deleteRequestLoan({{$loans->id}})"></i></a>
                         </td>
                     </tr>
                 @endforeach
@@ -24,7 +24,7 @@
         <div>{{ $loan->links('pagination::bootstrap-5') }}</div>
         
     </div>
-    <div class="modal fade" id="deleteReq" tabindex="-1" role="dialog"
+    <div class="modal fade" id="deleteReqLo" tabindex="-1" role="dialog"
     aria-labelledby="ordinanceAddedModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -49,7 +49,7 @@
 
 <script>
     document.addEventListener('livewire:load', function() {
-        window.livewire.on('deleteReq',() =>{
+        window.livewire.on('deleteReqLo',() =>{
             console.log('ordinanceAdded event received');
 
             // document.getElementById('ordinanceDelete').classList.remove('show');
@@ -57,7 +57,7 @@
             // document.getElementsByClassName('modal-backdrop')[0].remove();
 
             var modalOrdinanceAdded = new bootstrap.Modal(document.getElementById(
-                'deleteReq'));
+                'deleteReqLo'));
             modalOrdinanceAdded.show();
         });
     });

@@ -16,9 +16,9 @@ class ListLeave extends Component
         $this->resetPage();
     }
 
-    public function deleteRequ($id)
+    public function deleteRequestLeave($id)
     { 
-        $this->emit('deleteReq');
+        $this->emit('deleteReqLe');
         $this->idDelete = $id;
     }
 
