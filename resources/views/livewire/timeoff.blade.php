@@ -13,10 +13,13 @@
 
             <div class="form-group col-md-12">
                 <label for="reason">Reason</label>
-                <textarea type="text" class="form-control" placeholder="Note..." id="reason" rows="5" wire:model="reason" required ></textarea>
+                <input type="text" class="form-control" placeholder="Reason" id="reason" wire:model="reason" required >
             </div>
 
-           
+            <div class="form-group col-md-6">
+                <label for="exampleInputPassword1">Description</label>
+                <textarea name="txtdescription" class="form-control" placeholder="Description"></textarea>
+            </div>        
         </div>
             <button class="btn btn-success btn-lg btn-block" type="submit">Submit</button>         
     </form>

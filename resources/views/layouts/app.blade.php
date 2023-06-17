@@ -31,6 +31,7 @@
 <body>
     
     <div id="app">
+        
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #0079FF;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}" style="color:white;">
@@ -72,7 +73,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="">{{ Auth::user()->name }}</a>
+                                    <a class="dropdown-item" href="">{{ Auth::user()->first_name }}</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
