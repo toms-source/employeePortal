@@ -1,12 +1,16 @@
 <div>
     <form wire:submit.prevent="save">
-        <label for="amount">Amount</label>
-        <input type="number" id="amount" wire:model="amount" required>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="amount">Amount</label>
+            <input type="number" class="form-control" id="amount" wire:model="amount" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="reason">Reason</label>
+            <textarea id="reason" class="form-control" placeholder="Reason" wire:model="reason" required></textarea>
+        </div>
         
-        <label for="reason">Reason</label>
-        <textarea id="reason" wire:model="reason" required></textarea>
-        
-        <button type="submit">Submit</button>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>         
     </form>
     
     @if (session()->has('message'))
