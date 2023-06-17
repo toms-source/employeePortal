@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\DocumentRequest;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class ListDocument extends Component
 {
@@ -34,7 +35,14 @@ class ListDocument extends Component
 
     public function render()
     {
-        $query = DocumentRequest::query();
+        $user = Auth::user();
+        $id = Auth::id();
+        $user_id = "%" . $id . "%";
+
+        $query = DocumentRequest::query()
+            ->where('status', '<>', "Approved")
+            ->where('user_id', 'like', $user_id);
+
         return view('livewire.list-document', [
             'docuReq' => $query->paginate(5),
             //,['*'],'docu'

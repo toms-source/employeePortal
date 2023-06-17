@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\LeaveRequest;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class ListLeave extends Component
 {
@@ -35,7 +36,14 @@ class ListLeave extends Component
 
     public function render()
     {
-        $query = LeaveRequest::query();
+        $user = Auth::user();
+        $id = Auth::id();
+        $user_id = "%" . $id . "%";
+
+        $query = LeaveRequest::query()
+            ->where('status', '<>', "Approved")
+            ->where('user_id', 'like', $user_id);
+
         return view('livewire.list-leave', [
             'leave' => $query->paginate(5),
         ]);
