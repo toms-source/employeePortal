@@ -6,7 +6,7 @@
         <textarea class="form-control" wire:model="reason" id="reason" placeholder="Note..." rows="5"></textarea>
      </div>
 
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>         
+        <button class="btn btn-success btn-lg btn-block" type="submit">Submit</button>         
     </form>
     
     @if (session()->has('message'))

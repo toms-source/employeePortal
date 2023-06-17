@@ -11,12 +11,17 @@
                 <input type="date"  class="form-control" id="end_date" wire:model="end_date" required>
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-12">
                 <label for="reason">Reason</label>
                 <input type="text" class="form-control" placeholder="Reason" id="reason" wire:model="reason" required >
-            </div>       
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="exampleInputPassword1">Description</label>
+                <textarea name="txtdescription" class="form-control" placeholder="Description"></textarea>
+            </div>        
         </div>
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>         
+            <button class="btn btn-success btn-lg btn-block" type="submit">Submit</button>         
     </form>
 
     @if (session()->has('message'))
