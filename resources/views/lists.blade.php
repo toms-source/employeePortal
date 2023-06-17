@@ -8,9 +8,7 @@
 </head>
 <body>
     
-    @livewire('list-document')
-    @livewire('list-leave')
-    @livewire('list-loan')
+   
     @livewireScripts
 </body>
 </html>

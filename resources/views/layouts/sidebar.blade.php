@@ -32,7 +32,7 @@
 
         <hr style="">
         <div class="btns">
-            <a class="nav-link collapsible-link" href="{{ route('document') }}">
+            <a class="nav-link" href="{{ route('dashboard') }}">
                 <i class="icon fa-solid fa-home" style="color: #000000;"></i>Main
             </a>
         </div>

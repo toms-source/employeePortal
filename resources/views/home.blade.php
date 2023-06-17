@@ -36,6 +36,8 @@
                         <h3>Other Request</h3>
                         @livewire('other-request')
                 
+
+                        @livewire('dashboard')
                     </div>
                 </div>
             </div>

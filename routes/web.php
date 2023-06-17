@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
 
 Route::get('/document/pending', function () {
@@ -53,6 +53,10 @@ Route::get('/other/pending', function () {
 Route::get('/other/approved', function () {
     return view('dashboard.other-request-app');
 })->name('other2');
+
+Route::get('/dashboard', function () {
+    return view('dashboard.main');
+})->name('dashboard');
 
 
 
