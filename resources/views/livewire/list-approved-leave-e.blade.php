@@ -4,6 +4,8 @@
             <thead>
                 <tr class="text-center">
                     <th>Reason</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
                     <th>Status</th>
                 </tr>
             </thead>
@@ -12,6 +14,8 @@
                     <tr class="text-center">
         
                         <td>{{ $appLeaves->reason }}</td>
+                        <td>{{ $appLeaves->start_date }}</td>
+                        <td>{{ $appLeaves->end_date }}</td>
                         <td>{{ $appLeaves->status }}</td>
                         {{-- <td>  --}}
                             {{-- <button class="fa fa-edit border-0" data-target="#ope" type="button" data-toggle="modal"></button> --}}

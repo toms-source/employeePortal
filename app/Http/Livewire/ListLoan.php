@@ -41,7 +41,7 @@ class ListLoan extends Component
         $user_id = "%" . $id . "%";
 
         $query = Payadvance::query()
-            ->where('status', '<>', "Approved")
+            ->where('status', 'like', "Pending")
             ->where('user_id', 'like', $user_id);
 
         return view('livewire.list-loan', [

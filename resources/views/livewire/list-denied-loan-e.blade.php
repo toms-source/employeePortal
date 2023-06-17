@@ -3,20 +3,16 @@
         <table class="table table-striped table-bordered">
             <thead>
                 <tr class="text-center">
-                    <th>Answer</th>
-                    <th>Type</th>
-                    <th>Details</th>
+                    <th>Reason</th>
                     <th>Status</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($appOther as $appOthers)
+                @foreach ($denLoan as $denLoans)
                     <tr class="text-center">
         
-                        <td>{{ $appOthers->answer }}</td>
-                        <td>{{ $appOthers->request_type }}</td>
-                        <td>{{ $appOthers->request_details }}</td>
-                        <td>{{ $appOthers->status }}</td>
+                        <td>{{ $denLoans->reason }}</td>
+                        <td>{{ $denLoans->status }}</td>
                         {{-- <td>  --}}
                             {{-- <button class="fa fa-edit border-0" data-target="#ope" type="button" data-toggle="modal"></button> --}}
                             {{-- <a><i class="fa-solid fa-trash-can"style="color: #e61919;" wire:click="deleteRequestDocu({{$docuReqs->id}})"></i></a> --}}
@@ -26,7 +22,7 @@
                 @endforeach
             </tbody>
         </table>
-        <div>{{ $appOther->links() }}</div>
+        <div>{{ $denLoan->links() }}</div>
         
     </div>
     <div class="modal fade" id="deleteReqD" tabindex="-1" role="dialog"

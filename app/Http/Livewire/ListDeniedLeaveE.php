@@ -7,7 +7,7 @@ use App\Models\LeaveRequest;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 
-class ListApprovedLeaveE extends Component
+class ListDeniedLeaveE extends Component
 {
     use WithPagination;
     protected $listeners = ['newApproved' => 'refreshList'];
@@ -25,11 +25,11 @@ class ListApprovedLeaveE extends Component
         $user_id = "%" . $id . "%";
 
         $query = LeaveRequest::query()
-            ->where('status', 'like', "Approved")
+            ->where('status', 'like', "Denied")
             ->where('user_id', 'like', $user_id);
 
-        return view('livewire.list-approved-leave-e', [
-            'appLeave' => $query->paginate(5),
+        return view('livewire.list-denied-leave-e', [
+            'denLeave' => $query->paginate(5),
             //,['*'],'docu'
         ]);
     }

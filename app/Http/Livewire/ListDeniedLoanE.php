@@ -2,12 +2,12 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Payadvance;
 use Livewire\Component;
-use App\Models\LeaveRequest;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 
-class ListApprovedLeaveE extends Component
+class ListDeniedLoanE extends Component
 {
     use WithPagination;
     protected $listeners = ['newApproved' => 'refreshList'];
@@ -24,12 +24,12 @@ class ListApprovedLeaveE extends Component
         $id = Auth::id();
         $user_id = "%" . $id . "%";
 
-        $query = LeaveRequest::query()
-            ->where('status', 'like', "Approved")
+        $query = Payadvance::query()
+            ->where('status', 'like', "Denied")
             ->where('user_id', 'like', $user_id);
 
-        return view('livewire.list-approved-leave-e', [
-            'appLeave' => $query->paginate(5),
+        return view('livewire.list-denied-loan-e', [
+            'denLoan' => $query->paginate(5),
             //,['*'],'docu'
         ]);
     }

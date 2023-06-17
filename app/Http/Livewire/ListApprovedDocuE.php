@@ -25,7 +25,7 @@ class ListApprovedDocuE extends Component
         $user_id = "%" . $id . "%";
 
         $query = DocumentRequest::query()
-            ->where('status', 'like', "%Approved%")
+            ->where('status', 'like', "Approved")
             ->where('user_id', 'like', $user_id);
 
         return view('livewire.list-approved-docu-e', [
