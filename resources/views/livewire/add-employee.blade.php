@@ -66,6 +66,14 @@
             @enderror
         </div>
 
+        <div class="mb-3 ml-3 mr-3">
+            <label for="password" class="form-label">Password</label>
+            <input wire:model="password" type="password" name="employee_status" class="form-control" required>
+            @error('password')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+
         <!-- Add more input fields as needed -->
 
         <button type="submit" class="btn btn-primary ml-3">Add Employee</button>

@@ -1,24 +1,28 @@
 <div>
     <form wire:submit.prevent="save">
-       
-       {{-- Date --}}
-        <div class="text-center">
-            <label for="start_date" class="fw-bold">Start Date</label>
-            <input type="date" id="start_date" wire:model="start_date" required>
-        
-            <label for="end_date" class="fw-bold">End Date</label>
-            <input type="date" id="end_date" wire:model="end_date" required>
-        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="start_date">Start date</label>
+                <input type="date" class="form-control" id="start_date" wire:model="start_date" required>
+            </div>
 
-        {{-- Reason --}}
-        <div class="my-3">
-            <input type="text" class="form-control"placeholder="Reason"wire:model="reason">
+            <div class="form-group col-md-6">
+                <label for="end_date">End date</label>
+                <input type="date"  class="form-control" id="end_date" wire:model="end_date" required>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="reason">Reason</label>
+                <input type="text" class="form-control" placeholder="Reason" id="reason" wire:model="reason" required >
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="exampleInputPassword1">Description</label>
+                <textarea name="txtdescription" class="form-control" placeholder="Description"></textarea>
+            </div>        
         </div>
-        <div class="d-flex justify-content-end">
-             <button class="btn btn-success" type="submit">Submit</button>
-        </div>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>         
     </form>
-
 
     @if (session()->has('message'))
         <div class="alert alert-success">

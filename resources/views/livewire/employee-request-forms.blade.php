@@ -2,6 +2,8 @@
 @livewireStyles
 @section('content')
     <div class="container-fluid">
+
+        {{-- sidebar --}}
         <div class="card shadow p-3 mb-5 bg-white rounded">
             <h3 class="px-4"><i class="fa-solid fa-chart-bar mr-3"></i>
                 {{ __('Dashboard') }}
@@ -46,18 +48,6 @@
                         </div>
 
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-                 
          </div>
      </div>
 @endsection
