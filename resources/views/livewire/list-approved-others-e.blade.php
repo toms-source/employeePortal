@@ -4,7 +4,7 @@
             <thead>
                 <tr class="text-center">
                     <th>Reason</th>
-                    <th>File</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
