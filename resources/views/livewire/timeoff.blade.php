@@ -14,12 +14,7 @@
             <div class="form-group col-md-6">
                 <label for="reason">Reason</label>
                 <input type="text" class="form-control" placeholder="Reason" id="reason" wire:model="reason" required >
-            </div>
-
-            <div class="form-group col-md-6">
-                <label for="exampleInputPassword1">Description</label>
-                <textarea name="txtdescription" class="form-control" placeholder="Description"></textarea>
-            </div>        
+            </div>       
         </div>
             <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>         
     </form>
