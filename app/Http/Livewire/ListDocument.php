@@ -11,7 +11,7 @@ class ListDocument extends Component
 {
     use WithPagination;
     public $idDelete;
-    protected $listeners = ['newAdded' => 'refreshList'];
+    protected $listeners = ['newAdded' => 'refreshList','newApproved' => 'refreshList','newDenied' => 'refreshList'];
     protected $paginationTheme = 'bootstrap';
 
     
@@ -31,6 +31,7 @@ class ListDocument extends Component
         $query  = DocumentRequest::where('id', 'like', $id)->delete();
         
         $this->refreshList();
+        $this->emit('newDelete');
     }
 
     public function render()

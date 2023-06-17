@@ -11,7 +11,7 @@ class ListLeave extends Component
 {
     use WithPagination;
     public $idDelete;
-    protected $listeners = ['newAdded' => 'refreshList'];
+    protected $listeners = ['newAdded' => 'refreshList','newApproved' => 'refreshList','newDenied' => 'refreshList'];
     protected $paginationTheme = 'bootstrap';
 
     
@@ -32,6 +32,7 @@ class ListLeave extends Component
         $query  = LeaveRequest::where('id', 'like', $id)->delete();
         
         $this->refreshList();
+        $this->emit('newDelete');
     }
 
     public function render()

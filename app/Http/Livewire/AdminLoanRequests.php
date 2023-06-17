@@ -18,12 +18,14 @@ class AdminLoanRequests extends Component
     {
         $loanRequest->update(['status' => 'Approved']);
         $this->loanRequests = Payadvance::all();
+        $this->emit('newApproved');
     }
 
     public function deny(Payadvance $loanRequest)
     {
         $loanRequest->update(['status' => 'Denied']);
         $this->loanRequests = Payadvance::all();
+        $this->emit('newDenied');
     }
     public function render()
     {

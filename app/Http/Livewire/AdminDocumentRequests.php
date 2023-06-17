@@ -27,6 +27,7 @@ class AdminDocumentRequests extends Component
     {
         $documentRequest->update(['status' => 'Denied']);
         $this->documentRequests = DocumentRequest::all();
+        $this->emit('newDenied');
     }
 
     public function upload()
