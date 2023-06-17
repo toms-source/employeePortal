@@ -18,12 +18,14 @@ class AdminLeaveRequests extends Component
     {
         $leaveRequest->update(['status' => 'Approved']);
         $this->leaveRequests = LeaveRequest::all();
+        $this->emit('newApproved');
     }
 
     public function deny(LeaveRequest $leaveRequest)
     {
         $leaveRequest->update(['status' => 'Denied']);
         $this->leaveRequests = LeaveRequest::all();
+        $this->emit('newDenied');
     }
     public function render()
     {
