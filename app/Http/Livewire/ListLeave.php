@@ -42,7 +42,7 @@ class ListLeave extends Component
         $user_id = "%" . $id . "%";
 
         $query = LeaveRequest::query()
-            ->where('status', '<>', "Approved")
+            ->where('status', 'like', "Pending")
             ->where('user_id', 'like', $user_id);
 
         return view('livewire.list-leave', [

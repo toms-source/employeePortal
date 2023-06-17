@@ -25,7 +25,7 @@ class ListApprovedOthersE extends Component
         $user_id = "%" . $id . "%";
 
         $query = OtherRequests::query()
-            ->where('status', 'like', "%Approved%")
+            ->where('status', 'like', "Approved")
             ->where('user_id', 'like', $user_id);
 
         return view('livewire.list-approved-others-e', [
