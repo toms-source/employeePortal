@@ -3,11 +3,11 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\DocumentRequest;
+use App\Models\OtherRequests;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 
-class ListApprovedDocuE extends Component
+class ListApprovedOthersE extends Component
 {
     use WithPagination;
     protected $listeners = ['newApproved' => 'refreshList'];
@@ -24,12 +24,12 @@ class ListApprovedDocuE extends Component
         $id = Auth::id();
         $user_id = "%" . $id . "%";
 
-        $query = DocumentRequest::query()
+        $query = OtherRequests::query()
             ->where('status', 'like', "%Approved%")
             ->where('user_id', 'like', $user_id);
 
-        return view('livewire.list-approved-docu-e', [
-            'appDoc' => $query->paginate(5),
+        return view('livewire.list-approved-others-e', [
+            'appOther' => $query->paginate(5),
             //,['*'],'docu'
         ]);
     }

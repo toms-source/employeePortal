@@ -4,21 +4,15 @@
             <thead>
                 <tr class="text-center">
                     <th>Reason</th>
-                    <th>File</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($appDoc as $appDocs)
+                @foreach ($appLeave as $appLeaves)
                     <tr class="text-center">
         
-                        <td>{{ $appDocs->reason }}</td>
-                        <td>
-                            @if($appDocs->file_path) <!-- If the file_path is not null, display the document link -->
-                             <a href="{{ asset('storage/' . $appDocs->file_path) }}" target="_blank">Document</a>
-                            @elseif(($appDocs->file_path)==null)
-                                No File Uploaded
-                            @endif
-                        </td>
+                        <td>{{ $appLeaves->reason }}</td>
+                        <td>{{ $appLeaves->status }}</td>
                         {{-- <td>  --}}
                             {{-- <button class="fa fa-edit border-0" data-target="#ope" type="button" data-toggle="modal"></button> --}}
                             {{-- <a><i class="fa-solid fa-trash-can"style="color: #e61919;" wire:click="deleteRequestDocu({{$docuReqs->id}})"></i></a> --}}
@@ -28,7 +22,7 @@
                 @endforeach
             </tbody>
         </table>
-        <div>{{ $appDoc->links() }}</div>
+        <div>{{ $appLeave->links() }}</div>
         
     </div>
     <div class="modal fade" id="deleteReqD" tabindex="-1" role="dialog"

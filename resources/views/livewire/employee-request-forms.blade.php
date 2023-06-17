@@ -17,6 +17,7 @@
                             <h5>Leave Request</h5>
                             @livewire('timeoff')
                             @livewire('list-leave')
+                            @livewire('list-approved-leave-e')
                         </div>
                     </div>
 
@@ -36,6 +37,7 @@
                             <h5>Loan Request</h5>
                              @livewire('loan')
                             @livewire('list-loan')
+                            @livewire('list-approved-loan-e')
                         </div>
                     </div>
 
@@ -44,6 +46,7 @@
                                 <h5>Other Request</h5>
                                 @livewire('other-request')
                                 @livewire('list-others')
+                                @livewire('list-approved-others-e')
                             </div>
                         </div>
 

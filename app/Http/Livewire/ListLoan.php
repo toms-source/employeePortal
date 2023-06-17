@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Payadvance;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class ListLoan extends Component
 {
@@ -34,7 +35,14 @@ class ListLoan extends Component
     }
     public function render()
     {
-        $query = Payadvance::query();
+        $user = Auth::user();
+        $id = Auth::id();
+        $user_id = "%" . $id . "%";
+
+        $query = Payadvance::query()
+            ->where('status', '<>', "Approved")
+            ->where('user_id', 'like', $user_id);
+
         return view('livewire.list-loan', [
             'loan' => $query->paginate(5),
         ]);
