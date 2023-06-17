@@ -24,6 +24,7 @@
                             <h5>Document Request</h5>
                             @livewire('document-request-form')
                             @livewire('list-document')
+                            @livewire('list-approved-docu-e')
                         </div>
                     </div>
 

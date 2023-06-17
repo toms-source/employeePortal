@@ -41,6 +41,7 @@ class AdminDocumentRequests extends Component
 
         $this->documentRequests = DocumentRequest::all();
         $this->reset(['document', 'selectedRequest']);
+        $this->emit('newApproved');
     }
     
     public function render()
