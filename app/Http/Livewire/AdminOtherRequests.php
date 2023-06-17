@@ -25,6 +25,7 @@ class AdminOtherRequests extends Component
     {
         $request->update(['status' => 'Rejected']);
         $this->otherRequests = OtherRequests::all();
+        $this->emit('newDenied');
     }
 
     public function approveRequest()
@@ -38,6 +39,7 @@ class AdminOtherRequests extends Component
         $this->otherRequests = OtherRequests::all();
         $this->selectedRequest = null;
         $this->answer = '';
+        $this->emit('newApproved');
     }
 
     public function render()

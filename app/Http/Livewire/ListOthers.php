@@ -11,12 +11,12 @@ class ListOthers extends Component
 {   
     use WithPagination;
     public $idDelete;
-    protected $listeners = ['newAdded' => 'refreshList'];
+    protected $listeners = ['newAdded' => 'refreshList','newApproved' => 'refreshList','newDenied' => 'refreshList'];
     protected $paginationTheme = 'bootstrap';
 
     
     public function refreshList(){
-        $this->resetPage('other');
+        $this->resetPage();
     }
     public function deleteRequestOth($id)
     { 
@@ -31,6 +31,7 @@ class ListOthers extends Component
         $query  = OtherRequests::where('id', 'like', $id)->delete();
         
         $this->refreshList();
+        $this->emit('newDelete');
     }
 
     public function render()
