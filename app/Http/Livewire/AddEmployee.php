@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Employee;
+use App\Models\User;
 use Livewire\Component;
+use App\Mail\EmployeeAdded;
+use Illuminate\Support\Facades\Mail;
 
 class AddEmployee extends Component
 {
@@ -14,28 +16,31 @@ class AddEmployee extends Component
     public $department;
     public $employee_status;
     public $email;
+    public $password;
+
 
     public function render()
     {
-        $employees = Employee::all();
-        return view('livewire.add-employee',compact('employees'));
+        $employees = User::all();
+        return view('livewire.add-employee', compact('employees'));
     }
 
     public function addEmployee()
     {
         $validatedData = $this->validate([
-            'employee_number' => 'required',
+            'employee_number' => 'required|unique:users,employee_number',
             'last_name' => 'required',
             'first_name' => 'required',
             'office' => 'required',
             'department' => 'required',
             'employee_status' => 'required',
-            'email' => 'required|email|unique:employees,email',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required'
         ]);
 
-        Employee::create($validatedData);
+        User::create($validatedData);
+        Mail::to($this->email)->send(new EmployeeAdded($this->password));
 
-        // Reset form fields after saving
         $this->reset([
             'employee_number',
             'last_name',
@@ -44,6 +49,7 @@ class AddEmployee extends Component
             'department',
             'employee_status',
             'email',
+            'password',
         ]);
 
         session()->flash('message', 'Employee added successfully.');
