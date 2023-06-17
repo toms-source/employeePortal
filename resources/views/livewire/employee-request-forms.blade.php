@@ -8,10 +8,17 @@
         width: 350px;
         box-shadow: 0 2px 0 0 white;
         height: 100vh;
+        position: sticky;
+        top: 0;
+        overflow: hidden;
     }
     .sidebar-content {
         margin-top: 50px;
         padding: 35px;
+    }
+    .content {
+        flex: 1;
+        overflow-y: scroll;
     }
 
     .btns {
@@ -87,7 +94,7 @@
                             {{-- Leave Request --}}
                         <div class="card my-4 shadow-sm">
                              <div class="card-body">
-                                <h5>Leave Request</h5>
+                                <h5>Leave Request Form</h5>
                                 @livewire('timeoff')
                                 @livewire('list-leave')
                             </div>
@@ -96,7 +103,7 @@
                             {{-- Document Request --}}
                         <div class="card my-4 shadow-sm">
                             <div class="card-body">
-                                <h5>Document Request</h5>
+                                <h5>Document Request Form</h5>
                                 @livewire('document-request-form')
                                 @livewire('list-document')
                             </div>
@@ -105,7 +112,7 @@
                             {{-- Loan Request --}}
                         <div class="card my-4 shadow-sm">
                             <div class="card-body">
-                                <h5>Loan Request</h5>
+                                <h5>Loan Request Form</h5>
                                  @livewire('loan')
                                 @livewire('list-loan')
                             </div>
@@ -113,7 +120,7 @@
     
                             <div class="card my-4">
                                 <div class="card-body">
-                                    <h5>Other Request</h5>
+                                    <h5>Other Request Form</h5>
                                     @livewire('other-request')
                                     @livewire('list-others')
                                 </div>
