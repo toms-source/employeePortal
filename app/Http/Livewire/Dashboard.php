@@ -16,7 +16,7 @@ class Dashboard extends Component
     public function render()
     {
         $this->document = DB::table('document_requests')->count();
-        $this->loan = DB::table('loan_request')->count();
+        $this->loan = DB::table('payadvances')->count();
         $this->others = DB::table('other_requests')->count();
         $this->leave = DB::table('leave_requests')->count();
 
