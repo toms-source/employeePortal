@@ -15,5 +15,9 @@ class DocumentRequest extends Model
         'status',
         'file_path'
     ];
-
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

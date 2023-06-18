@@ -77,6 +77,7 @@ Route::middleware('auth')->group(function () {
     });
 });
 
+
 Route::prefix('user')->middleware('user.role')->group(function () {
     // Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
@@ -122,7 +123,18 @@ Route::prefix('user')->middleware('user.role')->group(function () {
 Route::prefix('admin')->middleware('admin')->group(function () {
     
     Route::get('/dashboard', function () {
-        return view('admin');
+        return view('dashboard.admin-dash');
     })->name('admin.dashboard');
+
+
+    Route::get('/document', function () {
+        return view('dashboard.admin-document');
+    })->name('admindpen');
+
+    Route::get('/leave', function () {
+        return view('dashboard.admin-leave');
+    })->name('adminleave');
+
+    
     //dagdagan mo nalang dito ng route kagaya sa user 
 });
