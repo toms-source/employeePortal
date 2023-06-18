@@ -139,6 +139,10 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         return view('dashboard.admin-loan');
     })->name('adminloan');
 
+    Route::get('/other', function () {
+        return view('dashboard.admin-other');
+    })->name('adminother');
+
 
     //dagdagan mo nalang dito ng route kagaya sa user 
 });

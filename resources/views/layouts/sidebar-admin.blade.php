@@ -65,6 +65,15 @@
             </a>
         </div>
 
+        <div class="btns">
+            <!-- Document Request -->
+
+            <a class="nav-link" href="{{ route('adminother') }}">
+                      <i class="icon fa-solid fa-repeat" style="color: #000000;"></i>
+                  <span class="ml-1">Other Request</span>
+            </a>
+        </div>
+
 
     </div>
 </div>

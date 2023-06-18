@@ -23,7 +23,7 @@ class AdminOtherRequests extends Component
 
     public function rejectRequest(OtherRequests $request)
     {
-        $request->update(['status' => 'Rejected']);
+        $request->update(['status' => 'Denied']);
         $this->otherRequests = OtherRequests::all();
         $this->emit('newDenied');
     }
