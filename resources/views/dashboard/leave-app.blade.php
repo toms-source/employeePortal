@@ -2,16 +2,21 @@
 @livewireStyles
 @section('content')
     <style>
-        .sidebar {
-            width: 350px;
-            box-shadow: 0 2px 0 0 white;
-            height: 100vh;
-        }
-
-        .sidebar-content {
-            margin-top: 50px;
-            padding: 35px;
-        }
+  .sidebar {
+        width: 25%;
+        box-shadow: 0 2px 0 0 white;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        overflow: hidden;
+    }
+    .content {
+        margin-top: 50px;
+        padding: 35px;
+        flex: 1;
+        overflow-y: scroll;
+        height: 100vh; 
+    }
 
         .btns {
             margin-bottom: 25px;
