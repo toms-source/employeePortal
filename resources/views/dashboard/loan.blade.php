@@ -4,30 +4,6 @@
 
 <style>
 
-    .sidebar {
-        width: 25%;
-        box-shadow: 0 2px 0 0 white;
-        height: 100vh;
-        position: sticky;
-        top: 0;
-        overflow: hidden;
-    }
-    .content {
-        margin-top: 50px;
-        padding: 35px;
-        flex: 1;
-        overflow-y: scroll;
-        height: 100vh; 
-    }
-
-    .btns {
-        margin-bottom: 25px;
-        width: auto;
-    }
-
-    .icon {
-        margin-right: 3px;
-    }
     
 </style>
         <div class="d-flex">

@@ -1,31 +1,32 @@
 <style>
+
     .sidebar {
         width: 25%;
         box-shadow: 0 2px 0 0 white;
+        height: 100vh;
         position: sticky;
         top: 0;
         overflow: hidden;
+        
     }
+    .content {
 
-    .sidebar-content {
-        margin-top: 30px;
+        margin-top: 50px;
         padding: 35px;
+        flex: 1;
+        overflow-y: scroll;
+        height: 100vh; 
     }
 
     .btns {
+        padding-left: 30px;
         margin-bottom: 25px;
-        width: 150px;
-
+        width: auto;
     }
 
     .icon {
         margin-right: 3px;
     }
-
-    hr {
-        border-top: 1px solid #000000;
-    }
-   
    
     
 </style>
@@ -51,7 +52,7 @@
                     <i class="icon fa-solid fa-folder-open" style="color: #000000;"></i>
                     <span class="ml-1">Document Request</span>
                   </div>
-                  <i class="fa fa-caret-down"></i>
+                  <i class="fa fa-caret-down" style="margin-right: 20px"></i>
                 </div>
               </a>
               
@@ -73,7 +74,7 @@
                     <i class="icon fa-solid fa-person-walking-arrow-right" style="color: #000000;"></i>
                     <span class="ml-1">Leave Request</span>
                   </div>
-                  <i class="fa fa-caret-down"></i>
+                  <i class="fa fa-caret-down" style="margin-right: 20px"></i>
                 </div>
               </a>
               
@@ -94,7 +95,7 @@
                     <i class="icon fa-solid fa-money-bill-1" style="color: #000000;"></i>
                     <span class="ml-1">Loan Request</span>
                   </div>
-                  <i class="fa fa-caret-down"></i>
+                  <i class="fa fa-caret-down" style="margin-right: 20px"></i>
                 </div>
               </a>
               
@@ -117,7 +118,7 @@
                   <i class="icon fa-solid fa-repeat" style="color: #000000;"></i>
                   <span class="ml-1">Other Request</span>
                   <div class="ml-auto">
-                    <i class="fa fa-caret-down"></i>
+                    <i class="fa fa-caret-down" style="margin-right: 20px"></i>
                   </div>
                 </div>
               </a>

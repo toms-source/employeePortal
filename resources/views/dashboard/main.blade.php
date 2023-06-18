@@ -34,12 +34,10 @@
             <div class="card shadow p-3 mb-5 bg-white rounded">
               
                     <div class="card my-4 shadow-sm">
-                        
 
                             @livewire('total-reqs-e')
                         
                     </div>
-               
             </div>
         </div>
 
