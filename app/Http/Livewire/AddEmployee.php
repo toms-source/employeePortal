@@ -17,6 +17,7 @@ class AddEmployee extends Component
     public $employee_status;
     public $email;
     public $password;
+    public $role = "user";
 
 
     public function render()
@@ -35,7 +36,8 @@ class AddEmployee extends Component
             'department' => 'required',
             'employee_status' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required'
+            'password' => 'required',
+            'role' => 'required',
         ]);
 
         User::create($validatedData);

@@ -26,6 +26,7 @@ class User extends Authenticatable
         'office',
         'department',
         'employee_status',
+        'role',
         'rememberToken',
     ];
 

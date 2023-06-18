@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('office');
             $table->string('department');
             $table->string('employee_status');
+            $table->string('role');
             $table->rememberToken();
         });
     }
