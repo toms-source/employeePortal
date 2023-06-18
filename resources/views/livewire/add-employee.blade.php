@@ -105,6 +105,12 @@
                     <td>{{ $employee->email }}</td>
                     <td>
                         <button class="fa fa-edit border-0" data-target="#editEmployee" type="button" data-toggle="modal" wire:click="editEmployees({{ $employee->id }})"></button>
+                        @if($employee->id == 1)
+                                </td>
+
+                            </tr>
+                            @continue
+                        @endif
                         <a><i class="fa-solid fa-trash-can"style="color: #e61919;" wire:click="deleteEmpTry({{$employee->id}})"></i></a>
                     </td>
 

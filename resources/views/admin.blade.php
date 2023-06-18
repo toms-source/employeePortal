@@ -15,7 +15,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Add Employee') }}</div>
                     @livewire('add-employee')
-                    @livewire('edit-employee');
+                    @livewire('edit-employee')
                 </div>
             </div>
             <div class="col mt-3">
