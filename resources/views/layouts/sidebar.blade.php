@@ -15,7 +15,7 @@
     .btns {
         margin-bottom: 25px;
         width: 150px;
-        font-size: 0.8em;
+
     }
 
     .icon {

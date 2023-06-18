@@ -56,6 +56,14 @@
                 <span class="ml-1">Leave Request</span>
             </a>
         </div>
+        <div class="btns">
+            <!-- Document Request -->
+
+            <a class="nav-link" href="{{ route('adminloan') }}">
+                <i class="icon fa-solid fa-money-bill-1" style="color: #000000;"></i>
+                    <span class="ml-1">Loan Request</span>
+            </a>
+        </div>
 
 
     </div>

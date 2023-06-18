@@ -26,11 +26,11 @@ class AdminLeaveRequests extends Component
         if ($this->selectedRequest) {
             $this->selectedRequest->update(['status' => 'Approved']);
             $this->leaveRequests = LeaveRequest::all();
-            $this->selectedRequest = null; // Clear the selected request
+            $this->selectedRequest = null;
             $this->emit('newApproved');
             $this->emit('hideConfirmationModal');
         } else {
-            // Handle error when request is not found
+         
             dd("Request not found.");
         }
     }
@@ -45,10 +45,10 @@ class AdminLeaveRequests extends Component
         if ($this->selectedRequest) {
             $this->selectedRequest->update(['status' => 'Denied']);
             $this->leaveRequests = LeaveRequest::all();
-            $this->selectedRequest = null; // Clear the selected request
+            $this->selectedRequest = null; 
             $this->emit('newDenied');
         } else {
-            // Handle error when request is not found
+           
             dd("Request not found.");
         }
     }

@@ -58,7 +58,7 @@
 
 
 
-    <div class="card mt-5">
+    <div class="card mt-3">
         <div class="card-body">
             <h3 class="mt-3">Document Request Approved</h3>
             <table class="table table-striped">
@@ -100,7 +100,7 @@
     </div>
 
     
-    <div class="card mt-5">
+    <div class="card mt-3">
         <div class="card-body">
             <h3 class="mt-3">Document Request Denied</h3>
             <table class="table table-striped">

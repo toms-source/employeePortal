@@ -8,6 +8,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Full Name</th>
+                        <th>Department</th>
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th>Reason</th>
@@ -21,6 +22,7 @@
                         <tr>
                             <td>{{ $request->id }}</td>
                             <td>{{ $request->user->first_name . " " . $request->user->last_name }}</td>
+                            <td>{{ $request->user->department }}</td>
                             <td>{{ $request->start_date }}</td>
                             <td>{{ $request->end_date }}</td>
                             <td>{{ $request->reason }}</td>
@@ -40,7 +42,7 @@
     </div>
 
 
-    <div class="card">
+    <div class="card mt-3">
         <div class="card-body">
             <div class="card-title"><h3>Leave Request Approved</h3></div>
             <table class="table table-striped">
@@ -81,7 +83,7 @@
         </div>
     </div>
 
-    <div class="card">
+    <div class="card mt-3">
         <div class="card-body">
             <div class="card-title"><h3>Leave Request Denied</h3></div>
             <table class="table table-striped">
