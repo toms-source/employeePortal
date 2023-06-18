@@ -12,7 +12,7 @@
             </div>
             <div class="card">
                
-                <div class="card-header fw-bold"  style="background-color: #0079FF; color:white;"> <i class="fa-solid fa-lock px-1"></i>Admin</div>
+                <div class="card-header fw-bold"  style="background-color: #0079FF; color:white;"> <i class="fa-solid fa-lock px-1"></i>Log in</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
