@@ -78,7 +78,11 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::prefix('user')->middleware('user.role')->group(function () {
-    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+    // Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+
+    Route::get('/dashboard', function(){
+        return view('/dashboard.main');
+    })->name('dashboard');
 
     Route::get('/document/pending', function () {
         return view('dashboard.document');
