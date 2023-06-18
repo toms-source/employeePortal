@@ -18,6 +18,9 @@ class AddEmployee extends Component
     public $email;
     public $password;
     public $role = "user";
+    public $idDelete;
+
+    protected $listeners = ['employeeEdited' => 'render'];
 
 
     public function render()
@@ -55,5 +58,23 @@ class AddEmployee extends Component
         ]);
 
         session()->flash('message', 'Employee added successfully.');
+    }
+
+    public function deleteEmpTry($id){
+        $this->idDelete = $id;
+        $this->emit('deleteEmployee');
+    }
+
+    public function deleteEmpConfirm(){
+        $query = User::query();
+
+        $id = '%' . $this->idDelete . '%';
+        $query  = User::where('id', 'like', $id)->delete();
+        
+        $this->render();
+    }
+
+    public function editEmployees($id){
+        $this->emit('editEmployeez', $id);
     }
 }

@@ -90,6 +90,7 @@
                     <th>Department</th>
                     <th>Employee Status</th>
                     <th>Email</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -102,10 +103,51 @@
                     <td>{{ $employee->department }}</td>
                     <td>{{ $employee->employee_status }}</td>
                     <td>{{ $employee->email }}</td>
+                    <td>
+                        <button class="fa fa-edit border-0" data-target="#editEmployee" type="button" data-toggle="modal" wire:click="editEmployees({{ $employee->id }})"></button>
+                        <a><i class="fa-solid fa-trash-can"style="color: #e61919;" wire:click="deleteEmpTry({{$employee->id}})"></i></a>
+                    </td>
+
                 </tr>
                 @endforeach
             </tbody>
         </table>
         
     </div>
+    <div class="modal fade" id="deleteEmployee" tabindex="-1" role="dialog"
+    aria-labelledby="ordinanceAddedModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ordinanceAddedModalLabel">Employee Deletion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this Employee?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="px-5 btn btn-outline-danger" data-dismiss="modal" wire:click='deleteEmpConfirm()'>Yes</button>
+                    <button type="button" class="px-5 btn btn-outline-secondary" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+    document.addEventListener('livewire:load', function() {
+        window.livewire.on('deleteEmployee',() =>{
+            console.log('ordinanceAdded event received');
+
+            // document.getElementById('ordinanceDelete').classList.remove('show');
+            // document.body.classList.remove('modal-open');
+            // document.getElementsByClassName('modal-backdrop')[0].remove();
+
+            var modalOrdinanceAdded = new bootstrap.Modal(document.getElementById(
+                'deleteEmployee'));
+            modalOrdinanceAdded.show();
+        });
+    });
+</script>
