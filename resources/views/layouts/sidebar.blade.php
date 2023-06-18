@@ -33,7 +33,7 @@
 
 <div class="sidebar shadow">
     <div class="sidebar-content"> 
-        <h4 class="mx-2">Navigation</h4>
+        <h4 class="mx-2 mt-5">Navigation</h4>
 
         <hr>
         <div class="btns">
