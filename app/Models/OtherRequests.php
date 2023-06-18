@@ -16,4 +16,8 @@ class OtherRequests extends Model
         'answer'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
