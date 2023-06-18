@@ -1,7 +1,7 @@
 <div>
     <div class="col-8">
         <div class="modal fade" id="editEmployee" tabindex="-1" role="dialog" aria-labelledby="editEmpLabel"
-            aria-hidden="true" wire:ignore>
+            aria-hidden="true" wire:ignore.self>
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
