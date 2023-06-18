@@ -1,20 +1,21 @@
 <style>
     .sidebar {
-        width: 20%;
+        width: 25%;
         box-shadow: 0 2px 0 0 white;
-        height: 110vh;
+        position: sticky;
+        top: 0;
+        overflow: hidden;
     }
 
     .sidebar-content {
-        margin-top: 25px;
+        margin-top: 30px;
         padding: 35px;
-        text-emphasis: s
     }
 
     .btns {
         margin-bottom: 25px;
-        width: auto;
-        font-size: 1.8vh;
+        width: 150px;
+        font-size: 0.8em;
     }
 
     .icon {
@@ -24,13 +25,16 @@
     hr {
         border-top: 1px solid #000000;
     }
+   
+   
+    
 </style>
 
-<div class="sidebar shadow align-self-center">
+<div class="sidebar shadow">
     <div class="sidebar-content"> 
-        <h5>Navigation</h5>
+        <h4 class="mx-2">Navigation</h4>
 
-        <hr style="">
+        <hr>
         <div class="btns">
             <a class="nav-link" href="{{ route('dashboard') }}">
                 <i class="icon fa-solid fa-home" style="color: #000000;"></i>Main
@@ -39,8 +43,8 @@
 
 
         <div class="btns">
-            <!-- Document Request -->
 
+            <!-- Document Request -->
             <a class="nav-link collapsible-link" href="#documentRequest">
                 <div class="d-flex align-items-center justify-content-between">
                   <div>
@@ -54,13 +58,14 @@
             <div class="collapse sidebar-submenu" id="documentRequest" data-parent="#sidebarMenu">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"><a class="nav-link mx-5 text-black" href="{{ route('document') }}"><i class="icon fa-solid fa-clock" style="color: #000000;"></i>Pending</a></li>
-                    <li class="nav-item"><a class="nav-link mx-5 text-black" href="{{ route('document2') }}"><i class="icon fa-solid fa-check-circle" style="color: #000000;"></i>Approved</a></li>
+                    <li class="nav-item"><a class="nav-link mx-5 text-black" href="{{ route('document2') }}"><i class="fa-solid fa-check" style="color: #000000"></i>Approved</a></li>
                 </ul>
             </div>
 
         </div>
 
         <div class="btns">
+
             <!-- Leave Request -->
             <a class="nav-link collapsible-link" href="#leaveRequest">
                 <div class="d-flex align-items-center justify-content-between">
@@ -75,7 +80,7 @@
             <div class="collapse sidebar-submenu" id="leaveRequest" data-parent="#sidebarMenu">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"><a class="nav-link mx-5 text-black" href="{{ route('leave') }}"><i class="icon fa-solid fa-clock" style="color: #000000;"></i>Pending</a></li>
-                    <li class="nav-item"><a class="nav-link mx-5 text-black" href="{{ route('leave2') }}"><i class="icon fa-solid fa-check-circle" style="color: #000000;"></i>Approved</a></li>
+                    <li class="nav-item"><a class="nav-link mx-5 text-black" href="{{ route('leave2') }}"><i class="fa-solid fa-check" style="color: #000000"></i>Approved</a></li>
                 </ul>
             </div>
 
@@ -96,7 +101,7 @@
             <div class="collapse sidebar-submenu" id="loanRequest" data-parent="#sidebarMenu">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"><a class="nav-link mx-5 text-black" href="{{ route('loan') }}"><i class="icon fa-solid fa-clock" style="color: #000000;"></i>Pending</a></li>
-                    <li class="nav-item"><a class="nav-link mx-5 text-black" href="{{ route('loan2') }}"><i class="icon fa-solid fa-check-circle" style="color: #000000;"></i>Approved</a></li>
+                    <li class="nav-item"><a class="nav-link mx-5 text-black" href="{{ route('loan2') }}"><i class="fa-solid fa-check" style="color: #000000"></i>Approved</a></li>
                 </ul>
             </div>
 
@@ -120,7 +125,7 @@
             <div class="collapse sidebar-submenu" id="otherRequest" data-parent="#sidebarMenu">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"><a class="nav-link mx-5 text-black" href="{{ route('other') }}"><i class="icon fa-solid fa-clock" style="color: #000000;"></i>Pending</a></li>
-                    <li class="nav-item"><a class="nav-link mx-5 text-black" href="{{ route('other2') }}"><i class="icon fa-solid fa-check-circle" style="color: #000000;"></i>Approved</a></li>
+                    <li class="nav-item"><a class="nav-link mx-5 text-black" href="{{ route('other2') }}"><i class="fa-solid fa-check" style="color: #000000"></i>Approved</a></li>
                 </ul>
             </div>
 

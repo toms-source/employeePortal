@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
        
         <div class="col-md-6"> 
-            <div class="text-center">
+            <div class="mt-4 text-center">
                 <i class="fa-solid fa-users" style="color: #404040; font-size: 3rem;" ></i>
                  <h4>Employee Management System</h4>
             </div>
@@ -46,17 +46,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="row mb-0">
                             <div class=" offset-md-4">
