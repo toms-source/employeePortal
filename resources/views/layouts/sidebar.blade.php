@@ -38,10 +38,28 @@
         <hr>
         <div class="btns">
             <a class="nav-link" href="{{ route('dashboard') }}">
-                <i class="icon fa-solid fa-home" style="color: #000000;"></i>Main
+                <i class="icon fa-solid fa-home" style="color: #000000;"></i>Home
             </a>
         </div>
-
+        
+        <div class="btns">
+            <a class="nav-link" href="">
+                <i class="icon fa-solid fa-user" style="color: #000000;"></i>Profile
+            </a>
+        </div>
+        
+        <div class="btns">
+            <a class="nav-link" href="">
+                <i class="icon fa-solid fa-calendar" style="color: #000000;"></i>Attendance
+            </a>
+        </div>
+        
+        <div class="btns">
+            <a class="nav-link" href="">
+                <i class="icon fa-solid fa-file-alt" style="color: #000000;"></i>Payslips
+            </a>
+        </div>
+        
 
         <div class="btns">
 
