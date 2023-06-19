@@ -3,7 +3,7 @@
     .sidebar {
         width: 25%;
         box-shadow: 0 2px 0 0 white;
-        height: 100vh;
+        height: 110vh;
         position: sticky;
         top: 0;
         overflow: hidden;
