@@ -1,20 +1,25 @@
 <style>
     .sidebar {
-        width: 20%;
+        width: 25%;
         box-shadow: 0 2px 0 0 white;
         height: 110vh;
+        position: sticky;
+        top: 0;
+        overflow: hidden;
     }
 
-    .sidebar-content {
-        margin-top: 25px;
+    .content {
+        margin-top: 50px;
         padding: 35px;
-        text-emphasis: s
+        flex: 1;
+        overflow-y: scroll;
+        height: 100vh; 
     }
 
     .btns {
+        padding-left: 30px;
         margin-bottom: 25px;
         width: auto;
-        font-size: 1.8vh;
     }
 
     .icon {
@@ -28,7 +33,7 @@
 
 <div class="sidebar shadow align-self-center">
     <div class="sidebar-content"> 
-        <h5>Navigation</h5>
+        <h5 class="mx-2 mt-5">Navigation</h5>
 
         <hr style="">
         <div class="btns">
@@ -37,6 +42,14 @@
             </a>
         </div>
 
+        <div class="btns">
+            <!-- Document Request -->
+
+            <a class="nav-link" href="{{ route('addemployee') }}">
+                      <i class="icon fa-solid fa-user-plus" style="color: #000000;"></i>
+                  <span class="ml-1">Add Employee</span>
+            </a>
+        </div>
 
         <div class="btns">
             <!-- Document Request -->

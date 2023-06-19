@@ -8,7 +8,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>User ID</th>
+        
                         <th>Full name</th>
                         <th>Department</th>
                         <th>Reason</th>
@@ -21,7 +21,7 @@
                         @if ($request->status == 'Pending')
                             <tr>
                                 <td>{{ $request->id }}</td>
-                                <td>{{ $request->user_id }}</td>
+                
                                 <td>{{ $request->user->first_name . ' ' . $request->user->first_name }}</td>
                                 <td>{{ $request->user->department }}</td>
                                 <td>
@@ -65,10 +65,10 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>User ID</th>
                         <th>Full name</th>
                         <th>Department</th>
                         <th>Document Type</th>
+                        <th>Reason</th>
                         <th>Status</th>
                      
                     </tr>
@@ -78,9 +78,10 @@
                         @if ($request->status == 'Approved')
                             <tr>
                                 <td>{{ $request->id }}</td>
-                                <td>{{ $request->user_id }}</td>
+                             
                                 <td>{{ $request->user->first_name . ' ' . $request->user->first_name }}</td>
                                 <td>{{ $request->user->department }}</td>
+                     
                                 <td>
                                     @if ($request->file_path)
                                         <a href="{{ asset('storage/' . $request->file_path) }}"
@@ -89,6 +90,7 @@
                                         No File Uploaded
                                     @endif
                                 </td>
+                                <td>{{ $request->reason }}</td>
                                 <td>{{ $request->status }}</td>
          
                             </tr>
@@ -107,7 +109,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>User ID</th>
+                    
                         <th>Full name</th>
                         <th>Department</th>
                         <th>Document Type</th>
@@ -121,7 +123,7 @@
                         @if ($request->status == 'Denied')
                             <tr>
                                 <td>{{ $request->id }}</td>
-                                <td>{{ $request->user_id }}</td>
+                
                                 <td>{{ $request->user->first_name . ' ' . $request->user->first_name }}</td>
                                 <td>{{ $request->user->department }}</td>
                                 <td>

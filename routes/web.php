@@ -143,6 +143,10 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         return view('dashboard.admin-other');
     })->name('adminother');
 
+    Route::get('/add_employee', function () {
+        return view('dashboard.admin-employee');
+    })->name('addemployee');
+
 
     //dagdagan mo nalang dito ng route kagaya sa user 
 });

@@ -15,7 +15,7 @@
                         {{-- Document Request --}}
                         <div class="card my-4 shadow-sm">
                             <div class="card-body">
-                                <h5>Leave Request</h5>
+                                <h5>Loan Request</h5>
 
                                 @livewire('list-approved-loan-e')
                             </div>

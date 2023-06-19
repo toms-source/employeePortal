@@ -48,7 +48,7 @@ class AdminDocumentRequests extends Component
     public function upload()
     {
         $this->validate([
-            'document' => 'required|file|max:1024', // 1MB Max
+            'document' => 'required|file|max:10024', // 1MB Max
         ]);
 
         $filePath = $this->document->store('documents', 'public');
