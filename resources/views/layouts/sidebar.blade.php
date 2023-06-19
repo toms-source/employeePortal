@@ -49,7 +49,7 @@
         </div>
         
         <div class="btns">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{ route('attendance') }}">
                 <i class="icon fa-solid fa-calendar" style="color: #000000;"></i>Attendance
             </a>
         </div>
