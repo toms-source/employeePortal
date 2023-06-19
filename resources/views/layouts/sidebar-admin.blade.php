@@ -37,6 +37,14 @@
             </a>
         </div>
 
+        <div class="btns">
+            <!-- Document Request -->
+
+            <a class="nav-link" href="{{ route('addemployee') }}">
+                      <i class="icon fa-solid fa-repeat" style="color: #000000;"></i>
+                  <span class="ml-1">Add Employee</span>
+            </a>
+        </div>
 
         <div class="btns">
             <!-- Document Request -->
