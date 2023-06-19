@@ -4,9 +4,12 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\OtherRequests;
+use Livewire\WithPagination;
 
 class AdminOtherRequests extends Component
 {
+    use WithPagination;
+    public $idDeny;
     public $otherRequests;
     public $selectedRequest = null;
     public $answer = '';
@@ -21,11 +24,29 @@ class AdminOtherRequests extends Component
         $this->selectedRequest = OtherRequests::find($requestId);
     }
 
-    public function rejectRequest(OtherRequests $request)
+    // public function rejectRequest(OtherRequests $request)
+    // {
+    //     $request->update(['status' => 'Denied']);
+    //     $this->otherRequests = OtherRequests::all();
+    //     $this->emit('newDenied');
+    // }
+
+    public function deny($id)
     {
-        $request->update(['status' => 'Denied']);
+        // $documentRequest->update(['status' => 'Denied']);
+        // $this->documentRequests = DocumentRequest::all();
+        $this->idDeny = $id;
+        $this->emit('denyDocu');
+    }
+
+    public function denyConfirm(){
+        $query = OtherRequests::query();
+
+        $id = '%' . $this->idDeny . '%';
+        $query  = OtherRequests::where('id', 'like', $id)->update(['status' => 'Denied']);
+        
         $this->otherRequests = OtherRequests::all();
-        $this->emit('newDenied');
+        $this->emit('newApproved');
     }
 
     public function approveRequest()
