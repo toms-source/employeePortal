@@ -22,7 +22,7 @@
                             <tr>
                                 <td>{{ $request->id }}</td>
                 
-                                <td>{{ $request->user->first_name . ' ' . $request->user->first_name }}</td>
+                                <td>{{ $request->user->first_name . ' ' . $request->user->last_name }}</td>
                                 <td>{{ $request->user->department }}</td>
                                 <td>
                                     {{ $request->reason }}
@@ -79,7 +79,7 @@
                             <tr>
                                 <td>{{ $request->id }}</td>
                              
-                                <td>{{ $request->user->first_name . ' ' . $request->user->first_name }}</td>
+                                <td>{{ $request->user->first_name . ' ' . $request->user->last_name }}</td>
                                 <td>{{ $request->user->department }}</td>
                      
                                 <td>
@@ -124,7 +124,7 @@
                             <tr>
                                 <td>{{ $request->id }}</td>
                 
-                                <td>{{ $request->user->first_name . ' ' . $request->user->first_name }}</td>
+                                <td>{{ $request->user->first_name . ' ' . $request->user->last_name }}</td>
                                 <td>{{ $request->user->department }}</td>
                                 <td>
                                     @if ($request->file_path)

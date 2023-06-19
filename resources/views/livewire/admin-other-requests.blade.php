@@ -33,7 +33,7 @@
                                             <button class="btn btn-success"
                                                 wire:click="selectRequest({{ $request->id }})">Approve</button>
                                             <button class="btn btn-danger"
-                                                wire:click="deny({{ $request->id }})">Reject</button>
+                                                wire:click="deny({{ $request->id }})">Deny</button>
                                         @endif
                                     </td>
                                 </tr>

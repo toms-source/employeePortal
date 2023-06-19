@@ -24,7 +24,7 @@
                     
                             <div class="mb-1 ml-3 mr-3">
                                 <label for="email" class="form-label mt-3">Email</label>
-                                <input wire:model="emailE" type="text" name="emailE" class="form-control" required>
+                                <input wire:model="emailE" type="text" name="emailE" class="form-control" required disabled>
                                 @error('emailE')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
