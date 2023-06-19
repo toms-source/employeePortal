@@ -126,6 +126,9 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         return view('dashboard.admin-dash');
     })->name('admin.dashboard');
 
+    Route::get('/profile', function () {
+        return view('dashboard.admin-profile');
+    })->name('admin.profile');
 
     Route::get('/document', function () {
         return view('dashboard.admin-document');

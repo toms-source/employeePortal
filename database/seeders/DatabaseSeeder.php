@@ -23,11 +23,6 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'employee_number' => 'admin1',
-            'last_name' => 'admin',
-            'first_name' => 'admin',
-            'office' => 'admin',
-            'department' => 'admin',
-            'employee_status' => 'admin',
             'email' => 'admin@gmail.com',
             'role' => 'admin',
             'password' => bcrypt('password123'),
