@@ -17,6 +17,7 @@
                      
                   
                             @livewire('add-employee')
+                            @livewire('edit-employee')
                         </div>
                     </div>
                 </div>
