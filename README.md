@@ -1,4 +1,4 @@
-<h1>Employee Portal System<h1>
+<h1>Employee Portal System</h1>
 
 How to run this project:
 
