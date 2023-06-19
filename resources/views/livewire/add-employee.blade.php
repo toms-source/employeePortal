@@ -1,6 +1,7 @@
 <div>
     <div class="card">
         <div class="card-body">
+            <div class="card-title"><h3> Add Employee Form </h3></div>
             @if (session()->has('message'))
             <div id="flash-message" class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('message') }}
@@ -85,7 +86,7 @@
 
     <div class="card mt-3">
         <div class="card-body">
-            <div class="card-title"><h3> Add Employee </h3></div>
+            <div class="card-title"><h3> Add Employee Table</h3></div>
             <div>
                 <table class="table table-striped">
                     <thead>

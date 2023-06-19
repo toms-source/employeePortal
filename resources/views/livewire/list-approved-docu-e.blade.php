@@ -5,6 +5,7 @@
                 <tr class="text-center">
                     <th>Reason</th>
                     <th>File</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,6 +20,7 @@
                                 No File Uploaded
                             @endif
                         </td>
+                        <td>{{ $appDocs->status }}</td>
                         {{-- <td>  --}}
                             {{-- <button class="fa fa-edit border-0" data-target="#ope" type="button" data-toggle="modal"></button> --}}
                             {{-- <a><i class="fa-solid fa-trash-can"style="color: #e61919;" wire:click="deleteRequestDocu({{$docuReqs->id}})"></i></a> --}}

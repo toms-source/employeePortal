@@ -41,7 +41,7 @@
             <!-- Document Request -->
 
             <a class="nav-link" href="{{ route('addemployee') }}">
-                      <i class="icon fa-solid fa-repeat" style="color: #000000;"></i>
+                      <i class="icon fa-solid fa-user-plus" style="color: #000000;"></i>
                   <span class="ml-1">Add Employee</span>
             </a>
         </div>

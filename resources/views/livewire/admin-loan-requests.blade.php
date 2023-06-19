@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-body">
             <div class="card-title">
-                <h3>Leave Request Pending</h3>
+                <h3>Loan Request Pending</h3>
             </div>
             <table class="table table-striped">
                 <thead>
@@ -44,7 +44,7 @@
     <div class="card mt-3">
         <div class="card-body">
             <div class="card-title">
-                <h3>Leave Request Approved</h3>
+                <h3>Loan Request Approved</h3>
             </div>
             <table class="table table-striped">
                 <thead>
@@ -80,7 +80,7 @@
     <div class="card mt-3">
         <div class="card-body">
             <div class="card-title">
-                <h3>Leave Request Denied</h3>
+                <h3>Loan Request Denied</h3>
             </div>
             <table class="table table-striped">
                 <thead>

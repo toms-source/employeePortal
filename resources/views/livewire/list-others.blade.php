@@ -5,6 +5,8 @@
                 <tr class="text-center">
                     <th>Request Type</th>
                     <th>Request Details</th>
+                    <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -13,11 +15,12 @@
             
                         <td>{{ $otherReqs->request_type }}</td>
                         <td>{{ $otherReqs->request_details }}</td>
+                        <td>{{ $otherReqs->status }}</td>
                         <td> 
                             {{-- <button class="fa fa-edit border-0" data-target="#ope" type="button" data-toggle="modal"></button> --}}
                             <a><i class="fa-solid fa-trash-can"style="color: #e61919;" wire:click="deleteRequestOth({{$otherReqs->id}})"></i></a>
                         </td>
-                        
+                       
                     </tr>
                 @endforeach
             </tbody>
