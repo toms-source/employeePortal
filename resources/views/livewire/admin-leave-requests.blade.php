@@ -140,9 +140,42 @@
         </div>
     </div>
 
+    <div class="modal fade" id="denyDocu" tabindex="-1" role="dialog"
+    aria-labelledby="ordinanceAddedModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ordinanceAddedModalLabel">Leave Deny</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to deny this Leave Request?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="px-5 btn btn-outline-danger" data-dismiss="modal" wire:click='denyConfirm()'>Yes</button>
+                    <button type="button" class="px-5 btn btn-outline-secondary" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
+    document.addEventListener('livewire:load', function() {
+        window.livewire.on('denyDocu',() =>{
+            console.log('ordinanceAdded event received');
+
+            // document.getElementById('ordinanceDelete').classList.remove('show');
+            // document.body.classList.remove('modal-open');
+            // document.getElementsByClassName('modal-backdrop')[0].remove();
+
+            var modalOrdinanceAdded = new bootstrap.Modal(document.getElementById(
+                'denyDocu'));
+            modalOrdinanceAdded.show();
+        });
+    });
     window.livewire.on('showConfirmationModal', () => {
         $('#confirmationModal').modal('show');
     });

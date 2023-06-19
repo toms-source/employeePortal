@@ -4,9 +4,12 @@ namespace App\Http\Livewire;
 
 use App\Models\Payadvance;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class AdminLoanRequests extends Component
 {
+    use WithPagination;
+    public $idDeny;
     public $loanRequests;
     public $selectedRequest = null;
 
@@ -35,11 +38,28 @@ class AdminLoanRequests extends Component
         }
     }
 
-    public function deny(Payadvance $loanRequest)
+    // public function deny(Payadvance $loanRequest)
+    // {
+    //     $loanRequest->update(['status' => 'Denied']);
+    //     $this->loanRequests = Payadvance::all();
+    //     $this->emit('newDenied');
+    // }
+    public function deny($id)
     {
-        $loanRequest->update(['status' => 'Denied']);
+        // $documentRequest->update(['status' => 'Denied']);
+        // $this->documentRequests = DocumentRequest::all();
+        $this->idDeny = $id;
+        $this->emit('denyDocu');
+    }
+
+    public function denyConfirm(){
+        $query = Payadvance::query();
+
+        $id = '%' . $this->idDeny . '%';
+        $query  = Payadvance::where('id', 'like', $id)->update(['status' => 'Denied']);
+        
         $this->loanRequests = Payadvance::all();
-        $this->emit('newDenied');
+        $this->emit('newApproved');
     }
 
     public function render()
