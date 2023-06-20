@@ -9,6 +9,7 @@ class payrollList extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'user_id',
         'cutoff_from',
         'cutoff_to',
         'present_days_total',
