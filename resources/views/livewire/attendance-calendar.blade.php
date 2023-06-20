@@ -8,6 +8,7 @@
             {{ session('message') }}
         </div>
     @endif
+    
     <!-- Modal -->
     <div class="modal fade" id="attendanceModal" tabindex="-1" aria-labelledby="attendanceModalLabel" aria-hidden="true">
         <div class="modal-dialog">

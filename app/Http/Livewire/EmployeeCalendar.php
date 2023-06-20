@@ -17,6 +17,12 @@ class EmployeeCalendar extends Component
         $this->attendanceRecords = Attendance::where('user_id', $id)->get();
     }
 
+    public function loadAttendanceRecords()
+    {
+        $this->attendanceRecords = Attendance::where('user_id', $this->employeeId)->get();
+    }
+
+
     public function render()
     {
         return view('livewire.employee-calendar', [

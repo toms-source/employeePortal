@@ -9,6 +9,7 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Routing\ResponseFactory;
 use App\Models\User;
+use App\Models\Attendance;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -161,8 +162,10 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
     Route::get('/{id}/employee-calendar', function ($id) {
         $employee = User::findOrFail($id);
-        return view('livewire.employee-calendar', compact('employee'));
-    })->name('employee-calendar');    
+        $attendanceRecords = Attendance::where('user_id', $id)->get();
+        return view('livewire.employee-calendar', compact('employee', 'attendanceRecords'));
+    })->name('employee-calendar');
+    
     
 });
 
