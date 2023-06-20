@@ -56,7 +56,7 @@
         </div>
         
         <div class="btns">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{ route('payslip') }}">
                 <i class="icon fa-solid fa-file-alt" style="color: #000000;"></i>Payslips
             </a>
         </div>

@@ -83,9 +83,10 @@ Route::prefix('user')->middleware('user.role')->group(function () {
         return view('dashboard.attendance');
     })->name('attendance');
 
-    Route::get('/payslip', function () {
+    Route::get('/payslips', function () {
         return view('/dashboard.view-payslip');
-    })->name('payslip');
+    })->name('payslips');
+
 });
 
 
@@ -153,6 +154,10 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/payroll', function () {
         return view('dashboard.payroll');
     })->name('payroll');
+
+    Route::get('/payslip', function () {
+        return view('dashboard.view-payslip');
+    })->name('payslip');
 
     Route::get('/{id}/employee-calendar', function ($id) {
         $employee = User::findOrFail($id);
