@@ -49,47 +49,54 @@
         <div class="alert alert-success">{{ session('message') }}</div>
     @endif
 
-    <div>
-        <button wire:click="generatePayslips">Generate Payslips from {{$this->getCutoffStartDate()}} to {{$this->getCutoffEndDate()}}</button>
-        <button wire:click="generatePayslips">Generate Payslips from {{$this->getCutoffStartDate2nd()}} to {{$this->getCutoffEndDate2nd()}}</button>
+    <div class="row">
+        <div class="col-5">
+            <button class="btn btn-primary w-100 mb-3" wire:click="generatePayslips">Generate Payslips from {{$this->getCutoffStartDate()}} to {{$this->getCutoffEndDate()}}</button>
+        </div>
+        <div class="col-2"></div> <!-- Spacer -->
+        <div class="col-5">
+            <button class="btn btn-primary w-100 mb-3" wire:click="generatePayslips">Generate Payslips from {{$this->getCutoffStartDate2nd()}} to {{$this->getCutoffEndDate2nd()}}</button>
+        </div>
     </div>
+    
+    
 
     @if ($payslips)
-        <table>
-            <thead>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Cutoff From</th>
+                <th>Cutoff To</th>
+                <th>Employee Name</th>
+                <th>Present Days Total</th>
+                <th>Regular Hours Total</th>
+                <th>Gross Pay</th>
+                <th>Deductions</th>
+                <th>Allowance</th>
+                <th>Net Pay</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($payslips as $payslip)
                 <tr>
-                    <th>Cutoff From</th>
-                    <th>Cutoff To</th>
-                    <th>Employee Name</th>
-                    <th>Present Days Total</th>
-                    <th>Regular Hours Total</th>
-                    <th>Gross Pay</th>
-                    <th>Deductions</th>
-                    <th>Allowance</th>
-                    <th>Net Pay</th>
-                    <th>Actions</th>
+                    <td>{{ $payslip['cutoff_from'] }}</td>
+                    <td>{{ $payslip['cutoff_to'] }}</td>
+                    <td>{{ $payslip['employee_name'] }}</td>
+                    <td>{{ $payslip['present_days_total'] }}</td>
+                    <td>{{ $payslip['regular_hours_total'] }}</td>
+                    <td>{{ $payslip['gross_pay'] }}</td>
+                    <td>{{ $payslip['deductions'] }}</td>
+                    <td>{{ $payslip['allowance'] }}</td>
+                    <td>{{ $payslip['net_pay'] }}</td>
+                    <td>
+                        {{-- <button class="fa fa-edit border-0" data-target="#editEmployee" type="button" data-toggle="modal" wire:click="editEmployees({{ $payslip['id'] }})"></button>
+                        <a><i class="fa-solid fa-trash-can" style="color: #e61919;" wire:click="deleteEmpTry({{ $payslip['id'] }})"></i></a> --}}
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach ($payslips as $payslip)
-                    <tr>
-                        <td>{{ $payslip['cutoff_from'] }}</td>
-                        <td>{{ $payslip['cutoff_to'] }}</td>
-                        <td>{{ $payslip['employee_name'] }}</td>
-                        <td>{{ $payslip['present_days_total'] }}</td>
-                        <td>{{ $payslip['regular_hours_total'] }}</td>
-                        <td>{{ $payslip['gross_pay'] }}</td>
-                        <td>{{ $payslip['deductions'] }}</td>
-                        <td>{{ $payslip['allowance'] }}</td>
-                        <td>{{ $payslip['net_pay'] }}</td>
-                        <td>
-                            {{-- <button class="fa fa-edit border-0" data-target="#editEmployee" type="button" data-toggle="modal" wire:click="editEmployees({{ $payslip['id'] }})"></button>
-                            <a><i class="fa-solid fa-trash-can"style="color: #e61919;" wire:click="deleteEmpTry({{$payslip['id'] }})"></i></a> --}}
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+            @endforeach
+        </tbody>
+    </table>
     @endif
 
     </div>
