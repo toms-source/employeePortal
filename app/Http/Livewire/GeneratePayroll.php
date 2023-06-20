@@ -97,7 +97,7 @@ class GeneratePayroll extends Component
             });
     
             // Perform additional calculations based on the salary types model
-            $salaryTypes = SalaryTypes::where('name', $user->status)->get(); // Assuming you have only one record in the salary types table
+            $salaryTypes = SalaryTypes::where('daily_rate', $user->salary_rate)->get(); // Assuming you have only one record in the salary types table
 
             $grossPay = $regularHoursTotal * $user->salary_rate;
             $deductions = $this->calculateDeductions($salaryTypes[0]);
@@ -216,7 +216,7 @@ class GeneratePayroll extends Component
             });
     
             // Perform additional calculations based on the salary types model
-            $salaryTypes = SalaryTypes::where('name', $user->status)->get(); // Assuming you have only one record in the salary types table
+            $salaryTypes = SalaryTypes::where('daily_rate', $user->salary_rate)->get(); // Assuming you have only one record in the salary types table
 
             $grossPay = $regularHoursTotal * $user->salary_rate;
             $deductions = $this->calculateDeductions2nd($salaryTypes[0]);
