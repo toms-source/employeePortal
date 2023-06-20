@@ -18,7 +18,7 @@ class AdminAddPersonalProfile extends Component
     public $first_name;
     public $middle_name;
     public $department;
-    public $role = "user";
+    public $role = "employee";
     public $gender;
     public $birth_date;
     public $civil_status;
