@@ -9,26 +9,19 @@ use App\Models\Attendance;
 class EmployeeCalendar extends Component
 {
     public $employee;
-    public $attendances;
+    public $attendanceRecords;
 
-    protected $listeners = ['viewCalendar' => 'viewCalendar'];
-
-    public function viewCalendar($employeeId)
+    public function mount($id)
     {
-        $this->employee = $employeeId;
-  
-        $this->mount();
+        $this->employee = User::with('attendance')->findOrFail($id);
+        $this->attendanceRecords = Attendance::where('user_id', $id)->get();
     }
 
-    public function mount()
-    {
-        $this->employee = User::find($this->employee);
-        dd($this->employee);
-    }
-    
     public function render()
     {
-
-        return view('livewire.employee-calendar');
+        return view('livewire.employee-calendar', [
+            'employee' => $this->employee,
+            'attendanceRecords' => $this->attendanceRecords
+        ]);
     }
 }

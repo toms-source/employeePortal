@@ -42,7 +42,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler.css" />
 
 </head>
 
@@ -116,11 +115,6 @@
     </div>
 
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-    <script src="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler.js"></script>
-
-
 
 </body>
 

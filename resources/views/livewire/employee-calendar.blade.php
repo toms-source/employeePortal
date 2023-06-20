@@ -1,5 +1,3 @@
 <div>
-    <h1>{{ $employee->first_name }}'s Calendar</h1>
+    <p>{{ $employee->first_name }}</p>
 </div>
-
-
