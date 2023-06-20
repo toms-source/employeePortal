@@ -1,11 +1,4 @@
-<style>
-    .custom-event {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-    }
-  </style>
+
 <div>
     <div id='calendar' class="height: 300px"></div>
 

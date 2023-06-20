@@ -11,12 +11,8 @@ class Attendance extends Model
 
     protected $fillable = [
         'user_id',
-        'start_date',
-        'end_date',
         'check_in',
         'check_out',
-        'start_shift',
-        'end_shift',
     ];
 
     public function user()
