@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\models\Attendance;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\models\Schedule;
 
 class AttendanceCalendar extends Component
 {    
@@ -14,6 +15,7 @@ class AttendanceCalendar extends Component
     public $checkouttime;
     public $attendanceRecords = [];
     public $todayAttendance = null;
+    public $scheduleRecords;
     public function mount()
     {
         $userId = Auth::id();
@@ -32,9 +34,11 @@ class AttendanceCalendar extends Component
             ->keyBy('checkInDate')
             ->toArray();
 
-            $this->todayAttendance = Attendance::where('user_id', $userId)
+        $this->todayAttendance = Attendance::where('user_id', $userId)
             ->whereDate('check_in', '=', now()->format('Y-m-d'))
             ->first();
+
+        $this->scheduleRecords = Schedule::where('user_id', $userId)->get();
     }
     
     public function checkIn()
@@ -80,6 +84,8 @@ class AttendanceCalendar extends Component
 
     public function render()
     {
-        return view('livewire.attendance-calendar');
+        return view('livewire.attendance-calendar', [
+            'scheduleRecords' => $this->scheduleRecords,
+        ]);
     }
 }
