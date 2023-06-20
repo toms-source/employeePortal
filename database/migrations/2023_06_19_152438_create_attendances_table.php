@@ -18,8 +18,8 @@ return new class extends Migration
             $table->dateTime('end_date')->nullable();
             $table->dateTime('check_in')->nullable();
             $table->dateTime('check_out')->nullable();
-            $table->dateTime('start_shift')->nullable();
-            $table->dateTime('end_shift')->nullable();
+            $table->string('start_shift', 5)->nullable()->comment('Format: HH:MM'); 
+            $table->string('end_shift', 5)->nullable()->comment('Format: HH:MM');  
             $table->timestamps();
         });
     }

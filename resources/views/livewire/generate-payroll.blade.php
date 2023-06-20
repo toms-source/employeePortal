@@ -49,10 +49,17 @@
         <div class="alert alert-success">{{ session('message') }}</div>
     @endif
 
-    <div>
-        <button wire:click="generatePayslips">Generate Payslips from {{$this->getCutoffStartDate()}} to {{$this->getCutoffEndDate()}}</button>
-        <button wire:click="generatePayslips2nd">Generate Payslips from {{$this->getCutoffStartDate2nd()}} to {{$this->getCutoffEndDate2nd()}}</button>
+    <div class="row">
+        <div class="col-5">
+            <button class="btn btn-primary w-100 mb-3" wire:click="generatePayslips">Generate Payslips from {{$this->getCutoffStartDate()}} to {{$this->getCutoffEndDate()}}</button>
+        </div>
+        <div class="col-2"></div> <!-- Spacer -->
+        <div class="col-5">
+            <button class="btn btn-primary w-100 mb-3" wire:click="generatePayslips2nd">Generate Payslips from {{$this->getCutoffStartDate2nd()}} to {{$this->getCutoffEndDate2nd()}}</button>
+        </div>
     </div>
+    
+    
 
     @if ($payslips)
         <table>
@@ -82,10 +89,6 @@
                         <td>{{ $payslip['deductions'] }}</td>
                         <td>{{ $payslip['allowance'] }}</td>
                         <td>{{ $payslip['net_pay'] }}</td>
-                        {{-- <td>
-                            <button class="fa fa-edit border-0" data-target="#editEmployee" type="button" data-toggle="modal" wire:click="editEmployees({{ $payslip['id'] }})"></button>
-                            <a><i class="fa-solid fa-trash-can"style="color: #e61919;" wire:click="deleteEmpTry({{$payslip['id'] }})"></i></a>
-                        </td> --}}
                         <td>
                             @if ($payslip['status'] == "Pending")
                                 <button class="btn btn-success"
