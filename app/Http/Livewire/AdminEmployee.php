@@ -2,12 +2,14 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\User;
 use Livewire\Component;
 
 class AdminEmployee extends Component
 {
     public function render()
     {
-        return view('livewire.admin-employee');
+        $employees = User::all();
+        return view('livewire.admin-employee', compact('employees'));
     }
 }

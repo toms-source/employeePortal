@@ -9,9 +9,9 @@
 
                 {{-- grid --}}
                 <div class="col">
-                    <h5 class="shadow border fw-bold p-3 mb-3 bg-white rounded"> {{ Auth::user()->first_name }}
-                        {{ Auth::user()->last_name }} VINCENT
-                        DELA CRUZ > Change Account Settings</h5>
+                    <h5 class="shadow border fw-bold p-3 mb-3 bg-white rounded"> 
+                        <a href="{{route('admin.profile')}}">{{ Auth::user()->first_name }}
+                            {{ Auth::user()->last_name }} </a>   > Change Account Settings</h5>
 
                     {{-- Document Request --}}
                     <div class="shadow border fw-bold p-3 mb-3 bg-white rounded">
@@ -20,9 +20,6 @@
                         </div>
                     </div>
                 </div> 
-            <div class="d-flex justify-content-end mb-1 p-2 gap-3">
-                <button class="btn btn-outline-warning"><i class="fa-solid fa-pen-to-square"></i>Edit</button>
-                <button class="btn btn-outline-danger"><i class="fa-solid fa-ban"></i>Cancel</button>
             </div>
         </div>
 

@@ -9,8 +9,7 @@
 
                 {{-- grid --}}
                 <div class="col"> 
-                    <h5 class="shadow border fw-bold p-3 mb-3 bg-white rounded"> {{ Auth::user()->first_name }} {{ Auth::user()->last_name }} VINCENT
-                                DELA CRUZ Profile</h5>
+                    <h5 class="shadow border fw-bold p-3 mb-3 bg-white rounded"> {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}  Profile</h5>
 
                         <div class="d-flex justify-content-end mb-3">
                             <a href="{{route('admin.account.setting')}}" class="btn btn-outline-primary"><i class="fa-solid fa-gear"></i>Account Setting</a>
@@ -19,7 +18,7 @@
                     {{-- Document Request --}}
                     <div class="shadow border fw-bold p-3 mb-3 bg-white rounded">
                         <div class="card-body py-5">
-                            @livewire('profile')
+                            @livewire('admin-profile')
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-<form method="POST" enctype="multipart/form-data">
+<form wire:submit.prevent="updateSetting" method="POST" enctype="multipart/form-data">
     @csrf
     <div>
         <div class="container">
@@ -9,6 +9,15 @@
                     </div>
 
                     <hr>
+
+                    @if (session()->has('message'))
+                        <div id="flash-message" class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('message') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
 
                     <div class="row">
                         <div class="col-md-4">
@@ -25,37 +34,37 @@
                         </div>
                         <div class="col-md-7">
                             <div class="mb-3">
-                                <label for="email" class="form-label">Company Email:</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
-                                @error('email')
+                                <label for="company_email" class="form-label">Company Email:</label>
+                                <input disabled wire:model="company_email"type="email" class="form-control" id="company_email" name="company_email" required>
+                                @error('company_email')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="role" class="form-label">Access</label>
-                                <input type="text" class="form-control" id="role" name="role" required>
+                                <input disabled wire:model="role"type="text" class="form-control" id="role" name="role" required>
                                 @error('role')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label">Old Password:</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
-                                @error('password')
+                                <label for="old_password" class="form-label">Old Password:</label>
+                                <input wire:model="old_password" type="password" class="form-control" id="old_password" name="old_password" required>
+                                @error('old_password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="newPassword" class="form-label">New Password</label>
-                                <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                                <label for="new_password" class="form-label">New Password</label>
+                                <input wire:model="new_password" type="password" class="form-control" id="new_password" name="new_password" required>
                                 @error('newPassword')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-                                @error('confirmPassword')
+                                <label for="confirm_password" class="form-label">Confirm Password</label>
+                                <input wire:model="confirm_password" type="password" class="form-control" id="confirm_password" name="confirmPconfirm_passwordassword" required>
+                                @error('confirm_password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
