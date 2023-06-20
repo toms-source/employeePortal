@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('role')->nullable();
             $table->string('gender')->nullable();
             $table->date('birth_date')->nullable();
-            $table->string('sivil_status')->nullable();
+            $table->string('civil_status')->nullable();
             $table->integer('number')->nullable()->default(0);
             $table->string('address')->nullable();
             $table->integer('sss')->nullable();

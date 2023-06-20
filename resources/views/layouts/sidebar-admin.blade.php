@@ -68,13 +68,13 @@
         </div>
         
         <div class="btns">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{ route('admin.employee.list')}}">
                 <i class="icon fa-solid fa-users" style="color: #000000;"></i>Employees
             </a>
         </div>
         
         <div class="btns">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{ route('admin.department')}}">
                 <i class="icon fa-solid fa-building" style="color: #000000;"></i>Departments
             </a>
         </div>

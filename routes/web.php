@@ -146,10 +146,21 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         return view('dashboard.admin-other');
     })->name('adminother');
 
-    Route::get('/add_employee', function () {
-        return view('dashboard.admin-employee');
-    })->name('addemployee');
+    Route::get('/account-setting', function () {
+        return view('dashboard.admin-account-setting');
+    })->name('admin.account.setting');
 
+    Route::get('/account-employees', function () {
+        return view('dashboard.admin-employee-list');
+    })->name('admin.employee.list');
+
+    Route::get('/add-employee', function () {
+        return view('dashboard.admin-add-user');
+    })->name('admin.addemployee');
+
+    Route::get('/department', function () {
+        return view('dashboard.admin-department-list');
+    })->name('admin.department');
 
     //dagdagan mo nalang dito ng route kagaya sa user 
 });
