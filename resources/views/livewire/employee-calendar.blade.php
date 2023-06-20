@@ -6,13 +6,13 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 
    <style>
-    .custom-event {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-    }
-  </style>
+       .custom-event {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           height: 100%;
+       }
+   </style>
    @extends('layouts.app')
    @livewireStyles
    @section('content')
@@ -84,18 +84,28 @@
                                moment(schedule.end_date).isSameOrAfter(dateString);
                        });
 
-                       console.log('Found schedule:', schedule);
+                       let startShift = moment(schedule.start_shift, 'HH:mm').format(
+                       'hh:mm A'); // Convert start_shift to 12-hour format
+                       let endShift = moment(schedule.end_shift, 'HH:mm').format(
+                       'hh:mm A'); // Convert end_shift to 12-hour format
 
-                       let startShift = schedule.start_shift  // Convert start_shift to hours
-                       let endShift = schedule.end_shift  // Convert end_shift to hours
+                       if (moment(schedule.start_shift, 'HH:mm').format('HH') >= 12) {
+                           startShift;
+                       } else {
+                           startShift;
+                       }
 
-                       console.log('Start shift:', startShift);
-                       console.log('End shift:', endShift);
+                       if (moment(schedule.end_shift, 'HH:mm').format('HH') >= 12) {
+                           endShift ;
+                       } else {
+                           endShift ;
+                       }
 
-                       cell.append('<div class="custom-event text-center mt-4 text-info"> Schedule: ' + startShift + ' - ' + endShift +
-                           '</div>');
+                       cell.append('<div class="custom-event text-center mt-4 text-info"> Schedule: <br>' +
+                           startShift + ' - ' + endShift + '</div>');
                    }
                },
+               
 
                events: function(start, end, timezone, callback) {
                    let events = [];
@@ -115,7 +125,7 @@
                        } : {
                            title: 'Did not Check Out',
                            start: record
-                           .check_in, // Still need a time for the event to be displayed on the correct day
+                               .check_in, // Still need a time for the event to be displayed on the correct day
                            allDay: true,
                        };
 
@@ -134,13 +144,13 @@
 
                        let scheduleStartDateTime = moment(schedule.start_date).set({
                            'hour': schedule.start_shift /
-                           60, // Assuming start_shift is in minutes
+                               60, // Assuming start_shift is in minutes
                            'minute': schedule.start_shift % 60
                        });
 
                        let scheduleEndDateTime = moment(schedule.end_date).set({
                            'hour': schedule.end_shift /
-                           60, // Assuming end_shift is in minutes
+                               60, // Assuming end_shift is in minutes
                            'minute': schedule.end_shift % 60
                        });
 
