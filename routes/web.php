@@ -82,6 +82,10 @@ Route::prefix('user')->middleware('user.role')->group(function () {
     Route::get('/attendance/calendar', function () {
         return view('dashboard.attendance');
     })->name('attendance');
+
+    Route::get('/payslip', function () {
+        return view('/dashboard.view-payslip');
+    })->name('payslip');
 });
 
 
