@@ -83,9 +83,10 @@ Route::prefix('user')->middleware('user.role')->group(function () {
         return view('dashboard.attendance');
     })->name('attendance');
 
-    Route::get('/payslip', function () {
+    Route::get('/payslips', function () {
         return view('/dashboard.view-payslip');
-    })->name('payslip');
+    })->name('payslips');
+
 });
 
 
@@ -138,17 +139,30 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
 
     Route::get('/schedule', function () {
-        return view('dashboard.schedule');
+        return view('dashboard.sched');
     })->name('schedule');
 
     Route::get('/annoucement', function () {
         return view('dashboard.announcement');
     })->name('announcement');
 
+    Route::get('/salary', function () {
+        return view('dashboard.salary');
+    })->name('salary');
+
+    
+    Route::get('/payroll', function () {
+        return view('dashboard.payroll');
+    })->name('payroll');
+
+    Route::get('/payslip', function () {
+        return view('dashboard.view-payslip');
+    })->name('payslip');
+
     Route::get('/{id}/employee-calendar', function ($id) {
         $employee = User::findOrFail($id);
         return view('livewire.employee-calendar', compact('employee'));
-    })->name('view-ordinance');    
+    })->name('employee-calendar');    
         //dagdagan mo nalang dito ng route kagaya sa user 
 });
 
