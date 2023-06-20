@@ -19,7 +19,7 @@
                             @livewire('admin-account-setting')
                         </div>
                     </div>
-                </div>
+                </div> 
             <div class="d-flex justify-content-end mb-1 p-2 gap-3">
                 <button class="btn btn-outline-warning"><i class="fa-solid fa-pen-to-square"></i>Edit</button>
                 <button class="btn btn-outline-danger"><i class="fa-solid fa-ban"></i>Cancel</button>

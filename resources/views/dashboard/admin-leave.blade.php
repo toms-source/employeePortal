@@ -11,7 +11,7 @@
                     Leave Request
                     </h5>
 
-                    {{-- Leave Request --}}
+                {{-- Leave Request --}}
                     <div class="shadow border fw-bold p-3 mb-3 bg-white rounded">
                         <div class="card-body py-5">
                             @livewire('admin-leave-requests')
