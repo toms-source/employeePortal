@@ -8,6 +8,7 @@ use App\Models\payrollList;
 use App\Models\SalaryTypes;
 use Carbon\Carbon;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 class GeneratePayroll extends Component
 {
@@ -123,17 +124,30 @@ class GeneratePayroll extends Component
 
     public function render()
     {
-        $employees = User::all();
+        $employees = payrollList::all();
+        if ($employees->isNotEmpty()) {
+            $this->payslips = $employees->map(function ($payroll) {
+                return [
+                    'cutoff_from' => $payroll->cutoff_from,
+                    'cutoff_to' => $payroll->cutoff_to,
+                    'employee_name' => $payroll->user->first_name . ' ' . $payroll->user->last_name,
+                    'present_days_total' => $payroll->present_days_total,
+                    'regular_hours_total' => $payroll->regular_hours_total,
+                    'gross_pay' => $payroll->gross_pay,
+                    'deductions' => $payroll->deductions,
+                    'allowance' => $payroll->allowance,
+                    'net_pay' => $payroll->net_pay,
+                ];
+            });
+        }
 
-        return view('livewire.generate-payroll', [
-            'employees' => $employees,
-        ]);
+        return view('livewire.generate-payroll');
     }
 
     public function generatePayslips()
     {
-        $employee = User::findOrFail($this->employeeId);
-
+        $users = User::all();
+        
         $cutoffStartDate = $this->getCutoffStartDate();
         $cutoffEndDate = $this->getCutoffEndDate();
 
@@ -155,57 +169,70 @@ class GeneratePayroll extends Component
                     'net_pay' => $payroll->net_pay,
                 ];
             });
-            return;
         }
 
-        // Retrieve the attendance records for the employee
-        $attendanceRecords = Attendance::where('user_id', $employee->id)
-            ->whereBetween('check_in', [$cutoffStartDate, $cutoffEndDate])
-            ->get();
+        foreach ($users as $user) {
+            if( $user->id == 1){
+                continue;
+            }
 
-        // Calculate payslip details
-        $presentDaysTotal = $attendanceRecords->count();
-        $regularHoursTotal = $attendanceRecords->sum(function ($record) {
-            $formatted_in = Carbon::parse($record->check_in);
-            $formatted_out = Carbon::parse($record->check_out);
-            return $formatted_out->diffInHours($formatted_in);
-        });
+            $existingPayroll = payrollList::where('user_id', $user->id)
+                ->where('cutoff_from', $this->getCutoffStartDate())
+                ->where('cutoff_to', $this->getCutoffEndDate())
+                ->first();
+    
+            if ($existingPayroll) {
+                continue; // Skip generating the payslip if it already exists
+            }
+    
+            // Retrieve the attendance records for the employee
+            $attendanceRecords = Attendance::where('user_id', $user->id)
+                ->whereBetween('check_in', [$this->getCutoffStartDate(), $this->getCutoffEndDate()])
+                ->get();
+    
+            // Calculate payslip details
+            $presentDaysTotal = $attendanceRecords->count();
+            $regularHoursTotal = $attendanceRecords->sum(function ($record) {
+                $formatted_in = Carbon::parse($record->check_in);
+                $formatted_out = Carbon::parse($record->check_out);
+                return $formatted_out->diffInHours($formatted_in);
+            });
+    
+            // Perform additional calculations based on the salary types model
+            $salaryTypes = SalaryTypes::where('name', $user->employee_status)->get(); // Assuming you have only one record in the salary types table
 
-        // Perform additional calculations based on the salary types model
-        $salaryTypes = SalaryTypes::where('name', $employee->employee_status)->get(); // Assuming you have only one record in the salary types table
-        $grossPay = $regularHoursTotal * $employee->salary_rate;
-        $deductions = $this->calculateDeductions($salaryTypes[0]);
-        $allowance = $salaryTypes[0]->allowance;
-        $netPay = $grossPay - $deductions + $allowance;
-
-        // Create payrollList record
-        $payrollList = payrollList::create([
-            'user_id' => $employee->id,
-            'cutoff_from' => $cutoffStartDate,
-            'cutoff_to' => $cutoffEndDate,
-            'present_days_total' => $presentDaysTotal,
-            'regular_hours_total' => $regularHoursTotal,
-            'gross_pay' => $grossPay,
-            'deductions' => $deductions,
-            'allowance' => $allowance,
-            'net_pay' => $netPay,
-        ]);
-
-        // Store the generated payslip details for display
-        $this->payslips = [
-            [
-                'cutoff_from' => $cutoffStartDate,
-                'cutoff_to' => $cutoffEndDate,
-                'employee_name' => $employee->first_name . ' ' . $employee->last_name,
+            $grossPay = $regularHoursTotal * $user->salary_rate;
+            $deductions = $this->calculateDeductions($salaryTypes[0]);
+            $allowance = $salaryTypes[0]->allowance;
+            $netPay = $grossPay - $deductions + $allowance;
+    
+            // Create payrollList record
+            $payrollList = payrollList::create([
+                'user_id' => $user->id,
+                'cutoff_from' => $this->getCutoffStartDate(),
+                'cutoff_to' => $this->getCutoffEndDate(),
                 'present_days_total' => $presentDaysTotal,
                 'regular_hours_total' => $regularHoursTotal,
                 'gross_pay' => $grossPay,
                 'deductions' => $deductions,
                 'allowance' => $allowance,
                 'net_pay' => $netPay,
-            ]
-        ];
-
+            ]);
+    
+            // Store the generated payslip details for display
+            $this->payslips[] = [
+                'cutoff_from' => $this->getCutoffStartDate(),
+                'cutoff_to' => $this->getCutoffEndDate(),
+                'employee_name' => $user->first_name . ' ' . $user->last_name,
+                'present_days_total' => $presentDaysTotal,
+                'regular_hours_total' => $regularHoursTotal,
+                'gross_pay' => $grossPay,
+                'deductions' => $deductions,
+                'allowance' => $allowance,
+                'net_pay' => $netPay,
+            ];
+        }
+    
         session()->flash('message', 'Payslips generated successfully.');
     }
 
@@ -234,8 +261,8 @@ class GeneratePayroll extends Component
 
     public function generatePayslips2nd()
     {
-        $employee = User::findOrFail($this->employeeId);
-
+        $users = User::all();
+        
         $cutoffStartDate = $this->getCutoffStartDate2nd();
         $cutoffEndDate = $this->getCutoffEndDate2nd();
 
@@ -257,57 +284,70 @@ class GeneratePayroll extends Component
                     'net_pay' => $payroll->net_pay,
                 ];
             });
-            return;
         }
 
-        // Retrieve the attendance records for the employee
-        $attendanceRecords = Attendance::where('user_id', $employee->id)
-            ->whereBetween('check_in', [$cutoffStartDate, $cutoffEndDate])
-            ->get();
+        foreach ($users as $user) {
+            if( $user->id == 1){
+                continue;
+            }
 
-        // Calculate payslip details
-        $presentDaysTotal = $attendanceRecords->count();
-        $regularHoursTotal = $attendanceRecords->sum(function ($record) {
-            $formatted_in = Carbon::parse($record->check_in);
-            $formatted_out = Carbon::parse($record->check_out);
-            return $formatted_out->diffInHours($formatted_in);
-        });
+            $existingPayroll = payrollList::where('user_id', $user->id)
+                ->where('cutoff_from', $this->getCutoffStartDate2nd())
+                ->where('cutoff_to', $this->getCutoffEndDate2nd())
+                ->first();
+    
+            if ($existingPayroll) {
+                continue; // Skip generating the payslip if it already exists
+            }
+    
+            // Retrieve the attendance records for the employee
+            $attendanceRecords = Attendance::where('user_id', $user->id)
+                ->whereBetween('check_in', [$this->getCutoffStartDate2nd(), $this->getCutoffEndDate2nd()])
+                ->get();
+    
+            // Calculate payslip details
+            $presentDaysTotal = $attendanceRecords->count();
+            $regularHoursTotal = $attendanceRecords->sum(function ($record) {
+                $formatted_in = Carbon::parse($record->check_in);
+                $formatted_out = Carbon::parse($record->check_out);
+                return $formatted_out->diffInHours($formatted_in);
+            });
+    
+            // Perform additional calculations based on the salary types model
+            $salaryTypes = SalaryTypes::where('name', $user->employee_status)->get(); // Assuming you have only one record in the salary types table
 
-        // Perform additional calculations based on the salary types model
-        $salaryTypes = SalaryTypes::where('name', $employee->employee_status)->get(); // Assuming you have only one record in the salary types table
-        $grossPay = $regularHoursTotal * $employee->salary_rate;
-        $deductions = $this->calculateDeductions2nd($salaryTypes[0]);
-        $allowance = $salaryTypes[0]->allowance;
-        $netPay = $grossPay - $deductions + $allowance;
-
-        // Create payrollList record
-        $payrollList = payrollList::create([
-            'user_id' => $employee->id,
-            'cutoff_from' => $cutoffStartDate,
-            'cutoff_to' => $cutoffEndDate,
-            'present_days_total' => $presentDaysTotal,
-            'regular_hours_total' => $regularHoursTotal,
-            'gross_pay' => $grossPay,
-            'deductions' => $deductions,
-            'allowance' => $allowance,
-            'net_pay' => $netPay,
-        ]);
-
-        // Store the generated payslip details for display
-        $this->payslips = [
-            [
-                'cutoff_from' => $cutoffStartDate,
-                'cutoff_to' => $cutoffEndDate,
-                'employee_name' => $employee->first_name . ' ' . $employee->last_name,
+            $grossPay = $regularHoursTotal * $user->salary_rate;
+            $deductions = $this->calculateDeductions2nd($salaryTypes[0]);
+            $allowance = $salaryTypes[0]->allowance;
+            $netPay = $grossPay - $deductions + $allowance;
+    
+            // Create payrollList record
+            $payrollList = payrollList::create([
+                'user_id' => $user->id,
+                'cutoff_from' => $this->getCutoffStartDate2nd(),
+                'cutoff_to' => $this->getCutoffEndDate2nd(),
                 'present_days_total' => $presentDaysTotal,
                 'regular_hours_total' => $regularHoursTotal,
                 'gross_pay' => $grossPay,
                 'deductions' => $deductions,
                 'allowance' => $allowance,
                 'net_pay' => $netPay,
-            ]
-        ];
-
+            ]);
+    
+            // Store the generated payslip details for display
+            $this->payslips[] = [
+                'cutoff_from' => $this->getCutoffStartDate2nd(),
+                'cutoff_to' => $this->getCutoffEndDate2nd(),
+                'employee_name' => $user->first_name . ' ' . $user->last_name,
+                'present_days_total' => $presentDaysTotal,
+                'regular_hours_total' => $regularHoursTotal,
+                'gross_pay' => $grossPay,
+                'deductions' => $deductions,
+                'allowance' => $allowance,
+                'net_pay' => $netPay,
+            ];
+        }
+    
         session()->flash('message', 'Payslips generated successfully.');
     }
 

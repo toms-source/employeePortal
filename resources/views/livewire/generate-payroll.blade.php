@@ -51,7 +51,7 @@
 
     <div>
         <button wire:click="generatePayslips">Generate Payslips from {{$this->getCutoffStartDate()}} to {{$this->getCutoffEndDate()}}</button>
-        <button wire:click="generatePayslips">Generate Payslips from {{$this->getCutoffStartDate()}} to {{$this->getCutoffEndDate()}}</button>
+        <button wire:click="generatePayslips">Generate Payslips from {{$this->getCutoffStartDate2nd()}} to {{$this->getCutoffEndDate2nd()}}</button>
     </div>
 
     @if ($payslips)
