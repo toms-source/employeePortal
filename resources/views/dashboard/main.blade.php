@@ -30,7 +30,7 @@
     <div class="d-flex">
         @Include('layouts.sidebar')
 
-        <div class="col-10 mt-3">
+        <div class="col-10 m-3">
             <div class="card shadow p-3 mb-5 bg-white rounded">
               
                     <div class="card my-4 shadow-sm">

@@ -33,9 +33,9 @@
 
 <div class="sidebar shadow align-self-center">
     <div class="sidebar-content"> 
-        <h5 class="mx-2 mt-5">Navigation</h5>
+        <h4 class="text-center fw-bold mx-2 mt-5"><i class="fa-solid fa-user-lock m-3"></i>Admin Navigation</h4>
 
-        <hr style="">
+    
 
         <div class="btns">
             <a class="nav-link" href="{{ route('admin.dashboard') }}">

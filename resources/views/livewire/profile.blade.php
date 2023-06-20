@@ -64,7 +64,7 @@
                     
                     <div class="col form-group">
                         <label for="birthDate">{{ __('Birthdate') }}</label>
-                        <input id="birthDate" type="text"
+                        <input id="birthDate" type="date"
                             class="form-control @error('employee_number') is-invalid @enderror"
                             name="employee_number" value="{{ old('employee_number') }}" required>
                         @error('employee_number')

@@ -11,22 +11,24 @@
                
                 {{-- grid --}}
                 <div class="col"> 
-                    <h5 class="shadow border fw-bold p-3 mb-3 bg-white rounded"> {{ Auth::user()->first_name }} {{ Auth::user()->last_name }} VINCENT
+                    
+                    <h5 class="border fw-bold p-3 mb-3 bg-white rounded"> {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}<i class="fa-solid fa-circle-user"></i> VINCENT
                                 DELA CRUZ Profile</h5>
 
-                        <div class="d-flex justify-content-end mb-3">
+                        <div class="d-flex justify-content-end ">
                             <button class="btn btn-outline-primary"><i class="fa-solid fa-gear"></i>Account Setting</button>
                         </div>
 
                     {{-- Document Request --}}
-                    <div class="shadow my-5">
+                    <div class="shadow my-3 border rounded-2">
                         <div class="card-body py-5">
                             @livewire('profile')
                         </div>
-                    </div>
-
-
-                    <div class="shadow my-5">
+                    </div>  
+                </div>
+            </div>
+            
+            <div class="shadow border rounded-2">
                         <div class="card-body py-5">
                             <div>
                                 <div class="container">
@@ -88,7 +90,7 @@
 
                                             <div class="col form-group">
                                                 <label for="startDate">{{ __('Start Date') }}</label>
-                                                <input id="startDate" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                                <input id="startDate" type="date" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                                 @error('email')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -97,7 +99,7 @@
                                             </div>
                                             <div class="col form-group">
                                                 <label for="endDate">{{ __('End Date') }}</label>
-                                                <input id="endDate" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                                <input id="endDate" type="date" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                                 @error('email')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -116,14 +118,11 @@
                            
                         </div>
                     </div>
-
-                    <div class="d-flex justify-content-end mb-3 p-4 gap-3">
-                        <button class="btn btn-outline-warning"><i class="fa-solid fa-pen-to-square"></i>Edit</button>
-                        <button class="btn btn-outline-danger"><i class="fa-solid fa-ban"></i>Cancel</button>
-                    </div>
+                <div class="d-flex justify-content-end mb-3 p-4 gap-3">
+                                <button class="btn btn-outline-warning"><i class="fa-solid fa-pen-to-square"></i>Edit</button>
+                                <button class="btn btn-outline-danger"><i class="fa-solid fa-ban"></i>Cancel</button>
                 </div>
             </div>
-        </div>
 
     </div>
     </div>
