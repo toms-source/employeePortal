@@ -163,7 +163,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         $employee = User::findOrFail($id);
         return view('livewire.employee-calendar', compact('employee'));
     })->name('employee-calendar');    
-        //dagdagan mo nalang dito ng route kagaya sa user 
+    
 });
 
 
