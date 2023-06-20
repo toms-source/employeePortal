@@ -15,13 +15,59 @@
                {{-- grid --}}
                <div class="col">
                    <h5 class="shadow border fw-bold p-3 mb-3 bg-white rounded">
-                       <a href="{{ route('schedule') }}">Schedule</a> > {{ $employee->first_name }} {{ $employee->last_name }} > Manage Schedule
+
+                       <a href="{{ route('schedule') }}">Schedule</a> > {{ $employee->first_name }}
+                       {{ $employee->last_name }} > Manage Schedule
                    </h5>
+                   <div class="d-flex justify-content-end mb-3">
+                       <a href="" class="btn btn-outline-success" data-bs-toggle="modal"
+                           data-bs-target="#addScheduleModal"><i class="fas fa-plus"></i> Add Schedule</a>
+                   </div>
                    <div class="shadow border fw-bold p-3 mb-3 bg-white rounded">
                        <div class="card-body py-5">
-                        <div id="calendar2"></div>
+
+
+                           <div id="calendar2"></div>
                        </div>
                    </div>
+               </div>
+           </div>
+       </div>
+
+
+       <!-- Add Schedule Modal -->
+       <div class="modal fade" id="addScheduleModal" tabindex="-1" aria-labelledby="addScheduleModalLabel"
+           aria-hidden="true">
+           <div class="modal-dialog">
+               <div class="modal-content">
+                   <div class="modal-header">
+                       <h5 class="modal-title" id="addScheduleModalLabel">Add Schedule</h5>
+                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                   </div>
+                   <form wire:submit.prevent="addSchedule">
+                       <div class="modal-body">
+                           <div class="mb-3">
+                               <label for="startDate" class="form-label">Start Date</label>
+                               <input type="date" class="form-control" id="startDate" wire:model="startDate">
+                           </div>
+                           <div class="mb-3">
+                               <label for="endDate" class="form-label">End Date</label>
+                               <input type="date" class="form-control" id="endDate" wire:model="endDate">
+                           </div>
+                           <div class="mb-3">
+                               <label for="startShift" class="form-label">Start Shift</label>
+                               <input type="time" class="form-control" id="startShift" wire:model="startShift">
+                           </div>
+                           <div class="mb-3">
+                               <label for="endShift" class="form-label">End Shift</label>
+                               <input type="time" class="form-control" id="endShift" wire:model="endShift">
+                           </div>
+                       </div>
+                       <div class="modal-footer">
+                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                           <button type="submit" class="btn btn-primary">Add Schedule</button>
+                       </div>
+                   </form>
                </div>
            </div>
        </div>
@@ -72,12 +118,26 @@
                    } : {
                        title: 'Did not Check Out',
                        start: record
-                       .check_in, // Still need a time for the event to be displayed on the correct day
+                           .check_in, // Still need a time for the event to be displayed on the correct day
                        allDay: true,
                    };
 
-                   return [checkInEvent, checkOutEvent];
+                   let startShiftEvent = record.start_shift ? {
+                       title: 'Start Shift',
+                       start: record.start_shift,
+                       allDay: false,
+                   } : null;
+
+                   let endShiftEvent = record.end_shift ? {
+                       title: 'End Shift',
+                       start: record.end_shift,
+                       allDay: false,
+                   } : null;
+                   
+                   return [checkInEvent, checkOutEvent, startShiftEvent, endShiftEvent].filter(
+                       Boolean);
                })
+
            });
        });
    </script>
