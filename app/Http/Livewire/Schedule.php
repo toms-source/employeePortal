@@ -11,7 +11,7 @@ class Schedule extends Component
 
     public function mount()
     {
-        $this->employees = User::where('employee_status', 'hired')->get();
+        $this->employees = User::where('status', 'hired')->get();
     }
 
     public function viewCalendar($employeeId)

@@ -5,7 +5,14 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 
-
+   <style>
+       .custom-event {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           height: 100%;
+       }
+   </style>
    @extends('layouts.app')
    @livewireStyles
    @section('content')
@@ -19,10 +26,7 @@
                        <a href="{{ route('schedule') }}">Schedule</a> > {{ $employee->first_name }}
                        {{ $employee->last_name }} > Manage Schedule
                    </h5>
-                   <div class="d-flex justify-content-end mb-3">
-                       <a href="" class="btn btn-outline-success" data-bs-toggle="modal"
-                           data-bs-target="#addScheduleModal"><i class="fas fa-plus"></i> Add Schedule</a>
-                   </div>
+                   @livewire('add-schedule', ['user' => $employee->id])
                    <div class="shadow border fw-bold p-3 mb-3 bg-white rounded">
                        <div class="card-body py-5">
 
@@ -30,44 +34,6 @@
                            <div id="calendar2"></div>
                        </div>
                    </div>
-               </div>
-           </div>
-       </div>
-
-
-       <!-- Add Schedule Modal -->
-       <div class="modal fade" id="addScheduleModal" tabindex="-1" aria-labelledby="addScheduleModalLabel"
-           aria-hidden="true">
-           <div class="modal-dialog">
-               <div class="modal-content">
-                   <div class="modal-header">
-                       <h5 class="modal-title" id="addScheduleModalLabel">Add Schedule</h5>
-                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                   </div>
-                   <form wire:submit.prevent="addSchedule">
-                       <div class="modal-body">
-                           <div class="mb-3">
-                               <label for="startDate" class="form-label">Start Date</label>
-                               <input type="date" class="form-control" id="startDate" wire:model="startDate">
-                           </div>
-                           <div class="mb-3">
-                               <label for="endDate" class="form-label">End Date</label>
-                               <input type="date" class="form-control" id="endDate" wire:model="endDate">
-                           </div>
-                           <div class="mb-3">
-                               <label for="startShift" class="form-label">Start Shift</label>
-                               <input type="time" class="form-control" id="startShift" wire:model="startShift">
-                           </div>
-                           <div class="mb-3">
-                               <label for="endShift" class="form-label">End Shift</label>
-                               <input type="time" class="form-control" id="endShift" wire:model="endShift">
-                           </div>
-                       </div>
-                       <div class="modal-footer">
-                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                           <button type="submit" class="btn btn-primary">Add Schedule</button>
-                       </div>
-                   </form>
                </div>
            </div>
        </div>
@@ -80,6 +46,7 @@
    <script>
        $(document).ready(function() {
            let attendanceRecords = @json($attendanceRecords);
+           let scheduleRecords = @json($scheduleRecords);
 
            // Initialize FullCalendar
            var calendar = $('#calendar2').fullCalendar({
@@ -104,40 +71,101 @@
                            });
                    }
                },
-               events: attendanceRecords.flatMap(function(record) {
-                   let checkInEvent = {
-                       title: 'Check In',
-                       start: record.check_in,
-                       allDay: false,
-                   };
+               dayRender: function(date, cell) {
+                   let dateString = date.format('YYYY-MM-DD');
+                   let isWithinSchedule = scheduleRecords.some(function(schedule) {
+                       return moment(schedule.start_date).isSameOrBefore(dateString) && moment(
+                           schedule.end_date).isSameOrAfter(dateString);
+                   });
 
-                   let checkOutEvent = record.check_out ? {
-                       title: 'Check Out',
-                       start: record.check_out,
-                       allDay: false,
-                   } : {
-                       title: 'Did not Check Out',
-                       start: record
-                           .check_in, // Still need a time for the event to be displayed on the correct day
-                       allDay: true,
-                   };
+                   if (isWithinSchedule) {
+                       let schedule = scheduleRecords.find(function(schedule) {
+                           return moment(schedule.start_date).isSameOrBefore(dateString) &&
+                               moment(schedule.end_date).isSameOrAfter(dateString);
+                       });
 
-                   let startShiftEvent = record.start_shift ? {
-                       title: 'Start Shift',
-                       start: record.start_shift,
-                       allDay: false,
-                   } : null;
+                       let startShift = moment(schedule.start_shift, 'HH:mm').format(
+                       'hh:mm A'); // Convert start_shift to 12-hour format
+                       let endShift = moment(schedule.end_shift, 'HH:mm').format(
+                       'hh:mm A'); // Convert end_shift to 12-hour format
 
-                   let endShiftEvent = record.end_shift ? {
-                       title: 'End Shift',
-                       start: record.end_shift,
-                       allDay: false,
-                   } : null;
-                   
-                   return [checkInEvent, checkOutEvent, startShiftEvent, endShiftEvent].filter(
-                       Boolean);
-               })
+                       if (moment(schedule.start_shift, 'HH:mm').format('HH') >= 12) {
+                           startShift;
+                       } else {
+                           startShift;
+                       }
 
+                       if (moment(schedule.end_shift, 'HH:mm').format('HH') >= 12) {
+                           endShift ;
+                       } else {
+                           endShift ;
+                       }
+
+                       cell.append('<div class="custom-event text-center mt-4 text-info"> Schedule: <br>' +
+                           startShift + ' - ' + endShift + '</div>');
+                   }
+               },
+               
+
+               events: function(start, end, timezone, callback) {
+                   let events = [];
+
+                   // Add attendance records
+                   events.push(...attendanceRecords.flatMap(function(record) {
+                       let checkInEvent = {
+                           title: 'Check In',
+                           start: record.check_in,
+                           allDay: false,
+                       };
+
+                       let checkOutEvent = record.check_out ? {
+                           title: 'Check Out',
+                           start: record.check_out,
+                           allDay: false,
+                       } : {
+                           title: 'Did not Check Out',
+                           start: record
+                               .check_in, // Still need a time for the event to be displayed on the correct day
+                           allDay: true,
+                       };
+
+                       return [checkInEvent, checkOutEvent].filter(Boolean);
+                   }));
+
+                   // Add schedule records within the selected range
+                   scheduleRecords.forEach(function(schedule) {
+                       let scheduleStartDate = moment(schedule.start_date).startOf('day');
+                       let scheduleEndDate = moment(schedule.end_date).endOf('day');
+
+                       if (scheduleEndDate.isBefore(start) || scheduleStartDate.isAfter(end)) {
+                           // The schedule is not within the selected range
+                           return;
+                       }
+
+                       let scheduleStartDateTime = moment(schedule.start_date).set({
+                           'hour': schedule.start_shift /
+                               60, // Assuming start_shift is in minutes
+                           'minute': schedule.start_shift % 60
+                       });
+
+                       let scheduleEndDateTime = moment(schedule.end_date).set({
+                           'hour': schedule.end_shift /
+                               60, // Assuming end_shift is in minutes
+                           'minute': schedule.end_shift % 60
+                       });
+
+                       let scheduleEvent = {
+                           title: 'Shift',
+                           start: scheduleStartDateTime,
+                           end: scheduleEndDateTime,
+                           allDay: false,
+                       };
+
+                       events.push(scheduleEvent);
+                   });
+
+                   callback(events);
+               }
            });
        });
    </script>

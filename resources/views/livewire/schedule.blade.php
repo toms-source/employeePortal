@@ -21,7 +21,7 @@
                     <td>{{ $employee->middle_name }}</td>
                     <td>{{ $employee->position }}</td>
                     <td>{{ $employee->department }}</td>
-                    <td>{{ $employee->employee_status }}</td>
+                    <td>{{ $employee->status }}</td>
                     <td>
                         <a href="{{ route('employee-calendar', $employee->id) }}"><i class="fa fa-eye"></i></a>
                     </td>
