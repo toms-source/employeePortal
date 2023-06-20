@@ -4,7 +4,9 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
+use App\Mail\EmployeeAdded;
 
 class AdminAddPersonalProfile extends Component
 {
@@ -100,7 +102,7 @@ class AdminAddPersonalProfile extends Component
         ]);
 
         event(new Registered($user));
-
+        Mail::to($this->email)->send(new EmployeeAdded($this->password));
         session()->flash('message', 'Employee added successfully.');
     }
 
