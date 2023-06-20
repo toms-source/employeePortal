@@ -17,17 +17,14 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->timestamps();
-            $table->string('employee_number')->unique()->nullable();
             $table->string('last_name')->nullable();
             $table->string('first_name')->nullable();
             $table->string('middle_name')->nullable();
             $table->string('department')->nullable();
-            $table->string('employee_status')->nullable();
             $table->string('role')->nullable();
             $table->string('gender')->nullable();
             $table->date('birth_date')->nullable();
             $table->string('civil_status')->nullable();
-            $table->integer('number')->nullable()->default(0);
             $table->string('address')->nullable();
             $table->integer('sss')->nullable();
             $table->integer('tin')->nullable();
@@ -38,11 +35,13 @@ return new class extends Migration
             $table->string('contact_relationship')->nullable();
             $table->string('position')->nullable();
             $table->string('description')->nullable();
-            $table->decimal('salary_rate', 8, 2)->nullable();
+            $table->decimal('salary_rate', $precision = 8, $scale = 2)->nullable();  
+            $table->string('number')->nullable();          
             $table->string('status')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->string('profile_picture')->nullable();
+            // $table->string('profile_picture')->nullable();
+            $table->string('company_email')->unique()->nullable();
             $table->rememberToken();
         });
     }
