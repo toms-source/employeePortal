@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->timestamps();
             $table->string('employee_number')->unique()->nullable();
             $table->string('last_name')->nullable();
             $table->string('first_name')->nullable();
@@ -43,6 +42,7 @@ return new class extends Migration
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->string('profile_picture')->nullable();
+            $table->timestamps();
             $table->rememberToken();
         });
     }

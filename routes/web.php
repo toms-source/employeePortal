@@ -4,6 +4,11 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Schedule;
 use App\Http\Livewire\EmployeeCalendar;
+use Livewire\Livewire;
+use Illuminate\Http\Response;
+use Illuminate\Http\Request;
+use Illuminate\Routing\ResponseFactory;
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -136,10 +141,11 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         return view('dashboard.announcement');
     })->name('announcement');
 
-    Route::get('/employee-calendar/{employee}', function ($employee) {
-        return view('dashboard.calendar-employee', ['id' => $employee]);
-    })->name('employee-calendar');
-    
-
+    Route::get('/{id}/employee-calendar', function ($id) {
+        $employee = User::findOrFail($id);
+        return view('livewire.employee-calendar', compact('employee'));
+    })->name('view-ordinance');    
         //dagdagan mo nalang dito ng route kagaya sa user 
 });
+
+
