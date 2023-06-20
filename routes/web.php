@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Schedule;
+
 use App\Http\Livewire\EmployeeCalendar;
 use Livewire\Livewire;
 use Illuminate\Http\Response;
@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\ResponseFactory;
 use App\Models\User;
 use App\Models\Attendance;
+use App\Models\Schedule;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -163,7 +164,8 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/{id}/employee-calendar', function ($id) {
         $employee = User::findOrFail($id);
         $attendanceRecords = Attendance::where('user_id', $id)->get();
-        return view('livewire.employee-calendar', compact('employee', 'attendanceRecords'));
+        $scheduleRecords = Schedule::where('user_id', $id)->get();
+        return view('livewire.employee-calendar', compact('employee', 'attendanceRecords','scheduleRecords'));
     })->name('employee-calendar');
     
     

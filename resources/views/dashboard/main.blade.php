@@ -29,14 +29,25 @@
     </style>
     <div class="d-flex">
         @Include('layouts.sidebar')
-
+    
         <div class="col-10 m-3">
-            <div class="card shadow p-3 mb-5 bg-white rounded">
-              
-                    <div class="card my-4 shadow-sm">
+            <div class="card mb-3 shadow p-3 mb-5 bg-white rounded">
+                <div class="card-body">
+                    <div class="card-title"><h3>Announcement</h3></div>
 
+                        @livewire('user-annoucement')
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <div class="card shadow p-3 mb-5 bg-white rounded">
+                    <div class="card my-4 shadow-sm">
                             @livewire('total-reqs-e')
-                        
                     </div>
             </div>
         </div>
