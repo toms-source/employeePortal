@@ -1,6 +1,6 @@
 <div>
     <div class="row mt-2 mb-3 ml-3 mr-3">
-        <h3 class="px-4"><i class="fa-solid fa-chart-bar mr-3 mb-3"></i>
+        <h3 class="px-4"><i class="fa-solid fa-file"></i>
             {{ __('Requests') }}
 
         </h3>
@@ -67,7 +67,7 @@
 
 
         <hr class="mt-3 mb-3">
-        <h3 class="px-4"><i class="fa-solid fa-chart-bar mr-3 mb-3"></i>
+        <h3 class="px-4"><i class="icon fa-solid fa-clock" style="color: #000000;"></i>
             {{ __('Pending') }}
         </h3>
 
@@ -117,7 +117,7 @@
         </div>
 
         <hr class="mt-3 mb-3">
-        <h3 class="px-4"><i class="fa-solid fa-chart-bar mr-3 mb-3"></i>
+        <h3 class="px-4"><i class="fa-solid fa-check" style="color: #000000"></i>
             {{ __('Approved') }}
         </h3>
 

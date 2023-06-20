@@ -1,5 +1,5 @@
 <div>
-    <div class="row mt-2 mb-3 ml-3 mr-3">
+    <div class="row m-3">
         <h3 class="px-4"><i class="fa-solid fa-folder-open"></i>
             {{ __('Requests') }}
 

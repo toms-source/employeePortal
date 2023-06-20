@@ -116,6 +116,11 @@ Route::prefix('user')->middleware('user.role')->group(function () {
     Route::get('/other/approved', function () {
         return view('dashboard.other-request-app');
     })->name('other2');
+
+    Route::get('/attendance/calendar', function () {
+        return view('dashboard.attendance');
+    })->name('attendance');
+    
 });
 
 
@@ -164,3 +169,5 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
     //dagdagan mo nalang dito ng route kagaya sa user 
 });
+
+

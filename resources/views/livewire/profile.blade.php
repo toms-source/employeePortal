@@ -7,8 +7,10 @@
                 </div>
 
                 <hr>
+
                 <div class="row gap-3">
                     <div class="row">
+
                         <div class="col form-group">
                             <label for="lastName">{{ __('Last Name') }}</label>
                             <input wire:model="last_name" type="text" name="last_name" class="form-control" required>
