@@ -15,7 +15,7 @@
                {{-- grid --}}
                <div class="col">
                    <h5 class="shadow border fw-bold p-3 mb-3 bg-white rounded">
-                       Schedule > {{ $employee->first_name }} {{ $employee->last_name }} > Manage Schedule
+                       <a href="{{ route('schedule') }}">Schedule</a> > {{ $employee->first_name }} {{ $employee->last_name }} > Manage Schedule
                    </h5>
                    <div class="shadow border fw-bold p-3 mb-3 bg-white rounded">
                        <div class="card-body py-5">
