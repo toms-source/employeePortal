@@ -101,7 +101,7 @@
                     let endShift = moment(schedule.end_shift, 'HH:mm').format(
                     'hh:mm A'); // Convert end_shift to AM/PM format
 
-                    cell.append('<div class="custom-event text-center mt-4 text-info">Schedule: ' +
+                    cell.append('<div class="custom-event text-center mt-4 text-info" style="display: flex; align-items: center; justify-content: center; height: 100%;">Schedule: ' +
                         startShift + ' - ' + endShift +
                         '</div>');
                 }
