@@ -12,23 +12,32 @@ class AttendanceCalendar extends Component
     public $myData = 'Hello, JavaScript!';
     public $checkintime;
     public $checkouttime;
-
+    public $attendanceRecords = [];
+    public $todayAttendance = null;
     public function mount()
     {
         $userId = Auth::id();
-        $today = now()->format('Y-m-d');
+        // Fetch attendance records for the past 7 days
+        $this->attendanceRecords = Attendance::where('user_id', $userId)
+            ->whereDate('check_in', '>', now()->subDays(7))
+            ->get()
+            ->map(function ($attendance) {
+                $check_in = Carbon::parse($attendance->check_in);
+                $check_out = $attendance->check_out ? Carbon::parse($attendance->check_out) : null;
+                return [
+                    'checkInDate' => $check_in->format('Y-m-d'),
+                    'checkInTime' => $check_in->format('H:i'),
+                    'checkOutTime' => $check_out ? $check_out->format('H:i') : null,
+                ];
+            })
+            ->keyBy('checkInDate')
+            ->toArray();
 
-        $attendance = Attendance::where('user_id', $userId)
-            ->whereDate('check_in', $today)
+            $this->todayAttendance = Attendance::where('user_id', $userId)
+            ->whereDate('check_in', '=', now()->format('Y-m-d'))
             ->first();
-
-            if ($attendance) {
-                $checkInTime = Carbon::parse($attendance->check_in)->format('H:i');
-                $checkOutTime = Carbon::parse($attendance->check_out)->format('H:i');
-                $this->checkintime = $checkInTime;
-                $this->checkouttime = $checkOutTime;
-            }
     }
+    
     public function checkIn()
     {
         $userId = session('user_id') ?? auth()->user()->id;
@@ -51,8 +60,9 @@ class AttendanceCalendar extends Component
             'user_id' => $userId,
             'check_in' => $checkInTime,
         ]);
-
+ 
         $this->emit('message', 'Checked in successfully!');
+        $this->emit('pageReload');
     }
 
     public function checkOut()
@@ -67,8 +77,9 @@ class AttendanceCalendar extends Component
                 'check_out' => $checkOutTime,
             ]);
         }
-
+      
         $this->emit('message', 'Checked out successfully!');
+        $this->emit('pageReload');
     }
 
 
