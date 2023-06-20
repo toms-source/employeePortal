@@ -51,7 +51,7 @@
 
     <div>
         <button wire:click="generatePayslips">Generate Payslips from {{$this->getCutoffStartDate()}} to {{$this->getCutoffEndDate()}}</button>
-        <button wire:click="generatePayslips">Generate Payslips from {{$this->getCutoffStartDate2nd()}} to {{$this->getCutoffEndDate2nd()}}</button>
+        <button wire:click="generatePayslips2nd">Generate Payslips from {{$this->getCutoffStartDate2nd()}} to {{$this->getCutoffEndDate2nd()}}</button>
     </div>
 
     @if ($payslips)
@@ -82,9 +82,16 @@
                         <td>{{ $payslip['deductions'] }}</td>
                         <td>{{ $payslip['allowance'] }}</td>
                         <td>{{ $payslip['net_pay'] }}</td>
+                        {{-- <td>
+                            <button class="fa fa-edit border-0" data-target="#editEmployee" type="button" data-toggle="modal" wire:click="editEmployees({{ $payslip['id'] }})"></button>
+                            <a><i class="fa-solid fa-trash-can"style="color: #e61919;" wire:click="deleteEmpTry({{$payslip['id'] }})"></i></a>
+                        </td> --}}
                         <td>
-                            {{-- <button class="fa fa-edit border-0" data-target="#editEmployee" type="button" data-toggle="modal" wire:click="editEmployees({{ $payslip['id'] }})"></button>
-                            <a><i class="fa-solid fa-trash-can"style="color: #e61919;" wire:click="deleteEmpTry({{$payslip['id'] }})"></i></a> --}}
+                            @if ($payslip['status'] == "Pending")
+                                <button class="btn btn-success"
+                                    wire:click="selectRequestForApproval({{ $payslip['id']  }})">Approve</button>
+                                <button class="btn btn-danger" wire:click="deny({{ $payslip['id'] }})">Deny</button>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -92,32 +99,54 @@
         </table>
     @endif
 
+        <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to approve this Payslip?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    @if ($selectedRequest)
+                        <button type="button" class="btn btn-primary" wire:click="confirmApprove()">Confirm</button>
+                    @endif
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="modal fade" id="deleteEmployee" tabindex="-1" role="dialog"
+
+    <div class="modal fade" id="denyDocu" tabindex="-1" role="dialog"
     aria-labelledby="ordinanceAddedModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="ordinanceAddedModalLabel">Employee Deletion</h5>
+                    <h5 class="modal-title" id="ordinanceAddedModalLabel">Payslip Deny</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Are you sure you want to delete this Employee?
+                    Are you sure you want to deny this Payslip?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="px-5 btn btn-outline-danger" data-dismiss="modal" wire:click='deleteEmpConfirm()'>Yes</button>
+                    <button type="button" class="px-5 btn btn-outline-danger" data-dismiss="modal" wire:click='denyConfirm()'>Yes</button>
                     <button type="button" class="px-5 btn btn-outline-secondary" data-dismiss="modal">No</button>
                 </div>
             </div>
         </div>
     </div>
+
+    </div>
 </div>
 
 <script>
     document.addEventListener('livewire:load', function() {
-        window.livewire.on('deleteEmployee',() =>{
+        window.livewire.on('denyDocu',() =>{
             console.log('ordinanceAdded event received');
 
             // document.getElementById('ordinanceDelete').classList.remove('show');
@@ -125,8 +154,14 @@
             // document.getElementsByClassName('modal-backdrop')[0].remove();
 
             var modalOrdinanceAdded = new bootstrap.Modal(document.getElementById(
-                'deleteEmployee'));
+                'denyDocu'));
             modalOrdinanceAdded.show();
+        });
+        window.livewire.on('showConfirmationModal', () => {
+            $('#confirmationModal').modal('show');
+        });
+        window.livewire.on('hideConfirmationModal', () => {
+            $('#confirmationModal').modal('hide');
         });
     });
 </script>

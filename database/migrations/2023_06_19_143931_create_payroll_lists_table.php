@@ -23,6 +23,7 @@ return new class extends Migration
             $table->decimal('deductions', $precision = 8, $scale = 2);
             $table->decimal('allowance', $precision = 8, $scale = 2);
             $table->decimal('net_pay', $precision = 8, $scale = 2);
+            $table->string('status');
             $table->timestamps();
         });
     }

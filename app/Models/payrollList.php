@@ -18,6 +18,8 @@ class payrollList extends Model
         'deductions',
         'allowance',
         'net_pay',
+        'status',
+        
     ];
     public function user()
     {
