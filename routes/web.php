@@ -134,17 +134,26 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
 
     Route::get('/schedule', function () {
-        return view('dashboard.schedule');
+        return view('dashboard.sched');
     })->name('schedule');
 
     Route::get('/annoucement', function () {
         return view('dashboard.announcement');
     })->name('announcement');
 
+    Route::get('/salary', function () {
+        return view('dashboard.salary');
+    })->name('salary');
+
+    
+    Route::get('/payroll', function () {
+        return view('dashboard.payroll');
+    })->name('payroll');
+
     Route::get('/{id}/employee-calendar', function ($id) {
         $employee = User::findOrFail($id);
         return view('livewire.employee-calendar', compact('employee'));
-    })->name('view-ordinance');    
+    })->name('employee-calendar');    
         //dagdagan mo nalang dito ng route kagaya sa user 
 });
 
