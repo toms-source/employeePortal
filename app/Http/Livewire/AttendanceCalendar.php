@@ -17,7 +17,6 @@ class AttendanceCalendar extends Component
     public function mount()
     {
         $userId = Auth::id();
-        // Fetch attendance records for the past 7 days
         $this->attendanceRecords = Attendance::where('user_id', $userId)
             ->whereDate('check_in', '>', now()->subDays(7))
             ->get()
@@ -43,19 +42,16 @@ class AttendanceCalendar extends Component
         $userId = session('user_id') ?? auth()->user()->id;
         $today = Carbon::today();
 
-        // Check if a record exists for today
         $existingAttendance = Attendance::where('user_id', $userId)
             ->whereDate('check_in', $today)
             ->first();
 
-        // If record exists, emit a message and return early
         if ($existingAttendance) {
             $this->emit('message', 'You have already checked in today!');
             return;
         }
 
         $checkInTime = Carbon::now();
-        // Create the attendance record
         Attendance::create([
             'user_id' => $userId,
             'check_in' => $checkInTime,
@@ -70,7 +66,6 @@ class AttendanceCalendar extends Component
         $checkOutTime = Carbon::now();
         $userId = session('user_id') ?? auth()->user()->id;
 
-        // Here you can update the record in the database for check out
         $attendance = Attendance::where('user_id', $userId)->latest()->first();
         if ($attendance) {
             $attendance->update([

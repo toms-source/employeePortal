@@ -2,110 +2,375 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
 use App\Models\Attendance;
-use App\Models\SalaryTypes;
-use App\Models\payrollList;
 use App\Models\User;
+use App\Models\payrollList;
+use App\Models\SalaryTypes;
+use Carbon\Carbon;
+use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 class GeneratePayroll extends Component
 {
-    public $payrollListId;
+    // public $employeeId;
+    // public $payslips;
 
-    public function generatePayslip()
+    // public function render()
+    // {
+    //     $employees = User::all();
+
+    //     return view('livewire.generate-payroll', [
+    //         'employees' => $employees,
+    //     ]);
+    // }
+
+    // public function generatePayslips()
+    // {
+        
+    //     $users = User::all();
+
+    //     foreach ($users as $user) {
+    //         if($user->id == 1){
+    //             continue;
+    //         }
+    //         $existingPayroll = payrollList::where('user_id', $user->id)
+    //             ->where('cutoff_from', $this->getCutoffStartDate())
+    //             ->where('cutoff_to', $this->getCutoffEndDate())
+    //             ->first();
+
+    //         if ($existingPayroll) {
+    //             continue; // Skip generating the payslip if it already exists
+    //         }
+
+    //         // Retrieve the attendance records for the employee
+    //         $attendanceRecords = Attendance::where('user_id', $user->id)
+    //             ->whereBetween('check_in', [$this->getCutoffStartDate(), $this->getCutoffEndDate()])
+    //             ->get();
+
+    //         // Calculate payslip details
+    //         $presentDaysTotal = $attendanceRecords->count();
+    //         $regularHoursTotal = $attendanceRecords->sum(function ($record) {
+    //             $formatted_in = Carbon::parse($record->check_in);
+    //             $formatted_out = Carbon::parse($record->check_out);
+    //             return $formatted_out->diffInHours($formatted_in);
+    //         });
+
+    //         // Perform additional calculations based on the salary types model
+    //         $salaryTypes = SalaryTypes::where('name', $user->employee_status)->get(); // Assuming you have only one record in the salary types table
+    //         // if (!$salaryTypes) {
+    //         //     continue; // Skip generating the payslip if it already exists
+    //         // }
+
+    //         $grossPay = $regularHoursTotal * $user->salary_rate;
+    //         $deductions = $this->calculateDeductions($salaryTypes[0]);
+    //         $allowance = $salaryTypes[0]->allowance;
+    //         $netPay = $grossPay - $deductions + $allowance;
+
+    //         // Create payrollList record
+    //         $payrollList = payrollList::create([
+    //             'user_id' => $user->id,
+    //             'cutoff_from' => $this->getCutoffStartDate(),
+    //             'cutoff_to' => $this->getCutoffEndDate(),
+    //             'present_days_total' => $presentDaysTotal,
+    //             'regular_hours_total' => $regularHoursTotal,
+    //             'gross_pay' => $grossPay,
+    //             'deductions' => $deductions,
+    //             'allowance' => $allowance,
+    //             'net_pay' => $netPay,
+    //         ]);
+
+    //         // Store the generated payslip details for display
+    //         $this->payslips[] = [
+    //             'cutoff_from' => $this->getCutoffStartDate(),
+    //             'cutoff_to' => $this->getCutoffEndDate(),
+    //             'employee_name' => $user->first_name . ' ' . $user->last_name,
+    //             'present_days_total' => $presentDaysTotal,
+    //             'regular_hours_total' => $regularHoursTotal,
+    //             'gross_pay' => $grossPay,
+    //             'deductions' => $deductions,
+    //             'allowance' => $allowance,
+    //             'net_pay' => $netPay,
+    //         ];
+    //     }
+
+    //     // dd($this->payslips);
+    //     session()->flash('message', 'Payslips generated successfully.');
+    
+    // }
+
+    // private function calculateDeductions($salaryTypes)
+    // {
+    //     // Perform the calculation for deductions based on gross pay and salary type
+    //     // Example calculation:
+    //     $taxBIR =$salaryTypes->tax_bir;
+    //     $taxSSS =$salaryTypes->tax_sss;
+    //     $taxPhilHealth =$salaryTypes->tax_phealth;
+    //     $taxPagIBIG =$salaryTypes->tax_pibig;
+
+    //     // Assuming the deductions are additive
+    //     return $taxBIR + $taxSSS + $taxPhilHealth + $taxPagIBIG;
+    // }
+
+    // public function getCutoffStartDate()
+    // {
+    //     return Carbon::now()->firstOfMonth()->format('Y-m-d');
+    // }
+
+    // public function getCutoffEndDate()
+    // {
+    //     return Carbon::now()->firstOfMonth()->addDays(14)->format('Y-m-d');
+    // }
+    public $payslips;
+
+    public function render()
     {
-        $payrollList = payrollList::find($this->payrollListId);
-
-        if (!$payrollList) {
-            // Handle the case where the payroll list is not found
-            return;
+        $employees = payrollList::all();
+        if ($employees->isNotEmpty()) {
+            $this->payslips = $employees->map(function ($payroll) {
+                return [
+                    'cutoff_from' => $payroll->cutoff_from,
+                    'cutoff_to' => $payroll->cutoff_to,
+                    'employee_name' => $payroll->user->first_name . ' ' . $payroll->user->last_name,
+                    'present_days_total' => $payroll->present_days_total,
+                    'regular_hours_total' => $payroll->regular_hours_total,
+                    'gross_pay' => $payroll->gross_pay,
+                    'deductions' => $payroll->deductions,
+                    'allowance' => $payroll->allowance,
+                    'net_pay' => $payroll->net_pay,
+                ];
+            });
         }
 
-        $attendance = Attendance::where('user_id', $payrollList->user_id)
-            ->whereBetween('check_in', [$payrollList->cutoff_from, $payrollList->cutoff_to])
-            ->whereNotNull('check_out')
+        return view('livewire.generate-payroll');
+    }
+
+    public function generatePayslips()
+    {
+        $users = User::all();
+        
+        $cutoffStartDate = $this->getCutoffStartDate();
+        $cutoffEndDate = $this->getCutoffEndDate();
+
+        $payrollList = payrollList::where('cutoff_from', $cutoffStartDate)
+            ->where('cutoff_to', $cutoffEndDate)
             ->get();
 
-        $salaryType = salaryTypes::where('name', $payrollList->user->salary_type)->first();
-
-        if (!$salaryType) {
-            // Handle the case where the salary type is not found
-            return;
+        if ($payrollList->isNotEmpty()) {
+            $this->payslips = $payrollList->map(function ($payroll) {
+                return [
+                    'cutoff_from' => $payroll->cutoff_from,
+                    'cutoff_to' => $payroll->cutoff_to,
+                    'employee_name' => $payroll->user->first_name . ' ' . $payroll->user->last_name,
+                    'present_days_total' => $payroll->present_days_total,
+                    'regular_hours_total' => $payroll->regular_hours_total,
+                    'gross_pay' => $payroll->gross_pay,
+                    'deductions' => $payroll->deductions,
+                    'allowance' => $payroll->allowance,
+                    'net_pay' => $payroll->net_pay,
+                ];
+            });
         }
 
-        // Perform calculations and generate the payslip based on the data retrieved
+        foreach ($users as $user) {
+            if( $user->id == 1){
+                continue;
+            }
 
-        // Example calculations using the salary type:
+            $existingPayroll = payrollList::where('user_id', $user->id)
+                ->where('cutoff_from', $this->getCutoffStartDate())
+                ->where('cutoff_to', $this->getCutoffEndDate())
+                ->first();
+    
+            if ($existingPayroll) {
+                continue; // Skip generating the payslip if it already exists
+            }
+    
+            // Retrieve the attendance records for the employee
+            $attendanceRecords = Attendance::where('user_id', $user->id)
+                ->whereBetween('check_in', [$this->getCutoffStartDate(), $this->getCutoffEndDate()])
+                ->get();
+    
+            // Calculate payslip details
+            $presentDaysTotal = $attendanceRecords->count();
+            $regularHoursTotal = $attendanceRecords->sum(function ($record) {
+                $formatted_in = Carbon::parse($record->check_in);
+                $formatted_out = Carbon::parse($record->check_out);
+                return $formatted_out->diffInHours($formatted_in);
+            });
+    
+            // Perform additional calculations based on the salary types model
+            $salaryTypes = SalaryTypes::where('name', $user->employee_status)->get(); // Assuming you have only one record in the salary types table
 
-        $presentDaysTotal = count($attendance);
-        $regularHoursTotal = $this->calculateRegularHours($attendance);
-        $grossPay = $this->calculateGrossPay($regularHoursTotal, $salaryType);
-        $deductions = $this->calculateDeductions($grossPay, $salaryType);
-        $allowance = $this->calculateAllowance($salaryType);
-        $netPay = $this->calculateNetPay($grossPay, $deductions, $allowance);
-
-        // Update the payroll list with the calculated values
-        $payrollList->present_days_total = $presentDaysTotal;
-        $payrollList->regular_hours_total = $regularHoursTotal;
-        $payrollList->gross_pay = $grossPay;
-        $payrollList->deductions = $deductions;
-        $payrollList->allowance = $allowance;
-        $payrollList->net_pay = $netPay;
-        $payrollList->save();
-
-        // Flash a success message to indicate that the payslip has been generated
-        session()->flash('message', 'Payslip generated successfully.');
+            $grossPay = $regularHoursTotal * $user->salary_rate;
+            $deductions = $this->calculateDeductions($salaryTypes[0]);
+            $allowance = $salaryTypes[0]->allowance;
+            $netPay = $grossPay - $deductions + $allowance;
+    
+            // Create payrollList record
+            $payrollList = payrollList::create([
+                'user_id' => $user->id,
+                'cutoff_from' => $this->getCutoffStartDate(),
+                'cutoff_to' => $this->getCutoffEndDate(),
+                'present_days_total' => $presentDaysTotal,
+                'regular_hours_total' => $regularHoursTotal,
+                'gross_pay' => $grossPay,
+                'deductions' => $deductions,
+                'allowance' => $allowance,
+                'net_pay' => $netPay,
+            ]);
+    
+            // Store the generated payslip details for display
+            $this->payslips[] = [
+                'cutoff_from' => $this->getCutoffStartDate(),
+                'cutoff_to' => $this->getCutoffEndDate(),
+                'employee_name' => $user->first_name . ' ' . $user->last_name,
+                'present_days_total' => $presentDaysTotal,
+                'regular_hours_total' => $regularHoursTotal,
+                'gross_pay' => $grossPay,
+                'deductions' => $deductions,
+                'allowance' => $allowance,
+                'net_pay' => $netPay,
+            ];
+        }
+    
+        session()->flash('message', 'Payslips generated successfully.');
     }
 
-    private function calculateRegularHours($attendance)
-    {
-        // Perform the calculation for regular hours based on attendance records
-        // Example calculation:
-        return count($attendance) * 8; // Assuming 8 hours per day
-    }
-
-    private function calculateGrossPay($regularHours, $salaryType)
-    {
-        // Perform the calculation for gross pay based on regular hours and salary type
-        // Example calculation:
-        return $regularHours * $salaryType->hourly_rate; // Assuming hourly rate is stored in the salary type
-    }
-
-    private function calculateDeductions($grossPay, $salaryType)
+    private function calculateDeductions($salaryTypes)
     {
         // Perform the calculation for deductions based on gross pay and salary type
         // Example calculation:
-        $taxBIR = $grossPay * $salaryType->tax_bir;
-        $taxSSS = $grossPay * $salaryType->tax_sss;
-        $taxPhilHealth = $grossPay * $salaryType->tax_phealth;
-        $taxPagIBIG = $grossPay * $salaryType->tax_pibig;
+        $taxBIR = $salaryTypes->tax_bir;
+        $taxSSS = $salaryTypes->tax_sss;
+        $taxPhilHealth = $salaryTypes->tax_phealth;
+        $taxPagIBIG = $salaryTypes->tax_pibig;
 
         // Assuming the deductions are additive
         return $taxBIR + $taxSSS + $taxPhilHealth + $taxPagIBIG;
     }
 
-    private function calculateAllowance($salaryType)
+    public function getCutoffStartDate() 
     {
-        // Perform the calculation for allowance based on salary type
-        // Example calculation:
-        return $salaryType->allowance;
+        return Carbon::now()->firstOfMonth()->format('Y-m-d');
     }
 
-    private function calculateNetPay($grossPay, $deductions, $allowance)
+    public function getCutoffEndDate()
     {
-        // Perform the calculation for net pay based on gross pay, deductions, and allowance
-        // Example calculation:
-        return $grossPay - $deductions + $allowance;
+        return Carbon::now()->firstOfMonth()->addDays(14)->format('Y-m-d');
     }
 
-    public function render()
+    public function generatePayslips2nd()
     {
-        $payrollList = payrollList::all();
-        $salaryTypes = salaryTypes::all();
+        $users = User::all();
+        
+        $cutoffStartDate = $this->getCutoffStartDate2nd();
+        $cutoffEndDate = $this->getCutoffEndDate2nd();
 
-        return view('livewire.generate-payroll', [
-            'payrollList' => $payrollList,
-            'salaryTypes' => $salaryTypes,
-        ]);
+        $payrollList = payrollList::where('cutoff_from', $cutoffStartDate)
+            ->where('cutoff_to', $cutoffEndDate)
+            ->get();
+
+        if ($payrollList->isNotEmpty()) {
+            $this->payslips = $payrollList->map(function ($payroll) {
+                return [
+                    'cutoff_from' => $payroll->cutoff_from,
+                    'cutoff_to' => $payroll->cutoff_to,
+                    'employee_name' => $payroll->user->first_name . ' ' . $payroll->user->last_name,
+                    'present_days_total' => $payroll->present_days_total,
+                    'regular_hours_total' => $payroll->regular_hours_total,
+                    'gross_pay' => $payroll->gross_pay,
+                    'deductions' => $payroll->deductions,
+                    'allowance' => $payroll->allowance,
+                    'net_pay' => $payroll->net_pay,
+                ];
+            });
+        }
+
+        foreach ($users as $user) {
+            if( $user->id == 1){
+                continue;
+            }
+
+            $existingPayroll = payrollList::where('user_id', $user->id)
+                ->where('cutoff_from', $this->getCutoffStartDate2nd())
+                ->where('cutoff_to', $this->getCutoffEndDate2nd())
+                ->first();
+    
+            if ($existingPayroll) {
+                continue; // Skip generating the payslip if it already exists
+            }
+    
+            // Retrieve the attendance records for the employee
+            $attendanceRecords = Attendance::where('user_id', $user->id)
+                ->whereBetween('check_in', [$this->getCutoffStartDate2nd(), $this->getCutoffEndDate2nd()])
+                ->get();
+    
+            // Calculate payslip details
+            $presentDaysTotal = $attendanceRecords->count();
+            $regularHoursTotal = $attendanceRecords->sum(function ($record) {
+                $formatted_in = Carbon::parse($record->check_in);
+                $formatted_out = Carbon::parse($record->check_out);
+                return $formatted_out->diffInHours($formatted_in);
+            });
+    
+            // Perform additional calculations based on the salary types model
+            $salaryTypes = SalaryTypes::where('name', $user->employee_status)->get(); // Assuming you have only one record in the salary types table
+
+            $grossPay = $regularHoursTotal * $user->salary_rate;
+            $deductions = $this->calculateDeductions2nd($salaryTypes[0]);
+            $allowance = $salaryTypes[0]->allowance;
+            $netPay = $grossPay - $deductions + $allowance;
+    
+            // Create payrollList record
+            $payrollList = payrollList::create([
+                'user_id' => $user->id,
+                'cutoff_from' => $this->getCutoffStartDate2nd(),
+                'cutoff_to' => $this->getCutoffEndDate2nd(),
+                'present_days_total' => $presentDaysTotal,
+                'regular_hours_total' => $regularHoursTotal,
+                'gross_pay' => $grossPay,
+                'deductions' => $deductions,
+                'allowance' => $allowance,
+                'net_pay' => $netPay,
+            ]);
+    
+            // Store the generated payslip details for display
+            $this->payslips[] = [
+                'cutoff_from' => $this->getCutoffStartDate2nd(),
+                'cutoff_to' => $this->getCutoffEndDate2nd(),
+                'employee_name' => $user->first_name . ' ' . $user->last_name,
+                'present_days_total' => $presentDaysTotal,
+                'regular_hours_total' => $regularHoursTotal,
+                'gross_pay' => $grossPay,
+                'deductions' => $deductions,
+                'allowance' => $allowance,
+                'net_pay' => $netPay,
+            ];
+        }
+    
+        session()->flash('message', 'Payslips generated successfully.');
+    }
+
+    private function calculateDeductions2nd($salaryTypes)
+    {
+        // Perform the calculation for deductions based on gross pay and salary type
+        // Example calculation:
+        $taxBIR = $salaryTypes->tax_bir;
+        $taxSSS = $salaryTypes->tax_sss;
+        $taxPhilHealth = $salaryTypes->tax_phealth;
+        $taxPagIBIG = $salaryTypes->tax_pibig;
+
+        // Assuming the deductions are additive
+        return $taxBIR + $taxSSS + $taxPhilHealth + $taxPagIBIG;
+    }
+
+    public function getCutoffStartDate2nd() 
+    {
+        return Carbon::now()->firstOfMonth()->addDays(14)->format('Y-m-d');
+    }
+
+    public function getCutoffEndDate2nd()
+    {
+        return Carbon::now()->lastOfMonth()->format('Y-m-d');
     }
 }

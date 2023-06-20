@@ -42,7 +42,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler.css" />
 
 </head>
 
@@ -73,14 +72,14 @@
                         @guest
                             <!-- @if (Route::has('login'))
     <li class="nav-item">
-                                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                                </li>
+                                                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                                        </li>
     @endif
 
-                                            @if (Route::has('register'))
+                                                    @if (Route::has('register'))
     <li class="nav-item">
-                                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                                </li>
+                                                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                                        </li>
     @endif -->
                         @else
                             <li class="nav-item dropdown">
@@ -116,12 +115,8 @@
     </div>
 
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-    <script src="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler.js"></script>
-
-
 
 </body>
+
 
 </html>

@@ -4,6 +4,12 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Schedule;
 use App\Http\Livewire\EmployeeCalendar;
+use Livewire\Livewire;
+use Illuminate\Http\Response;
+use Illuminate\Http\Request;
+use Illuminate\Routing\ResponseFactory;
+use App\Models\User;
+use App\Models\Attendance;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -77,6 +83,11 @@ Route::prefix('user')->middleware('user.role')->group(function () {
     Route::get('/attendance/calendar', function () {
         return view('dashboard.attendance');
     })->name('attendance');
+
+    Route::get('/payslips', function () {
+        return view('/dashboard.view-payslip');
+    })->name('payslips');
+
 });
 
 
@@ -129,17 +140,33 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
 
     Route::get('/schedule', function () {
-        return view('dashboard.schedule');
+        return view('dashboard.sched');
     })->name('schedule');
 
     Route::get('/annoucement', function () {
         return view('dashboard.announcement');
     })->name('announcement');
 
-    Route::get('/employee-calendar/{employee}', function ($employee) {
-        return view('dashboard.calendar-employee', ['id' => $employee]);
+    Route::get('/salary', function () {
+        return view('dashboard.salary');
+    })->name('salary');
+
+    
+    Route::get('/payroll', function () {
+        return view('dashboard.payroll');
+    })->name('payroll');
+
+    Route::get('/payslip', function () {
+        return view('dashboard.view-payslip');
+    })->name('payslip');
+
+    Route::get('/{id}/employee-calendar', function ($id) {
+        $employee = User::findOrFail($id);
+        $attendanceRecords = Attendance::where('user_id', $id)->get();
+        return view('livewire.employee-calendar', compact('employee', 'attendanceRecords'));
     })->name('employee-calendar');
     
-
-        //dagdagan mo nalang dito ng route kagaya sa user 
+    
 });
+
+

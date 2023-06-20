@@ -16,10 +16,8 @@ class Schedule extends Component
 
     public function viewCalendar($employeeId)
     {
-        $this->emitTo('employee-calendar', 'loadData', $employeeId);
+        return redirect()->route('employee.calendar', ['employeeId' => $employeeId]);
     }
-    
-    
     
 
 
