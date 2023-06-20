@@ -1,47 +1,3 @@
-{{-- <div>
-    @if (session()->has('message'))
-        <div class="alert alert-success">
-            {{ session('message') }}
-        </div>
-    @endif
-
-    <h2>Payslip Generator</h2>
-
-    <form wire:submit.prevent="generatePayslip">
-        <div class="form-group">
-            <label for="payrollListId">Select Payroll List:</label>
-            <select wire:model="payrollListId" class="form-control">
-                <option value="">-- Select Payroll List --</option>
-                @foreach ($userz as $list)
-                    <option value="{{ $list->id }}">{{ $list->cutoff_from }} - {{ $list->cutoff_to }}</option>
-                @endforeach
-            </select>
-            @error('payrollListId')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
-
-        <button type="submit" class="btn btn-primary">Generate Payslip</button>
-    </form>
-
-    @if ($payrollListId)
-        <h3>Payslip Details</h3>
-
-        @if ($payrollList)
-            <ul>
-                <li><strong>Cutoff From:</strong> {{ $payrollList->cutoff_from }}</li>
-                <li><strong>Cutoff To:</strong> {{ $payrollList->cutoff_to }}</li>
-                <li><strong>Present Days Total:</strong> {{ $payrollList->present_days_total }}</li>
-                <li><strong>Regular Hours Total:</strong> {{ $payrollList->regular_hours_total }}</li>
-                <li><strong>Gross Pay:</strong> {{ $payrollList->gross_pay }}</li>
-                <li><strong>Deductions:</strong> {{ $payrollList->deductions }}</li>
-                <li><strong>Allowance:</strong> {{ $payrollList->allowance }}</li>
-                <li><strong>Net Pay:</strong> {{ $payrollList->net_pay }}</li>
-            </ul>
-        @endif
-    @endif
-</div> --}}
-
 <div>
     <h1>Generate Payroll</h1>
 
@@ -50,17 +6,15 @@
     @endif
 
     <div class="row">
-        <div class="col-5">
-            <button class="btn btn-primary w-100 mb-3" wire:click="generatePayslips">Generate Payslips from {{$this->getCutoffStartDate()}} to {{$this->getCutoffEndDate()}}</button>
+        <div class="col-6">
+            <button class="btn btn-primary py-3 mb-3" wire:click="generatePayslips">Generate Payslips from {{$this->getCutoffStartDate()}} to {{$this->getCutoffEndDate()}}</button>
         </div>
-        <div class="col-2"></div> <!-- Spacer -->
-        <div class="col-5">
-            <button class="btn btn-primary w-100 mb-3" wire:click="generatePayslips2nd">Generate Payslips from {{$this->getCutoffStartDate2nd()}} to {{$this->getCutoffEndDate2nd()}}</button>
+        
+        <div class="col-6">
+            <button class="btn btn-primary py-3 mb-3" wire:click="generatePayslips2nd">Generate Payslips from {{$this->getCutoffStartDate2nd()}} to {{$this->getCutoffEndDate2nd()}}</button>
         </div>
     </div>
     
-    
-
     @if ($payslips)
         <table>
             <thead>

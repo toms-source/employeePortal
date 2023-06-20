@@ -95,7 +95,7 @@
     
             <!-- Add more input fields as needed -->
     
-            <button type="submit" class="btn btn-primary ml-3">Add Salary</button>
+            <button type="submit" class="btn btn-primary m-3">Add Salary</button>
         </form>
         </div>
     </div>
@@ -107,16 +107,16 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>name</th>
-                            <th>description</th>
-                            <th>daily_rate</th>
-                            <th>hourly_rate</th>
-                            <th>tax_bir</th>
-                            <th>tax_sss</th>
-                            <th>tax_phealth</th>
-                            <th>tax_pibig</th>
-                            <th>ot_rate</th>
-                            <th>allowance</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Daily Rate</th>
+                            <th>Hourly Rate</th>
+                            <th>TAX BIR</th>
+                            <th>TAX SSS</th>
+                            <th>TAX PhilHealth</th>
+                            <th>TAX Pagibig</th>
+                            <th>OT Rate</th>
+                            <th>Allowanve</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
