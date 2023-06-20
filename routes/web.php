@@ -30,7 +30,7 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         if (auth()->check()) {
-            if (auth()->user()->role == 'user') {
+            if (auth()->user()->role == 'employee') {
                 return redirect()->route('dashboard');
             } else {
                 return redirect()->route('admin.dashboard');
