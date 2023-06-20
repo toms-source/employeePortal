@@ -40,12 +40,12 @@ class AddSchedule extends Component
         ]);
 
         // Reset the input fields
-        $this->reset(['startDate', 'endDate', 'startShift', 'endShift']);
-
-        // Emit an event to refresh the calendar after a schedule is added
         $this->emit('scheduleAdded');
-    }
 
+        // Emit an event to reload the page
+        $this->emit('reloadPage');
+    }
+    
     public function render()
     {
         return view('livewire.add-schedule');
