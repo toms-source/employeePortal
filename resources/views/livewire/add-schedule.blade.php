@@ -14,7 +14,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form wire:submit.prevent="addSchedule">
+                <form id="addScheduleForm" wire:submit.prevent="addSchedule">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="startDate" class="form-label">Start Date</label>
@@ -46,3 +46,15 @@
 
 
 </div>
+<script>
+    document.addEventListener('livewire:load', function () {
+        Livewire.on('reloadPage', function () {
+            location.reload();
+        });
+
+        Livewire.on('closeModal', function () {
+            let modal = new bootstrap.Modal(document.getElementById('addScheduleModal'));
+            modal.hide();
+        });
+    });
+</script>
