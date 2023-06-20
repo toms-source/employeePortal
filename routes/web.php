@@ -89,6 +89,14 @@ Route::prefix('user')->middleware('user.role')->group(function () {
         return view('/dashboard.view-payslip');
     })->name('payslips');
 
+    Route::get('/profile', function () {
+        return view('/dashboard.user-profile');
+    })->name('user.profile');
+
+    Route::get('/profile/setting', function () {
+        return view('/dashboard.user-account-setting');
+    })->name('user.account.setting');
+
 });
 
 

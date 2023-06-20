@@ -43,7 +43,7 @@
         </div>
         
         <div class="btns">
-            <a class="nav-link" href="">
+            <a class="nav-link" href=" {{ route('user.profile') }}">
                 <i class="icon fa-solid fa-user" style="color: #000000;"></i>Profile
             </a>
         </div>
