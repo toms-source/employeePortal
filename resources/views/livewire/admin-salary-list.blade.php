@@ -122,9 +122,9 @@
                     </thead>
                     <tbody>
                         @foreach ($salaryTypes as $salaryTypess)
-                        @if($salaryTypess->id == 1)
+                        {{-- @if($salaryTypess->id == 1)
                             @continue
-                        @endif
+                        @endif --}}
                         <tr>
                             <td>{{ $salaryTypess->name }}</td>
                             <td>{{ $salaryTypess->description }}</td>
@@ -170,6 +170,8 @@
             </div>
         </div>
     </div>
+
+   
 </div>
 
 <script>

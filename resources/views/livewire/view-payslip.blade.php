@@ -24,7 +24,7 @@
                         <tr>
                             <td>{{ $payslips->cutoff_from }}</td>
                             <td>{{ $payslips->cutoff_to }}</td>
-                            <td>{{ $payslips->employee_name}}</td>
+                            <td>{{ $userstuff->first_name. ' ' .$userstuff->last_name}}</td>
                             <td>{{ $payslips->present_days_total }}</td>
                             <td>{{ $payslips->regular_hours_total }}</td>
                             <td>{{ $payslips->gross_pay }}</td>

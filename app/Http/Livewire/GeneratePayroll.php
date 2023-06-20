@@ -121,6 +121,8 @@ class GeneratePayroll extends Component
     //     return Carbon::now()->firstOfMonth()->addDays(14)->format('Y-m-d');
     // }
     public $payslips;
+    public $selectedRequest;
+    public $idDeny;
 
     public function render()
     {
@@ -128,6 +130,7 @@ class GeneratePayroll extends Component
         if ($employees->isNotEmpty()) {
             $this->payslips = $employees->map(function ($payroll) {
                 return [
+                    'id' => $payroll->id,
                     'cutoff_from' => $payroll->cutoff_from,
                     'cutoff_to' => $payroll->cutoff_to,
                     'employee_name' => $payroll->user->first_name . ' ' . $payroll->user->last_name,
@@ -137,6 +140,7 @@ class GeneratePayroll extends Component
                     'deductions' => $payroll->deductions,
                     'allowance' => $payroll->allowance,
                     'net_pay' => $payroll->net_pay,
+                    'status' => $payroll->status,
                 ];
             });
         }
@@ -158,6 +162,8 @@ class GeneratePayroll extends Component
         if ($payrollList->isNotEmpty()) {
             $this->payslips = $payrollList->map(function ($payroll) {
                 return [
+                    
+                    'id' => $payroll->id,
                     'cutoff_from' => $payroll->cutoff_from,
                     'cutoff_to' => $payroll->cutoff_to,
                     'employee_name' => $payroll->user->first_name . ' ' . $payroll->user->last_name,
@@ -217,10 +223,12 @@ class GeneratePayroll extends Component
                 'deductions' => $deductions,
                 'allowance' => $allowance,
                 'net_pay' => $netPay,
+                'status' => 'Pending',
             ]);
     
             // Store the generated payslip details for display
             $this->payslips[] = [
+                'id' => $payrollList->id,
                 'cutoff_from' => $this->getCutoffStartDate(),
                 'cutoff_to' => $this->getCutoffEndDate(),
                 'employee_name' => $user->first_name . ' ' . $user->last_name,
@@ -230,6 +238,7 @@ class GeneratePayroll extends Component
                 'deductions' => $deductions,
                 'allowance' => $allowance,
                 'net_pay' => $netPay,
+                'status' => 'Pending',
             ];
         }
     
@@ -273,6 +282,7 @@ class GeneratePayroll extends Component
         if ($payrollList->isNotEmpty()) {
             $this->payslips = $payrollList->map(function ($payroll) {
                 return [
+                    'id' => $payroll->id,
                     'cutoff_from' => $payroll->cutoff_from,
                     'cutoff_to' => $payroll->cutoff_to,
                     'employee_name' => $payroll->user->first_name . ' ' . $payroll->user->last_name,
@@ -332,10 +342,12 @@ class GeneratePayroll extends Component
                 'deductions' => $deductions,
                 'allowance' => $allowance,
                 'net_pay' => $netPay,
+                'status' => 'Pending',
             ]);
     
             // Store the generated payslip details for display
             $this->payslips[] = [
+                'id' => $payrollList->id,
                 'cutoff_from' => $this->getCutoffStartDate2nd(),
                 'cutoff_to' => $this->getCutoffEndDate2nd(),
                 'employee_name' => $user->first_name . ' ' . $user->last_name,
@@ -345,6 +357,7 @@ class GeneratePayroll extends Component
                 'deductions' => $deductions,
                 'allowance' => $allowance,
                 'net_pay' => $netPay,
+                'status' => 'Pending',
             ];
         }
     
@@ -372,5 +385,42 @@ class GeneratePayroll extends Component
     public function getCutoffEndDate2nd()
     {
         return Carbon::now()->lastOfMonth()->format('Y-m-d');
+    }
+
+    public function selectRequestForApproval(payrollList $loanRequest)
+    {
+        $this->selectedRequest = $loanRequest;
+        $this->emit('showConfirmationModal');
+    }
+
+    public function confirmApprove()
+    {
+        if ($this->selectedRequest) {
+            $this->selectedRequest->update(['status' => 'Approved']);
+            $this->loanRequests = payrollList::all();
+            $this->selectedRequest = null; // Clear the selected request
+            $this->emit('newApproved');
+            $this->emit('hideConfirmationModal');
+        } else {
+            // Handle error when request is not found
+            dd("Request not found.");
+        }
+    }
+
+    public function deny($id)
+    {
+        // $documentRequest->update(['status' => 'Denied']);
+        // $this->documentRequests = DocumentRequest::all();
+        $this->idDeny = $id;
+        $this->emit('denyDocu');
+    }
+
+    public function denyConfirm(){
+        $query = payrollList::query();
+
+        $id = '%' . $this->idDeny . '%';
+        $query  = payrollList::where('id', 'like', $id)->update(['status' => 'Denied']);
+        
+        $this->emit('newApproved');
     }
 }
