@@ -27,25 +27,24 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{-- @foreach ($employees as $employee)
+                                        @foreach ($employees as $employee)
                                         @if ($employee->id == 1)
                                             @continue
                                         @endif
                                         <tr>
-                                            <td>{{ $employee->employee_number }}</td>
-                                            <td>{{ $employee->last_name }}</td>
-                                            <td>{{ $employee->first_name }}</td>
-                                            <td>{{ $employee->office }}</td>
+                                            <td>{{ $employee->first_name }} {{ $employee->middle_name }} {{ $employee->last_name }}</td>
+                                            <td>{{ $employee->position }}</td>
                                             <td>{{ $employee->department }}</td>
-                                            <td>{{ $employee->employee_status }}</td>
-                                            <td>{{ $employee->email }}</td>
+                                            <td>{{ $employee->start_date }}</td>
+                                            <td>{{ $employee->status }}</td>
+                                            <td>{{ $employee->salary_rate }}</td>
                                             <td>
                                                 <button class="fa fa-edit border-0" data-target="#editEmployee" type="button" data-toggle="modal" wire:click="editEmployees({{ $employee->id }})"></button>
                                                 <a><i class="fa-solid fa-trash-can"style="color: #e61919;" wire:click="deleteEmpTry({{$employee->id}})"></i></a>
                                             </td>
                         
                                         </tr>
-                                        @endforeach --}}
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

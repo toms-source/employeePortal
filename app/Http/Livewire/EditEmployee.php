@@ -21,6 +21,7 @@ class EditEmployee extends Component
     public $idEdit;
     public $errora;
 
+
     protected $listeners = ['editEmployeez' => 'editEmployeez'];
 
     public function editEmployeez($id){
@@ -31,7 +32,6 @@ class EditEmployee extends Component
     public function mount()
     {
         $data = User::find($this->idEdit);
-
 
         if ($data) {
             $this->employee_numberE = $data->employee_number;
