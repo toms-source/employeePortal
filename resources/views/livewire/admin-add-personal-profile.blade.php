@@ -1,5 +1,13 @@
 <form method="POST" wire:submit.prevent="store">
     @csrf
+    @if (session()->has('message'))
+            <div id="flash-message" class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('message') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
     <div>
         <div class="container">
             <div class="row justify-content-center">
@@ -29,10 +37,10 @@
                         </div>
                         <div class="col-md-7">
                             <div class="mb-3">
-                                <label for="email" class="form-label">Company Email:</label>
-                                <input wire:model="email" autofocus type="email" class="form-control" id="email" name="email"
+                                <label for="company_email" class="form-label">Company Email:</label>
+                                <input wire:model="company_email" autofocus type="email" class="form-control" id="company_email" name="company_email"
                                     required>
-                                @error('email')
+                                @error('company_email')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -64,7 +72,7 @@
                         </div>
                     </div>
 
-                    {{-- <div class="mt-5">
+                    <div class="mt-5">
                         <h5 class="fw-bold">{{ __('Personal Profile') }}</h5>
                     </div>
                     <hr>
@@ -131,9 +139,9 @@
 
                         <div class="row">
                             <div class="col form-group">
-                                <label for="number">{{ __('Mobile Number') }}</label>
-                                <input id="number" type="number" wire:model="number" class="form-control "
-                                    name="number" required autocomplete="number">
+                                <label for="number">{{ __('Phone Number') }}</label>
+                                <input wire:model="number" id="number" type="number" class="form-control"
+                                    name="number" required>
                                 @error('number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -287,7 +295,7 @@
                                             <div class="row">
                                                 <div class="col form-group">
                                                     <label for="salary_rate">{{ __('Salary Rate') }}</label>
-                                                    <input id="salary_rate" type="number" class="form-control"
+                                                    <input wire:model="salary_rate" id="salary_rate" type="number" class="form-control"
                                                         name="salary_rate" required>
                                                     @error('salary_rate')
                                                         <span class="invalid-feedback" role="alert">
@@ -326,7 +334,7 @@
                                 </div>
                             </div>
                         </div> 
-                </div>--}}
+                </div>
             </div>
         </div>
     </div>
@@ -335,4 +343,5 @@
         <button type="submit" class="btn btn-outline-success"><i class="fa-solid fa-save"></i> Save</button>
         <button class="btn btn-outline-danger"><i class="fa-solid fa-ban"></i>Cancel</button>
     </div>
+
 </form>

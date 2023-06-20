@@ -3,19 +3,20 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Livewire\Component;
 
 class AdminAddPersonalProfile extends Component
 {
     public $email;
+    public $company_email;
     public $password;
-    public $employee_number;
+    public $confirm_password;
     public $last_name;
     public $first_name;
     public $middle_name;
     public $department;
-    public $employee_status;
-    public $role;
+    public $role = "employee";
     public $gender;
     public $birth_date;
     public $civil_status;
@@ -34,24 +35,22 @@ class AdminAddPersonalProfile extends Component
     public $status;
     public $start_date;
     public $end_date;
-    public $profile_picture;
-    public $confirm_password;
 
     protected $rules = [
         'email' => 'required|email|unique:users,email',
-        'password' => 'required|min:8|same:confirm_password',
+        'company_email' => 'required|email|unique:users,company_email',
+        'password' => 'required|same:confirm_password',
         'confirm_password' => 'required',
-        'employee_number' => 'required|unique:users,employee_number',
         'last_name' => 'required',
-        'first_name' => 'required',
         'middle_name' => 'required',
+        'first_name' => 'required',
         'department' => 'required',
-        'employee_status' => 'required',
+        'status' => 'required',
         'role' => 'required',
         'gender' => 'required',
-        'birth_date' => 'required|date',
+        'birth_date' => 'required',
         'civil_status' => 'required',
-        'number' => 'required|min:10',
+        'number' => 'required',
         'address' => 'required',
         'sss' => 'required',
         'tin' => 'required',
@@ -61,25 +60,48 @@ class AdminAddPersonalProfile extends Component
         'contact_number' => 'required',
         'contact_relationship' => 'required',
         'position' => 'required',
-        'description' => 'min:5',
+        'description' => 'required',
         'salary_rate' => 'required',
-        'status' => 'required',
-        'start_date' => 'required|date',
-        'end_date' => 'date',
-        'profile_picture' => 'required|image',
+        'start_date' => 'required',
+        'end_date' => 'required',
     ];
 
     public function store()
     {
-        $validatedData = $this->validate($this->rules);
+        $this->validate();
 
-        User::create($validatedData);
+        $user = User::create([
+            'email' => $this->email,
+            'company_email' => $this->company_email,
+            'password'=> $this->password,
+            'last_name'=> $this->last_name,
+            'first_name'=> $this->first_name,
+            'middle_name'=> $this->middle_name,
+            'department'=> $this->department,
+            'role'=> $this->role,
+            'gender'=> $this->gender,
+            'birth_date'=> $this->birth_date,
+            'civil_status'=> $this->civil_status,
+            'number'=> $this->number,
+            'address'=> $this->address,
+            'sss'=> $this->sss,
+            'tin'=> $this->tin,
+            'philhealth'=> $this->philhealth,
+            'pagibig'=> $this->pagibig,
+            'contact_name'=> $this->contact_name,
+            'contact_number'=> $this->contact_number,
+            'contact_relationship'=> $this->contact_relationship,
+            'position'=> $this->position,
+            'description'=> $this->description,
+            'salary_rate'=> $this->salary_rate,
+            'status'=> $this->status,
+            'start_date'=> $this->start_date,
+            'end_date'=> $this->end_date,
+        ]);
 
-        // Reset the form fields
-        $this->reset();
+        event(new Registered($user));
 
-        // Redirect or display success message
-        // return redirect()->back()->with('success', 'User created successfully');
+        session()->flash('message', 'Employee added successfully.');
     }
 
     public function render()
