@@ -50,7 +50,7 @@
         </div>
         
         <div class="btns">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{ route('attendance2') }}">
                 <i class="icon fa-solid fa-calendar" style="color: #000000;"></i>Attendance
             </a>
         </div>
@@ -80,7 +80,7 @@
         </div>
         
         <div class="btns">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{ route('schedule') }}">
                 <i class="icon fa-solid fa-clock" style="color: #000000;"></i>Schedules
             </a>
         </div>
@@ -98,7 +98,7 @@
         </div>
         
         <div class="btns">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{ route('announcement') }}">
                 <i class="icon fa-solid fa-bullhorn" style="color: #000000;"></i>Announcements
             </a>
         </div>

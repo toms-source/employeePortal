@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Livewire\Schedule;
+use App\Http\Livewire\EmployeeCalendar;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,50 +14,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('auth.login');
-// });
-
-// Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
-
-
-// Route::get('/document/pending', function () {
-//     return view('dashboard.document');
-// })->name('document');
-
-// Route::get('/document/approved', function () {
-//     return view('dashboard.document-app');
-// })->name('document2');
-
-
-// Route::get('/leave/pending', function () {
-//     return view('dashboard.leave');
-// })->name('leave');
-
-// Route::get('/leave/approved', function () {
-//     return view('dashboard.leave-app');
-// })->name('leave2');
-
-// Route::get('/loan/pending', function () {
-//     return view('dashboard.loan');
-// })->name('loan');
-
-// Route::get('/loan/approved', function () {
-//     return view('dashboard.loan-app');
-// })->name('loan2');
-
-// Route::get('/other/pending', function () {
-//     return view('dashboard.other-request');
-// })->name('other');
-
-// Route::get('/other/approved', function () {
-//     return view('dashboard.other-request-app');
-// })->name('other2');
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard.main');
-// })->name('dashboard');
 
 
 
@@ -72,7 +29,7 @@ Route::middleware('auth')->group(function () {
                 return redirect()->route('admin.dashboard');
             }
         } else {
-            return redirect()->route('login'); 
+            return redirect()->route('login');
         }
     });
 });
@@ -81,7 +38,7 @@ Route::middleware('auth')->group(function () {
 Route::prefix('user')->middleware('user.role')->group(function () {
     // Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
-    Route::get('/dashboard', function(){
+    Route::get('/dashboard', function () {
         return view('/dashboard.main');
     })->name('dashboard');
 
@@ -120,13 +77,12 @@ Route::prefix('user')->middleware('user.role')->group(function () {
     Route::get('/attendance/calendar', function () {
         return view('dashboard.attendance');
     })->name('attendance');
-    
 });
 
 
 
 Route::prefix('admin')->middleware('admin')->group(function () {
-    
+
     Route::get('/dashboard', function () {
         return view('dashboard.admin-dash');
     })->name('admin.dashboard');
@@ -142,7 +98,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/leave', function () {
         return view('dashboard.admin-leave');
     })->name('adminleave');
-    
+
     Route::get('/loan', function () {
         return view('dashboard.admin-loan');
     })->name('adminloan');
@@ -167,7 +123,23 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         return view('dashboard.admin-department-list');
     })->name('admin.department');
 
-    //dagdagan mo nalang dito ng route kagaya sa user 
+    Route::get('/attendance/calendar', function () {
+        return view('dashboard.attendance2');
+    })->name('attendance2');
+
+
+    Route::get('/schedule', function () {
+        return view('dashboard.schedule');
+    })->name('schedule');
+
+    Route::get('/annoucement', function () {
+        return view('dashboard.announcement');
+    })->name('announcement');
+
+    Route::get('/employee-calendar/{employee}', function ($employee) {
+        return view('dashboard.calendar-employee', ['id' => $employee]);
+    })->name('employee-calendar');
+    
+
+        //dagdagan mo nalang dito ng route kagaya sa user 
 });
-
-
