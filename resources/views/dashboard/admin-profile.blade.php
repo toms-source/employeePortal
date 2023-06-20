@@ -17,7 +17,7 @@
                         </div>
 
                     {{-- Document Request --}}
-                    <div class="shadow my-5">
+                    <div class="shadow border fw-bold p-3 mb-3 bg-white rounded">
                         <div class="card-body py-5">
                             @livewire('profile')
                         </div>

@@ -14,7 +14,7 @@
                     </h5>
 
                     {{-- Document Request --}}
-                    <div class="shadow my-3">
+                    <div class="shadow border fw-bold p-3 mb-3 bg-white rounded">
                         <div class="card-body py-5">
                             @livewire('admin-department-list')
                         </div>
