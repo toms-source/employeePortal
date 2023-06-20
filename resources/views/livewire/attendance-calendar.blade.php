@@ -88,7 +88,7 @@
                             attendanceRecord.checkOutTime + '</div>');
                     } else {
                         cell.append(
-                            '<div class="check-out-time text-center">Not checked out yet</div>');
+                            '<div class="check-out-time text-center text-danger">Not checked out yet</div>');
                     }
                 }
 
