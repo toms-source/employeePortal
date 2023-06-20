@@ -84,25 +84,51 @@ class GeneratePayroll extends Component
             }
     
             // Retrieve the attendance records for the employee
+             // Retrieve the attendance records for the employee
             $attendanceRecords = Attendance::where('user_id', $user->id)
-                ->whereBetween('check_in', [$this->getCutoffStartDate(), $this->getCutoffEndDate()])
-                ->get();
-    
-            // Calculate payslip details
+            ->whereBetween('check_in', [$this->getCutoffStartDate(), $this->getCutoffEndDate()])
+            ->get();
+
+    // Calculate payslip details
             $presentDaysTotal = $attendanceRecords->count();
-            $regularHoursTotal = $attendanceRecords->sum(function ($record) {
+            $regularHoursTotal = 0;
+            $overtimeHoursTotal = 0;
+            $overtimeAmount = 0;
+            $salaryTypes = SalaryTypes::where('daily_rate', $user->salary_rate)->get();
+
+            foreach ($attendanceRecords as $record) {
                 $formatted_in = Carbon::parse($record->check_in);
                 $formatted_out = Carbon::parse($record->check_out);
-                return $formatted_out->diffInHours($formatted_in);
-            });
+                $formatted_start_shift = Carbon::parse($record->start_shift);
+                $formatted_end_shift = Carbon::parse($record->end_shift);
+
+                $regularHours = $formatted_out->diffInHours($formatted_in);
+                if ($formatted_in->isBefore($formatted_start_shift)) {
+                    $regularHours -= $formatted_start_shift->diffInHours($formatted_in);
+                }
+                if ($formatted_out->isAfter($formatted_end_shift)) {
+                    $regularHours -= $formatted_out->diffInHours($formatted_end_shift);
+                }
+
+                $overtimeHours = $formatted_out->diffInHours($formatted_end_shift);
+
+                if ($overtimeHours > 0) {
+                    $overtimeRate = $salaryType->ot_rate;
+                    $overtimeAmount = $overtimeHours * $overtimeRate;
+                    // Add the OT amount to the payslip details
+                    $overtimeHoursTotal += $overtimeHours;
+                }
+
+                // Add the regular hours to the payslip details
+                $regularHoursTotal += max(0, $regularHours);
+            }
     
-            // Perform additional calculations based on the salary types model
-            $salaryTypes = SalaryTypes::where('daily_rate', $user->salary_rate)->get(); // Assuming you have only one record in the salary types table
+            // Perform additional calculations based on the salary types model // Assuming you have only one record in the salary types table
 
             $grossPay = $regularHoursTotal * $user->salary_rate;
             $deductions = $this->calculateDeductions($salaryTypes[0]);
             $allowance = $salaryTypes[0]->allowance;
-            $netPay = $grossPay - $deductions + $allowance;
+            $netPay = $grossPay + $overtimeAmount - $deductions + $allowance;
     
             // Create payrollList record
             $payrollList = payrollList::create([
@@ -204,24 +230,50 @@ class GeneratePayroll extends Component
     
             // Retrieve the attendance records for the employee
             $attendanceRecords = Attendance::where('user_id', $user->id)
-                ->whereBetween('check_in', [$this->getCutoffStartDate2nd(), $this->getCutoffEndDate2nd()])
-                ->get();
-    
+            ->whereBetween('check_in', [$this->getCutoffStartDate2nd(), $this->getCutoffEndDate2nd()])
+            ->get();
+
             // Calculate payslip details
             $presentDaysTotal = $attendanceRecords->count();
-            $regularHoursTotal = $attendanceRecords->sum(function ($record) {
+            $regularHoursTotal = 0;
+            $overtimeHoursTotal = 0;
+            $overtimeAmount = 0; 
+            $salaryTypes = SalaryTypes::where('daily_rate', $user->salary_rate)->get(); 
+
+            foreach ($attendanceRecords as $record) {
                 $formatted_in = Carbon::parse($record->check_in);
                 $formatted_out = Carbon::parse($record->check_out);
-                return $formatted_out->diffInHours($formatted_in);
-            });
+                $formatted_start_shift = Carbon::parse($record->start_shift);
+                $formatted_end_shift = Carbon::parse($record->end_shift);
+
+                $regularHours = $formatted_out->diffInHours($formatted_in);
+                if ($formatted_in->isBefore($formatted_start_shift)) {
+                    $regularHours -= $formatted_start_shift->diffInHours($formatted_in);
+                }
+                if ($formatted_out->isAfter($formatted_end_shift)) {
+                    $regularHours -= $formatted_out->diffInHours($formatted_end_shift);
+                }
+
+                $overtimeHours = $formatted_out->diffInHours($formatted_end_shift);
+
+                if ($overtimeHours > 0) {
+                    $overtimeRate = $salaryType->ot_rate;
+                    $overtimeAmount = $overtimeHours * $overtimeRate;
+                    // Add the OT amount to the payslip details
+                    $overtimeHoursTotal += $overtimeHours;
+                }
+
+                // Add the regular hours to the payslip details
+                $regularHoursTotal += max(0, $regularHours);
+            }
     
             // Perform additional calculations based on the salary types model
-            $salaryTypes = SalaryTypes::where('daily_rate', $user->salary_rate)->get(); // Assuming you have only one record in the salary types table
+           // Assuming you have only one record in the salary types table
 
             $grossPay = $regularHoursTotal * $user->salary_rate;
             $deductions = $this->calculateDeductions2nd($salaryTypes[0]);
             $allowance = $salaryTypes[0]->allowance;
-            $netPay = $grossPay - $deductions + $allowance;
+            $netPay = $grossPay + $overtimeAmount - $deductions + $allowance;
     
             // Create payrollList record
             $payrollList = payrollList::create([
