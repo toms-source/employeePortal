@@ -13,7 +13,7 @@
                                 DELA CRUZ Profile</h5>
 
                         <div class="d-flex justify-content-end mb-3">
-                            <button class="btn btn-outline-primary"><i class="fa-solid fa-gear"></i>Account Setting</button>
+                            <a href="{{route('admin.account.setting')}}" class="btn btn-outline-primary"><i class="fa-solid fa-gear"></i>Account Setting</a>
                         </div>
 
                     {{-- Document Request --}}
