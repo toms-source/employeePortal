@@ -14,11 +14,13 @@
             <button class="btn btn-primary py-3 mb-3" wire:click="generatePayslips2nd">Generate Payslips from {{$this->getCutoffStartDate2nd()}} to {{$this->getCutoffEndDate2nd()}}</button>
         </div>
     </div>
-    
+     
     @if ($payslips)
-        <table>
-            <thead>
-                <tr>
+     <div class="card">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
                     <th>Cutoff From</th>
                     <th>Cutoff To</th>
                     <th>Employee Name</th>
@@ -46,11 +48,11 @@
                         <td>
                             @if ($payslip['status'] == "Pending")
                                 <button class="btn btn-success"
-                                    wire:click="selectRequestForApproval({{ $payslip['id']  }})">Approve</button>
-                                <button class="btn btn-danger" wire:click="deny({{ $payslip['id'] }})">Deny</button>
+                                    wire:click="selectRequestForApproval({{ $payslip['id']  }})"><i class="fa-solid fa-check" ></i></button>
+                                <button class="btn btn-danger" wire:click="deny({{ $payslip['id'] }})"><i class="fa-solid fa-xmark"></i></button>
                             @endif
                             
-                            <a href="{{ route('employee-payslip', $payslip['id']) }}"><i class="fa fa-eye"></i></a>
+                         <a href="{{ route('employee-payslip', $payslip['id']) }}"><i class="fa fa-eye"></i></a> 
                         </td>
                     </tr>
                 @endforeach
