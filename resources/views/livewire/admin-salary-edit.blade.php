@@ -28,7 +28,7 @@ aria-hidden="true" wire:ignore.self>
                 </div>
         
                 <div class="mb-1 ml-3 mr-3">
-                    <label for="descriptionSE" class="form-label mt-3">Desciption</label>
+                    <label for="descriptionSE" class="form-label mt-3">Description</label>
                     <input wire:model="descriptionSE" type="text" name="descriptionSE" class="form-control" required>
                     @error('descriptionSE')
                         <span class="text-danger">{{ $message }}</span>
