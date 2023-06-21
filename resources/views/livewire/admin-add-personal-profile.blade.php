@@ -49,7 +49,7 @@
                                 <select reuired wire:model="role" class="form-select"
                                     aria-label="Default select example">
                                     <option value="admin">admin</option>
-                                    <option value="user">employee</option>
+                                    <option value="user">user</option>
                                 </select>
                             </div>
 
