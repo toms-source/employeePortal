@@ -26,6 +26,10 @@
                                 <img  src="{{ asset('storage/' . auth()->user()->profile_picture) }}" alt="Profile Preview"
                                     class="img-thumbnail" style="width: 250px; height: 250px;">
                             </div>
+                            <div class="mb-3 ml-2">
+                                <label for="profileImage" class="form-label">Profile Picture</label>
+                                
+                            </div>
 
                         </div>
                         <div class="col-md-7">

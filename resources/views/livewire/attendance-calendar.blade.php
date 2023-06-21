@@ -115,5 +115,8 @@
                 }
             }
         });
+        Livewire.on('pageReload', function() {
+            location.reload();
+        });
     });
 </script>

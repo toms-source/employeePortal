@@ -26,11 +26,9 @@
                                     class="img-thumbnail" style="width: 250px; height: 250px;">
                             </div>
 
-                            <div class="mb-3">
-                                <label for="profileImage" class="form-label">Profile Image:</label>
-                                <div class="col-10">
-                                    <input type="file" class="form-control bg-secondary text-white" id="profileImage" name="profileImage">
-                                </div>
+                            <div class="mb-3 ml-2">
+                                <label for="profileImage" class="form-label">Profile Picture</label>
+                                
                             </div>
                         </div>
                         <div class="col-md-7">

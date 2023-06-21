@@ -7,6 +7,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use App\Mail\EmployeeAdded;
+use Illuminate\Support\Facades\Auth;
 use Livewire\WithFileUploads;
 
 class AdminAddPersonalProfile extends Component
@@ -75,9 +76,14 @@ class AdminAddPersonalProfile extends Component
 
     public function store()
     {
+        $data = User::find(Auth::user()->id);
         $this->validate();
-        // dd('ewqe');
-        $profilePicturePath = $this->profile_picture->store('profile_pictures', 'public');
+        $profilePicturePath = '';
+        if($this->profile_picture)
+        {
+            $profilePicturePath = $this->profile_picture->store('profile_pictures', 'public');
+            $data->profile_picture = $profilePicturePath;
+        }
 
         $user = User::create([
             'email' => $this->email,
@@ -106,7 +112,6 @@ class AdminAddPersonalProfile extends Component
             'status'=> $this->status,
             'start_date'=> $this->start_date,
             'end_date'=> $this->end_date,
-            'profile_picture' => $profilePicturePath,
         ]);
 
         event(new Registered($user));
