@@ -99,13 +99,20 @@ Route::prefix('user')->middleware('user.role')->group(function () {
         return view('/dashboard.user-account-setting');
     })->name('user.account.setting');
 
+    
     Route::get('/{id}/employee-payslip-view', function ($id) {
         $payslipRecord = payrollList::where('id', $id)->get();
         $employee = User::findOrFail($payslipRecord[0]->user_id);
+        if (auth()->user()->id != $employee->id) {
+            return redirect()->route('payslips');
+        }
         $salaryRecord = salaryTypes::where('daily_rate', $employee->salary_rate)->get();
         return view('livewire.view-payslip-details-emp', compact('employee', 'payslipRecord','salaryRecord'));
     })->name('employee-payslip-view');
 
+    Route::get('/user/edit/profile', function () {
+        return view('dashboard.user-profile-edit');
+    })->name('user.profile.edit');
 });
 
 
@@ -184,14 +191,17 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         $scheduleRecords = Schedule::where('user_id', $id)->get();
         return view('livewire.employee-calendar', compact('employee', 'attendanceRecords','scheduleRecords'));
     })->name('employee-calendar');
-
+    
+    
     Route::get('/{id}/employee-payslip', function ($id) {
         $payslipRecord = payrollList::where('id', $id)->get();
         $employee = User::findOrFail($payslipRecord[0]->user_id);
         $salaryRecord = salaryTypes::where('daily_rate', $employee->salary_rate)->get();
         return view('livewire.view-payslip-details', compact('employee', 'payslipRecord','salaryRecord'));
     })->name('employee-payslip');
-    
-});
 
+    Route::get('/admin/edit/profile', function () {
+        return view('dashboard.admin-profile-edit');
+    })->name('admin.profile.edit');
+});
 

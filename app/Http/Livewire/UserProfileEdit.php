@@ -8,8 +8,9 @@ use Livewire\Component;
 use Illuminate\Support\Facades\File;
 use Livewire\WithFileUploads;
 
-class AdminProfile extends Component
+class UserProfileEdit extends Component
 {
+
     use WithFileUploads;
 
     public $email;
@@ -35,20 +36,8 @@ class AdminProfile extends Component
     public $status;
     public $start_date;
     public $end_date;
-    public $disable = true;
     public $profile_picture;
 
-    public function setOff()
-    {
-        $this->disable = false;
-    }
-    public function setOn()
-    {
-        $this()->validate;
-        $this->disable = true;
-    }
-
-    
 
     protected $rules = [
         'last_name' => 'required',
@@ -73,13 +62,11 @@ class AdminProfile extends Component
         'salary_rate' => 'required',
         'start_date' => 'required',
         'end_date' => 'nullable',
-        // 'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
+        'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
     ];
 
     public function mount()
     {
-        
-
         $data = User::find( Auth::user()->id);
 
         $this->email = $data->email;
@@ -107,8 +94,62 @@ class AdminProfile extends Component
         $this->end_date = $data->end_date;
     }
 
+    public function updateProfile()
+    {
+        $data = User::find(Auth::user()->id);
+
+        $this->validate();
+       
+        $profilePicturePath = '';
+
+        if($this->profile_picture)
+        {
+            $profilePicturePath = $this->profile_picture->store('profile_pictures', 'public');
+
+            if(File::exists(public_path('storage/'.auth()->user()->profile_picture))){
+                File::delete(public_path('storage/'.auth()->user()->profile_picture));
+            }
+            $data->profile_picture = $profilePicturePath;
+
+        }
+
+        
+
+        // Update the properties of the user model
+        $data->email = $this->email;
+        $data->last_name = $this->last_name;
+        $data->first_name = $this->first_name;
+        $data->middle_name = $this->middle_name;
+        $data->department = $this->department;
+        $data->gender = $this->gender;
+        $data->birth_date = $this->birth_date;
+        $data->civil_status = $this->civil_status;
+        $data->number = $this->number;
+        $data->address = $this->address;
+        $data->sss = $this->sss;
+        $data->tin = $this->tin;
+        $data->philhealth = $this->philhealth;
+        $data->pagibig = $this->pagibig;
+        $data->contact_name = $this->contact_name;
+        $data->contact_number = $this->contact_number;
+        $data->contact_relationship = $this->contact_relationship;
+        $data->position = $this->position;
+        $data->description = $this->description;
+        $data->salary_rate = $this->salary_rate;
+        $data->status = $this->status;
+        $data->start_date = $this->start_date;
+        $data->end_date = $this->end_date;
+
+        // Save the updated user model
+        $data->save();
+
+        return redirect()->route('user.profile')->with('message', 'Profile update successfully.');
+
+
+    }
+
     public function render()
     {
-        return view('livewire.admin-profile');
+        return view('livewire.user-profile-edit');
     }
 }

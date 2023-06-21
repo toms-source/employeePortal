@@ -7,9 +7,13 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use App\Mail\EmployeeAdded;
+use Illuminate\Support\Facades\Auth;
+use Livewire\WithFileUploads;
 
 class AdminAddPersonalProfile extends Component
 {
+    use WithFileUploads;
+
     public $email;
     public $company_email;
     public $password;
@@ -37,6 +41,7 @@ class AdminAddPersonalProfile extends Component
     public $status;
     public $start_date;
     public $end_date;
+    public $profile_picture;
 
     protected $rules = [
         'email' => 'required|email|unique:users,email',
@@ -66,11 +71,19 @@ class AdminAddPersonalProfile extends Component
         'salary_rate' => 'required',
         'start_date' => 'required',
         'end_date' => 'required',
+        'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
     ];
 
     public function store()
     {
+        $data = User::find(Auth::user()->id);
         $this->validate();
+        $profilePicturePath = '';
+        if($this->profile_picture)
+        {
+            $profilePicturePath = $this->profile_picture->store('profile_pictures', 'public');
+            $data->profile_picture = $profilePicturePath;
+        }
 
         $user = User::create([
             'email' => $this->email,

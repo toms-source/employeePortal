@@ -7,9 +7,30 @@ use Livewire\Component;
 
 class AdminEmployee extends Component
 {
+    public $idDelete;
+    public $confirmDeleteModal = false;
+
     public function render()
     {
         $employees = User::all();
         return view('livewire.admin-employee', compact('employees'));
+    }
+
+    public function deleteEmpTry($id)
+    {
+        $this->idDelete = $id;
+        $this->emit('deleteEmployee');
+    }
+
+    public function deleteEmpConfirm()
+    {
+        User::find($this->idDelete)->delete();
+        $this->confirmDeleteModal = false;
+        $this->render();
+    }
+
+    public function editEmployees($id)
+    {
+        $this->emit('editEmployeez', $id);
     }
 }

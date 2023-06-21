@@ -8,7 +8,7 @@
              {{-- grid --}}
                 <div class="col">
                     <h5 class="shadow border fw-bold p-3 mb-3 bg-white rounded"> 
-                    Salaries
+                    Payroll
                     </h5>
 
                     <div class="card my-4 shadow-sm bg-white rounded">

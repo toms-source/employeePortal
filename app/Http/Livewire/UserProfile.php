@@ -65,8 +65,7 @@ class UserProfile extends Component
         $this->pagibig = $data->pagibig;
         $this->contact_name = $data->contact_name;
         $this->contact_number = $data->contact_number;
-        $this->contact_relationship = $data->contact_name;
-        $this->contact_name = $data->contact_relationship;
+        $this->contact_relationship = $data->contact_relationship;
         $this->position = $data->position;
         $this->description = $data->description;
         $this->salary_rate = $data->salary_rate;
