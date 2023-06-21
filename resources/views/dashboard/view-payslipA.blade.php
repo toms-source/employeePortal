@@ -2,29 +2,24 @@
 @extends('layouts.app')
 @livewireStyles
 @section('content')
-    <style>
-
-
-
-    </style>
     <div class="d-flex">
         @Include('layouts.sidebar-admin')
-        <div class="col-10">
-            <div class=" container-fluid mt-5" style="width: 100%; height: 100vh;">
-                <div class="card shadow p-3 mb-5 bg-white rounded">
-                    {{-- grid --}}
-                    <div class="col">
-                        {{-- Document Request --}}
-                        <div class="card my-4 shadow-sm">
-                            <div class="card-body">
-                                <h5>Payslip</h5>
+        <div class="content container-fluid py-1" style="width: 100%; height: 100vh;">
+                {{-- grid --}}
+                <div class="col">
+                    <h5 class="shadow border fw-bold p-3 mb-3 bg-white rounded"> 
+                    Payslip
+                    </h5>
 
-                                @livewire('view-payslip')
-                            </div>
+                    {{-- Document Request --}}
+                    <div class="shadow border fw-bold p-3 mb-3 bg-white rounded">
+                        <div class="card-body py-5">
+                            @livewire('view-payslip')
                         </div>
                     </div>
-                </div>
-            </div>
+                </div>    
         </div>
-    @endsection
-    @livewireScripts
+    </div>
+
+@endsection
+@livewireScripts

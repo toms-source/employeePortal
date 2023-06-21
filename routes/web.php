@@ -103,6 +103,9 @@ Route::prefix('user')->middleware('user.role')->group(function () {
     Route::get('/{id}/employee-payslip-view', function ($id) {
         $payslipRecord = payrollList::where('id', $id)->get();
         $employee = User::findOrFail($payslipRecord[0]->user_id);
+        if (auth()->user()->id != $employee->id) {
+            return redirect()->route('payslips');
+        }
         $salaryRecord = salaryTypes::where('daily_rate', $employee->salary_rate)->get();
         return view('livewire.view-payslip-details-emp', compact('employee', 'payslipRecord','salaryRecord'));
     })->name('employee-payslip-view');

@@ -1,23 +1,4 @@
-<!-- Delete Confirmation Modal -->
-<div class="modal fade" id="deleteEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="deleteEmployeeModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteEmployeeModalLabel">Employee Deletion</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete this employee?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" wire:click="deleteEmpConfirm">Yes</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-            </div>
-        </div>
-    </div>
-</div>
+<div>
 
 <!-- Employee Table -->
 <div class="container">
@@ -63,4 +44,39 @@
             </table>
         </div>
     </div>
+    <!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="deleteEmployeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteEmployeeModalLabel">Employee Deletion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this employee?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" wire:click="deleteEmpConfirm" data-dismiss="modal">Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
 </div>
+</div>
+<script>
+     document.addEventListener('livewire:load', function() {
+        window.livewire.on('deleteEmployee',() =>{
+            console.log('ordinanceAdded event received');
+
+            // document.getElementById('ordinanceDelete').classList.remove('show');
+            // document.body.classList.remove('modal-open');
+            // document.getElementsByClassName('modal-backdrop')[0].remove();
+
+            var modalOrdinanceAdded = new bootstrap.Modal(document.getElementById(
+                'deleteEmployeeModal'));
+            modalOrdinanceAdded.show();
+        });
+    });
+</script>
