@@ -1,9 +1,7 @@
 @extends('layouts.app')
 @livewireStyles
 @section('content')
-
-
-        <div class="d-flex">
+    <div class="d-flex">
         @Include('layouts.sidebar-admin')
         <div class="content container-fluid py-1" style="width: 100%; height: 100vh;">
                 {{-- grid --}}
@@ -20,7 +18,6 @@
                     </div>
                 </div>    
         </div>
-    </div>
     </div>
 @endsection
 @livewireScripts
