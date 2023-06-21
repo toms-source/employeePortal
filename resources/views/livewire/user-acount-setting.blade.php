@@ -22,7 +22,8 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="mb-3">
-                                <img src="{{ $profileImage ?? '/path/to/default-image.jpg' }}" alt="Profile Preview" class="img-thumbnail" style="width: 250px; height: 250px;">
+                                <img  src="{{ asset('storage/' . auth()->user()->profile_picture) }}" alt="Profile Preview"
+                                    class="img-thumbnail" style="width: 250px; height: 250px;">
                             </div>
 
                             <div class="mb-3">

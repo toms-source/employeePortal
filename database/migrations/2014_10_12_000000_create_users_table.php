@@ -41,7 +41,7 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            // $table->string('profile_picture')->nullable();
+            $table->string('profile_picture')->nullable();
             $table->timestamps();
 
             $table->rememberToken();

@@ -97,6 +97,10 @@ Route::prefix('user')->middleware('user.role')->group(function () {
         return view('/dashboard.user-account-setting');
     })->name('user.account.setting');
 
+    Route::get('/user/profile/edit', function () {
+        return view('dashboard.user-profile-edit');
+    })->name('user.profile.edit');
+
 });
 
 
@@ -176,7 +180,9 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         return view('livewire.employee-calendar', compact('employee', 'attendanceRecords','scheduleRecords'));
     })->name('employee-calendar');
     
-    
+    Route::get('/admin/profile/edit', function () {
+        return view('dashboard.admin-profile-edit');
+    })->name('admin.profile.edit');
 });
 
 

@@ -22,14 +22,14 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="mb-3">
-                                <img src="{{ $profileImage ?? '/path/to/default-image.jpg' }}" alt="Profile Preview"
+                                <img  src="{{ asset('storage/' . auth()->user()->image) }}" alt="Profile Preview"
                                     class="img-thumbnail" style="width: 200px; height: 200px;">
                             </div>
 
                             <div class="mb-3">
                                 <label for="profileImage" class="form-label">Profile Image:</label>
                                 <div class="col-10">
-                                    <input type="file" class="form-control bg-secondary text-white" id="profileImage"
+                                    <input wire:model="profile_picture" type="file" class="form-control bg-secondary text-white" id="profileImage"
                                         name="profileImage">
                                 </div>
                             </div>
@@ -49,7 +49,7 @@
                                 <select reuired wire:model="role" class="form-select"
                                     aria-label="Default select example">
                                     <option value="admin">admin</option>
-                                    <option value="employee">employee</option>
+                                    <option value="user">employee</option>
                                 </select>
                             </div>
 

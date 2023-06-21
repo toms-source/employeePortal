@@ -82,11 +82,16 @@
                                                         </li>
     @endif -->
                         @else
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown" >
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle  text-white" href="#"
                                     role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                    v-pre><i class="fa-solid fa-user" style="color: #dedede;"></i>
-
+                                    v-pre>
+                                    @if(Auth::user()->profile_picture)
+                                    <img  src="{{ asset('storage/' . auth()->user()->profile_picture) }}" alt="Profile Preview"
+                                    class="rounded-circle" style="width: 35px; height: 35px;">
+                                    @else
+                                        <i class="fa-solid fa-user" style="color: white;"></i>
+                                    @endif
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
