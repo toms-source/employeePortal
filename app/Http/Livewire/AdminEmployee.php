@@ -19,13 +19,14 @@ class AdminEmployee extends Component
     public function deleteEmpTry($id)
     {
         $this->idDelete = $id;
-        $this->confirmDeleteModal = true;
+        $this->emit('deleteEmployee');
     }
 
     public function deleteEmpConfirm()
     {
         User::find($this->idDelete)->delete();
         $this->confirmDeleteModal = false;
+        $this->render();
     }
 
     public function editEmployees($id)
