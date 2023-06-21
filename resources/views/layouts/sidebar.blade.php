@@ -135,9 +135,9 @@
                 <div class="d-flex align-items-center">
                   <i class="icon fa-solid fa-repeat" style="color: #000000;"></i>
                   <span class="ml-1">Other Request</span>
-                  <div class="ml-auto">
+             
                     <i class="fa fa-caret-down" style="margin-right: 20px"></i>
-                  </div>
+       
                 </div>
               </a>
               

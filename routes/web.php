@@ -116,6 +116,10 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         return view('dashboard.admin-dash');
     })->name('admin.dashboard');
 
+    Route::get('/payslip', function () {
+        return view('/dashboard.view-payslipA');
+    })->name('payslip'); 
+
     Route::get('/profile', function () {
         return view('dashboard.admin-profile');
     })->name('admin.profile');
@@ -173,10 +177,6 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/payroll', function () {
         return view('dashboard.payroll');
     })->name('payroll');
-
-    Route::get('/payslip', function () {
-        return view('dashboard.view-payslip');
-    })->name('payslip');
 
     Route::get('/{id}/employee-calendar', function ($id) {
         $employee = User::findOrFail($id);
