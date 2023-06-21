@@ -3,7 +3,6 @@
 
     <div class="card">
         <div class="card-body">
-            <h3 class="">Payslips</h3>
             <table class="table table-striped">
                 <thead>
                     <tr>

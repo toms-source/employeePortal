@@ -3,8 +3,7 @@
 @section('content')
     <div class="d-flex">
         @Include('layouts.sidebar')
-        <div class="col-10">
-            <div class="mt-5 container-fluid" style="height: 100vh;">
+            <div class="content container-fluid py-1" style="width: 100%; height: 100vh;">
                 <div class="card shadow p-3 mb-5 bg-white rounded">
                     <h3 class="px-4"><i class="fa-solid fa-check" style="color: #000000"></i>
                         {{ __('Approved') }}
@@ -22,8 +21,6 @@
                     </div>
                 </div>
             </div>
-
-        </div>
     </div>
     </div>
 @endsection

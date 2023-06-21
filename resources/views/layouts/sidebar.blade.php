@@ -106,6 +106,7 @@
         </div>
 
         <div class="btns">
+        
             <!-- Loan Request -->
             <a class="nav-link collapsible-link" href="#loanRequest">
                 <div class="d-flex align-items-center justify-content-between">
@@ -123,21 +124,18 @@
                     <li class="nav-item"><a class="nav-link mx-5 text-black" href="{{ route('loan2') }}"><i class="fa-solid fa-check" style="color: #000000"></i>Approved</a></li>
                 </ul>
             </div>
-
-
-
         </div>
 
         <div class="btns">
             <!-- Other Request -->
 
             <a class="nav-link collapsible-link" href="#otherRequest">
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center justify-content-between">
+                <div>
                   <i class="icon fa-solid fa-repeat" style="color: #000000;"></i>
                   <span class="ml-1">Other Request</span>
-             
-                    <i class="fa fa-caret-down" style="margin-right: 20px"></i>
-       
+                </div>
+                <i class="fa fa-caret-down" style="margin-right: 20px"></i>
                 </div>
               </a>
               

@@ -29,8 +29,8 @@
     </style>
     <div class="d-flex">
         @Include('layouts.sidebar')
-    
-        <div class="col-10 m-3">
+        <div class="content container-fluid py-1" style="width: 100%; height: 100vh;">
+        <div class="col">
             <div class="card mb-3 shadow p-3 mb-5 bg-white rounded">
                 <div class="card-body">
                     <div class="card-title"><h3>Announcement</h3></div>
