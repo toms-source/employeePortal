@@ -77,7 +77,7 @@ class AdminAddPersonalProfile extends Component
     public function store()
     {
         $data = User::find(Auth::user()->id);
-        $this->validate();
+        //$this->validate();
         $profilePicturePath = '';
         if($this->profile_picture)
         {

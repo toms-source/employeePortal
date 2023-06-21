@@ -36,7 +36,7 @@ return new class extends Migration
             $table->string('contact_relationship')->nullable();
             $table->string('position')->nullable();
             $table->string('description')->nullable();
-            $table->decimal('salary_rate', $precision = 8, $scale = 2)->nullable();  
+            $table->integer('salary_rate')->nullable();  
             $table->string('number')->nullable();          
             $table->string('status')->nullable();
             $table->date('start_date')->nullable();

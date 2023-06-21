@@ -13,15 +13,22 @@
 
             <div class="form-group col-md-12">
                 <label for="reason">Reason</label>
-                <input type="text" class="form-control" placeholder="Reason" id="reason" wire:model="reason" required >
+                <select class="form-control" id="reason" wire:model="reason" required>
+                    <option value="">Select a reason</option>
+                    <option value="Sick leave">Sick leave</option>
+                    <option value="Casual leave">Casual leave</option>
+                    <option value="Public holiday">Public holiday</option>
+                    <option value="Religious holidays">Religious holidays</option>
+                    <option value="Maternity leave">Maternity leave</option>
+                    <option value="Paternity leave">Paternity leave</option>
+                    <option value="Bereavement leave">Bereavement leave</option>
+                    <option value="Compensatory leave">Compensatory leave</option>
+                </select>
             </div>
-
-            <div class="form-group col-md-6">
-                <label for="exampleInputPassword1">Description</label>
-                <textarea name="txtdescription" class="form-control" placeholder="Description"></textarea>
-            </div>        
+            
+     
         </div>
-            <button class="btn btn-success btn-lg btn-block" type="submit">Submit</button>         
+            <button class="btn btn-success btn-lg btn-block mt-3" type="submit">Submit</button>         
     </form>
 
     @if (session()->has('message'))
