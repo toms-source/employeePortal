@@ -49,6 +49,8 @@
                                     wire:click="selectRequestForApproval({{ $payslip['id']  }})">Approve</button>
                                 <button class="btn btn-danger" wire:click="deny({{ $payslip['id'] }})">Deny</button>
                             @endif
+                            
+                            <a href="{{ route('employee-payslip', $payslip['id']) }}"><i class="fa fa-eye"></i></a>
                         </td>
                     </tr>
                 @endforeach

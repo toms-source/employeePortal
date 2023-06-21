@@ -31,7 +31,9 @@
                             <td>{{ $payslips->deductions }}</td>
                             <td>{{ $payslips->allowance }}</td>
                             <td>{{ $payslips->net_pay }}</td>
-                            <td></td>
+                            <td>
+                                <a href="{{ route('employee-payslip-view', $payslips->id ) }}"><i class="fa fa-eye"></i></a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

@@ -11,6 +11,8 @@ use Illuminate\Routing\ResponseFactory;
 use App\Models\User;
 use App\Models\Attendance;
 use App\Models\Schedule;
+use App\Models\payrollList;
+use App\Models\salaryTypes;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -97,10 +99,6 @@ Route::prefix('user')->middleware('user.role')->group(function () {
         return view('/dashboard.user-account-setting');
     })->name('user.account.setting');
 
-    Route::get('/user/profile/edit', function () {
-        return view('dashboard.user-profile-edit');
-    })->name('user.profile.edit');
-
 });
 
 
@@ -110,6 +108,10 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard.admin-dash');
     })->name('admin.dashboard');
+
+    Route::get('/payslip', function () {
+        return view('/dashboard.view-payslipA');
+    })->name('payslip'); 
 
     Route::get('/profile', function () {
         return view('dashboard.admin-profile');
@@ -169,10 +171,6 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         return view('dashboard.payroll');
     })->name('payroll');
 
-    Route::get('/payslip', function () {
-        return view('dashboard.view-payslip');
-    })->name('payslip');
-
     Route::get('/{id}/employee-calendar', function ($id) {
         $employee = User::findOrFail($id);
         $attendanceRecords = Attendance::where('user_id', $id)->get();
@@ -180,9 +178,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         return view('livewire.employee-calendar', compact('employee', 'attendanceRecords','scheduleRecords'));
     })->name('employee-calendar');
     
-    Route::get('/admin/profile/edit', function () {
-        return view('dashboard.admin-profile-edit');
-    })->name('admin.profile.edit');
+    
 });
 
 
