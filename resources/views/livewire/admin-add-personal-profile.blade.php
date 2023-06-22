@@ -1,13 +1,13 @@
 <form method="POST" wire:submit.prevent="store">
     @csrf
     @if (session()->has('message'))
-            <div id="flash-message" class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('message') }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        @endif
+        <div id="flash-message" class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('message') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div>
         <div class="container">
             <div class="row justify-content-center">
@@ -22,14 +22,15 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="mb-3">
-                                <img  src="{{ asset('storage/' . auth()->user()->image) }}" alt="Profile Preview"
+                                <img src="{{ asset('storage/' . auth()->user()->image) }}" alt="Profile Preview"
                                     class="img-thumbnail" style="width: 200px; height: 200px;">
                             </div>
 
                             <div class="mb-3">
                                 <label for="profileImage" class="form-label">Profile Image:</label>
                                 <div class="col-10">
-                                    <input wire:model="profile_picture" type="file" class="form-control bg-secondary text-white" id="profileImage"
+                                    <input wire:model="profile_picture" type="file"
+                                        class="form-control bg-secondary text-white" id="profileImage"
                                         name="profileImage">
                                 </div>
                             </div>
@@ -38,8 +39,8 @@
                         <div class="col-md-7">
                             <div class="mb-3">
                                 <label for="company_email" class="form-label">Company Email:</label>
-                                <input wire:model="company_email" autofocus type="email" class="form-control" id="company_email" name="company_email"
-                                    required>
+                                <input wire:model="company_email" autofocus type="email" class="form-control"
+                                    id="company_email" name="company_email" required>
                                 @error('company_email')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -55,16 +56,16 @@
 
                             <div class="mb-3">
                                 <label for="newPassword" class="form-label">New Password</label>
-                                <input wire:model="password" type="password" class="form-control" id="newPassword" name="newPassword"
-                                    required>
+                                <input wire:model="password" type="password" class="form-control" id="newPassword"
+                                    name="newPassword" required>
                                 @error('password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                <input wire:model="confirm_password" type="password" class="form-control" id="confirmPassword" name="confirmPassword"
-                                    required>
+                                <input wire:model="confirm_password" type="password" class="form-control"
+                                    id="confirmPassword" name="confirmPassword" required>
                                 @error('confirm_password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -265,12 +266,15 @@
                                             <div class="row">
                                                 <div class="col form-group">
                                                     <label for="department">{{ __('Department') }}</label>
-                                                    <select wire:model="department" class="form-select " required
-                                                        aria-label="Default select example">
-                                                        <option selected>Department</option>
-                                                        <option value="IT">IT</option>
-                                                        <option value="softwareEngineer">Software Engineer</option>
+                                                    <select wire:model="department" class="form-select" required aria-label="Default select example">
+                                                        <option value="">Department</option>
+                                                        @if ($departments)
+                                                            @foreach ($departments as $dept)
+                                                                <option value="{{ $dept->name }}">{{ $dept->name }}</option>
+                                                            @endforeach
+                                                        @endif
                                                     </select>
+                                                    
                                                 </div>
                                                 <div class="col form-group">
                                                     <label for="position">{{ __('Position') }}</label>
@@ -295,8 +299,8 @@
                                             <div class="row">
                                                 <div class="col form-group">
                                                     <label for="salary_rate">{{ __('Salary Rate') }}</label>
-                                                    <input wire:model="salary_rate" id="salary_rate" type="number" class="form-control"
-                                                        name="salary_rate" required>
+                                                    <input wire:model="salary_rate" id="salary_rate" type="number"
+                                                        class="form-control" name="salary_rate" required>
                                                     @error('salary_rate')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -323,7 +327,7 @@
                                                 <div class="col form-group">
                                                     <label for="end_date">{{ __('End Date') }}</label>
                                                     <input wire:model="end_date" type="date" class="form-control"
-                                                        id="end_date" required>
+                                                        id="end_date">
                                                     @error('end_date')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -333,15 +337,16 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
     <div class="d-flex justify-content-center mb-1 p-2 gap-3">
         <button type="submit" class="btn btn-outline-success"><i class="fa-solid fa-save"></i> Save</button>
-        <button class="btn btn-outline-danger"><i class="fa-solid fa-ban"></i>Cancel</button>
+        <a type="button" href="{{ route('admin.employee.list') }}" class="btn btn-outline-danger"><i
+                class="fa-solid fa-ban"></i>Cancel</a>
     </div>
 
 </form>

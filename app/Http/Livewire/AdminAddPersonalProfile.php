@@ -7,6 +7,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use App\Mail\EmployeeAdded;
+use App\Models\Departments;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithFileUploads;
 
@@ -22,7 +23,7 @@ class AdminAddPersonalProfile extends Component
     public $first_name;
     public $middle_name;
     public $department;
-    public $role = "employee";
+    public $role;
     public $gender;
     public $birth_date;
     public $civil_status;
@@ -70,7 +71,7 @@ class AdminAddPersonalProfile extends Component
         'description' => 'required',
         'salary_rate' => 'required',
         'start_date' => 'required',
-        'end_date' => 'required',
+        'end_date' => 'nullable',
         'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
     ];
 
@@ -117,10 +118,12 @@ class AdminAddPersonalProfile extends Component
         event(new Registered($user));
         Mail::to($this->email)->send(new EmployeeAdded($this->password));
         session()->flash('message', 'Employee added successfully.');
+        return redirect(route('admin.employee.list'))->with('message2', 'Employee add successfully.');
     }
 
     public function render()
     {
-        return view('livewire.admin-add-personal-profile');
+        $departments = Departments::get();
+        return view('livewire.admin-add-personal-profile', compact('departments'));
     }
 }

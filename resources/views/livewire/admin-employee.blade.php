@@ -7,7 +7,15 @@
             @if (session()->has('message1'))
             <div id="flash-message" class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('message1') }}
-                <button wire:model="profile_picture" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <button wire:click="removeMessage" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
+            @if (session()->has('message2'))
+            <div id="flash-message" class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('message2') }}
+                <button wire:click="removeMessage" type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>

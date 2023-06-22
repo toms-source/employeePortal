@@ -12,19 +12,24 @@ class AdminEmployee extends Component
     public $selectedEmployeeId;
     public $searchTerm;
 
-
     public function render()
     {
-        $employees = User::where(function ($query) {
-            $query->where('last_name', 'like', '%' . $this->searchTerm . '%')
-                ->orWhere('first_name', 'like', '%' . $this->searchTerm . '%')
-                ->orWhere('email', 'like', '%' . $this->searchTerm . '%')
-                ->orWhere('position', 'like', '%' . $this->searchTerm . '%')
-                ->orWhere('department', 'like', '%' . $this->searchTerm . '%')
-                ->orWhere('middle_name', 'like', '%' . $this->searchTerm . '%')
-                ->orWhere('status', 'like', '%' . $this->searchTerm . '%')
-                ->orWhere('role', 'like', '%' . $this->searchTerm . '%');
-        })->get();
+        $employees = User::all();
+        if($this->searchTerm)
+        {
+            $employees = User::where(function ($query) {
+                $query->where('last_name', 'like', '%' . $this->searchTerm . '%')
+                    ->orWhere('first_name', 'like', '%' . $this->searchTerm . '%')
+                    ->orWhere('email', 'like', '%' . $this->searchTerm . '%')
+                    ->orWhere('position', 'like', '%' . $this->searchTerm . '%')
+                    ->orWhere('department', 'like', '%' . $this->searchTerm . '%')
+                    ->orWhere('middle_name', 'like', '%' . $this->searchTerm . '%')
+                    ->orWhere('status', 'like', '%' . $this->searchTerm . '%')
+                    ->orWhere('role', 'like', '%' . $this->searchTerm . '%');
+            })->get();
+        }
+        
+        
         return view('livewire.admin-employee', compact('employees'));
     }
 
@@ -47,4 +52,14 @@ class AdminEmployee extends Component
         $this->confirmDeleteModal = false;
         $this->render();
     }
+
+    public function removeMessage() 
+    {
+        session()->forget('message1');
+        session()->forget('message2');
+    }
+    // public function editEmployees($id)
+    // {
+    //     $this->emit('editEmployeez', $id);
+    // }
 }

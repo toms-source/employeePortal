@@ -6,24 +6,12 @@
                 
                 <div class="col-md-12">
                     <div class="">
-                        <h5 class="fw-bold">{{ __('Personal Profile') }}</h5>
+                        <h5 class="fw-bold">{{ __('Edit Profile') }}</h5>
                     </div>
 
                     <hr>
                     <div class="row gap-3">
-                        <div class="col-md-4">
-                            <div class="mb-3">
-                                <img  src="{{ asset('storage/' . auth()->user()->profile_picture) }}" alt="Profile Preview"
-                                    class="img-thumbnail" style="width: 250px; height: 250px;">
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="profileImage" class="form-label">Profile Image:</label>
-                                <div class="col-10">
-                                    <input wire:model="profile_picture" type="file" class="form-control bg-secondary text-white" id="profileImage" name="profileImage">
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="row">
                             <div class="col form-group">
                                 <label for="lastName">{{ __('Last Name') }}</label>
