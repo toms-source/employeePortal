@@ -105,6 +105,7 @@ class AdminProfile extends Component
         $this->status = $data->status;
         $this->start_date = $data->start_date;
         $this->end_date = $data->end_date;
+        $this->profile_picture = $data->profile_picture;
     }
 
     public function render()

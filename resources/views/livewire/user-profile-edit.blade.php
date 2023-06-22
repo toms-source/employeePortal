@@ -13,8 +13,20 @@
                     <div class="row gap-3">
                         <div class="col-md-4">
                             <div class="mb-3">
-                                <img  src="{{ asset('storage/' . auth()->user()->profile_picture) }}" alt="Profile Preview"
-                                    class="img-thumbnail" style="width: 250px; height: 250px;">
+                                @if ($profile_picture)
+                                    <img src="{{ asset( $profile_picture->temporaryUrl() ) }}"
+                                        alt="Profile Preview" class="img-thumbnail"
+                                        style="width: 200px; height: 200px;">
+                                @else
+                                    @if (auth()->user()->profile_picture)
+                                        <img src="{{ asset('storage/' . auth()->user()->profile_picture) }}"
+                                            alt="Profile Preview" class="img-thumbnail"
+                                            style="width: 200px; height: 200px;">
+                                    @else
+                                        <img class="rounded" src="{{ asset('image/default.jpg') }}" height="200"
+                                            width="200" alt="">
+                                    @endif
+                                @endif
                             </div>
 
                             <div class="mb-3">

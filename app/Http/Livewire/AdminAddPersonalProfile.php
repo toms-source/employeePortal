@@ -77,14 +77,13 @@ class AdminAddPersonalProfile extends Component
 
     public function store()
     {
-        $data = User::find(Auth::user()->id);
         $this->validate();
-        $profilePicturePath = '';
+        $profilePicturePath="";
         if($this->profile_picture)
         {
-            $profilePicturePath = $this->profile_picture->store('profile_pictures', 'public');
-            $data->profile_picture = $profilePicturePath;
+            $profilePicturePath = $this->profile_picture->store('profile_pictures', 'public'); 
         }
+        
 
         $user = User::create([
             'email' => $this->email,
@@ -113,12 +112,13 @@ class AdminAddPersonalProfile extends Component
             'status'=> $this->status,
             'start_date'=> $this->start_date,
             'end_date'=> $this->end_date,
+            'profile_picture' => $profilePicturePath,
         ]);
 
         event(new Registered($user));
         Mail::to($this->email)->send(new EmployeeAdded($this->password));
         session()->flash('message', 'Employee added successfully.');
-        return redirect(route('admin.employee.list'))->with('message2', 'Employee add successfully.');
+        //return redirect(route('admin.employee.list'))->with('message2', 'Employee add successfully.');
     }
 
     public function render()

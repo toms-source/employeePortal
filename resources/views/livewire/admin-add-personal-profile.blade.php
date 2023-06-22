@@ -22,8 +22,14 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="mb-3">
-                                <img src="{{ asset('storage/' . auth()->user()->image) }}" alt="Profile Preview"
-                                    class="img-thumbnail" style="width: 200px; height: 200px;">
+                                @if ($profile_picture)
+                                    <img class="rounded" src="{{ $profile_picture->temporaryUrl() }}" height="200"
+                                        width="200" alt="">
+                                @else
+                                    <img class="rounded" src="{{ asset('image/default.jpg') }}" height="200"
+                                        width="200" alt="">
+                                @endif
+
                             </div>
 
                             <div class="mb-3">
@@ -266,15 +272,17 @@
                                             <div class="row">
                                                 <div class="col form-group">
                                                     <label for="department">{{ __('Department') }}</label>
-                                                    <select wire:model="department" class="form-select" required aria-label="Default select example">
+                                                    <select wire:model="department" class="form-select" required
+                                                        aria-label="Default select example">
                                                         <option value="">Department</option>
                                                         @if ($departments)
                                                             @foreach ($departments as $dept)
-                                                                <option value="{{ $dept->name }}">{{ $dept->name }}</option>
+                                                                <option value="{{ $dept->name }}">
+                                                                    {{ $dept->name }}</option>
                                                             @endforeach
                                                         @endif
                                                     </select>
-                                                    
+
                                                 </div>
                                                 <div class="col form-group">
                                                     <label for="position">{{ __('Position') }}</label>
