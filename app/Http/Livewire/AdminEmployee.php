@@ -9,10 +9,22 @@ class AdminEmployee extends Component
 {
     public $idDelete;
     public $confirmDeleteModal = false;
+    public $selectedEmployeeId;
+    public $searchTerm;
+
 
     public function render()
     {
-        $employees = User::all();
+        $employees = User::where(function ($query) {
+            $query->where('last_name', 'like', '%' . $this->searchTerm . '%')
+                ->orWhere('first_name', 'like', '%' . $this->searchTerm . '%')
+                ->orWhere('email', 'like', '%' . $this->searchTerm . '%')
+                ->orWhere('position', 'like', '%' . $this->searchTerm . '%')
+                ->orWhere('department', 'like', '%' . $this->searchTerm . '%')
+                ->orWhere('middle_name', 'like', '%' . $this->searchTerm . '%')
+                ->orWhere('status', 'like', '%' . $this->searchTerm . '%')
+                ->orWhere('role', 'like', '%' . $this->searchTerm . '%');
+        })->get();
         return view('livewire.admin-employee', compact('employees'));
     }
 
@@ -22,15 +34,17 @@ class AdminEmployee extends Component
         $this->emit('deleteEmployee');
     }
 
+    public function editEmployees($id)
+    {
+        $id = $id;
+        return redirect()->to(route('admin.employee.edit') . '?id=' . $id);
+    }
+
+
     public function deleteEmpConfirm()
     {
         User::find($this->idDelete)->delete();
         $this->confirmDeleteModal = false;
         $this->render();
-    }
-
-    public function editEmployees($id)
-    {
-        $this->emit('editEmployeez', $id);
     }
 }

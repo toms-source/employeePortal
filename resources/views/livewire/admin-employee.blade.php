@@ -4,9 +4,17 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
+            @if (session()->has('message1'))
+            <div id="flash-message" class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('message1') }}
+                <button wire:model="profile_picture" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
             <div class="mb-3">
                 <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <input wire:model="searchTerm" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-primary" type="submit">Search</button>
                 </form>
             </div>
@@ -35,7 +43,7 @@
                             <td>{{ $employee->status }}</td>
                             <td>{{ $employee->salary_rate }}</td>
                             <td>
-                                <button class="fa fa-edit border-0" data-target="#editEmployee" type="button" data-toggle="modal" wire:click="editEmployees({{ $employee->id }})"></button>
+                                <button class="fa fa-edit border-0" data-target="#editEmployee" type="button" wire:click="editEmployees({{ $employee->id }})"></button>
                                 <a><i class="fa-solid fa-trash-can" style="color: #e61919;" wire:click="deleteEmpTry({{ $employee->id }})"></i></a>
                             </td>
                         </tr>

@@ -2,15 +2,16 @@
 
 namespace App\Http\Livewire;
 
-
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Support\Facades\File;
 use Livewire\WithFileUploads;
+use Illuminate\Http\Request;
 
-class AdminProfileEdit extends Component
+class AdminEmployeeEdit extends Component
 {
+
     use WithFileUploads;
 
     public $email;
@@ -37,9 +38,10 @@ class AdminProfileEdit extends Component
     public $start_date;
     public $end_date;
     public $profile_picture;
-
+    public $user_id;
 
     protected $rules = [
+        // 'email' => 'required|email|unique:users,email,' . '$data->id',
         'last_name' => 'required',
         'middle_name' => 'required',
         'first_name' => 'required',
@@ -65,10 +67,11 @@ class AdminProfileEdit extends Component
         'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
     ];
 
-    public function mount()
+    public function mount(Request $request)
     {
-        $data = User::find( Auth::user()->id);
-
+        $this->user_id = $request->query('id');
+        $data = User::find($this->user_id);
+        
         $this->email = $data->email;
         $this->last_name = $data->last_name;
         $this->first_name = $data->first_name;
@@ -94,10 +97,9 @@ class AdminProfileEdit extends Component
         $this->end_date = $data->end_date;
     }
 
-    public function updateProfile()
+    public function updateProfile(Request $request)
     {
-        $data = User::find(Auth::user()->id);
-
+        $data = User::find($this->user_id);
         $this->validate();
        
         $profilePicturePath = '';
@@ -113,10 +115,8 @@ class AdminProfileEdit extends Component
 
         }
 
-        
-
         // Update the properties of the user model
-        $data->email = $this->email;
+        // $data->email = $this->email;
         $data->last_name = $this->last_name;
         $data->first_name = $this->first_name;
         $data->middle_name = $this->middle_name;
@@ -143,13 +143,12 @@ class AdminProfileEdit extends Component
         // Save the updated user model
         $data->save();
 
-        return redirect()->route('admin.profile')->with('message', 'Profile update successfully.');
-
+        return redirect(route('admin.employee.list'))->with('message1', 'Employee edit successfully.');
 
     }
 
     public function render()
     {
-        return view('livewire.admin-profile-edit');
+        return view('livewire.admin-employee-edit');
     }
 }

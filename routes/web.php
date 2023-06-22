@@ -200,8 +200,13 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         return view('livewire.view-payslip-details', compact('employee', 'payslipRecord','salaryRecord'));
     })->name('employee-payslip');
 
-    Route::get('/admin/edit/profile', function () {
+    Route::get('/edit/profile', function () {
         return view('dashboard.admin-profile-edit');
     })->name('admin.profile.edit');
+
+    Route::get('/employee/edit', function () {
+        return view('dashboard.admin-employee-edit');
+    })->name('admin.employee.edit');
+
 });
 
