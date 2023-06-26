@@ -1,9 +1,12 @@
+
+
 <div>
+
     <div>
-        <table class="table">
+        
+        <table class="table table-striped">
             <thead>
                 <tr>
-               
                     <th>Last</th>
                     <th>First</th>
                     <th>Middle</th>
