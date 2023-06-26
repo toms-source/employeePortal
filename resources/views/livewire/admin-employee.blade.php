@@ -51,7 +51,8 @@
                             <td>{{ $employee->status }}</td>
                             <td>{{ $employee->salary_rate }}</td>
                             <td>
-                                <button class="fa fa-edit border-0" data-target="#editEmployee" type="button" wire:click="editEmployees({{ $employee->id }})"></button>
+                                <a href="" class="fas fa-eye"> </a>
+                                <button class="fa fa-edit border-0" type="button" wire:click="editEmployees({{ $employee->id }})"></button>
                                 <a><i class="fa-solid fa-trash-can" style="color: #e61919;" wire:click="deleteEmpTry({{ $employee->id }})"></i></a>
                             </td>
                         </tr>

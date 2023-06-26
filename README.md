@@ -18,4 +18,4 @@ How to run this project:
 
     8. run the project "php artisan serve"
 
-    9. on an other terminal: npm run dev php artisan livewire:discover
+    9. On the other terminal "npm run dev"

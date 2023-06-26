@@ -14,16 +14,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        
 
         User::create([
             'email' => 'admin@gmail.com',
-            'role' => 'admin',
+            'role' => 'superadmin',
             'first_name' => 'Super',
             'last_name' => 'Admin',
             'password' => bcrypt('password123'),
@@ -38,5 +34,7 @@ class DatabaseSeeder extends Seeder
             'status' => 'Hired',
             'password' => bcrypt('password123'),
         ]);
+
+        $this->call(UsersTableSeeder::class);  /// Eto yung mga fake data
     }
 }
