@@ -197,7 +197,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         $payslipRecord = payrollList::where('id', $id)->get();
         $employee = User::findOrFail($payslipRecord[0]->user_id);
         $salaryRecord = salaryTypes::where('daily_rate', $employee->salary_rate)->get();
-        return view('livewire.view-payslip-details', compact('employee', 'payslipRecord','salaryRecord'));
+        return view('dashboard.admin-view-payslip-details', compact('employee', 'payslipRecord','salaryRecord'));
     })->name('employee-payslip');
 
     Route::get('/edit/profile', function () {
