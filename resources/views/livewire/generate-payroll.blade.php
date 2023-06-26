@@ -31,6 +31,7 @@
                     <th>Allowance</th>
                     <th>Net Pay</th>
                     <th>Actions</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,6 +55,7 @@
                             
                          <a href="{{ route('employee-payslip', $payslip['id']) }}"><i class="fa fa-eye"></i></a> 
                         </td>
+                        <td>{{ $payslip['status'] }}</td>
                     </tr>
                 @endforeach
             </tbody>

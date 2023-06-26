@@ -39,7 +39,7 @@
                                 Tax SSS {{' : '. $salaryRecord[0]->tax_sss}}<br><br>
                                 Tax Phil Health {{' : '. $salaryRecord[0]->tax_phealth}}<br>
                                 Tax Pag Ibig {{' : '. $salaryRecord[0]->tax_pibig}}<br>
-                                Total Deductions {{' : '. $salaryRecord[0]->tax_bir + $salaryRecord[0]->tax_sss + $salaryRecord[0]->tax_phealth + $salaryRecord[0]->tax_pibig}}<br><br>
+                                Total Deductions {{' : '. $payslipRecord[0]->deductions}}<br><br>
                                 <h5 class="fw-bold">Total Gross Income: {{$payslipRecord[0]->net_pay}}</h5> 
                             </div>
                         </div>
