@@ -272,9 +272,8 @@
                                             <div class="row">
                                                 <div class="col form-group">
                                                     <label for="department">{{ __('Department') }}</label>
-                                                    <select wire:model="department" class="form-select" required
+                                                    <select wire:model="department" class="form-select" 
                                                         aria-label="Default select example">
-                                                        <option value="">Department</option>
                                                         @if ($departments)
                                                             @foreach ($departments as $dept)
                                                                 <option value="{{ $dept->name }}">
@@ -288,10 +287,12 @@
                                                     <label for="position">{{ __('Position') }}</label>
                                                     <select wire:model="position" class="form-select" required
                                                         aria-label="Default select example">
-                                                        <option selected>Position</option>
-                                                        <option value="Developer">Developer</option>
-                                                        <option value="Designer">Designer</option>
-                                                        <option value="Manager">Manager</option>
+                                                        @if ($departments)
+                                                            @foreach ($departments as $dept)
+                                                                <option value="{{ $dept->department_position }}">
+                                                                    {{ $dept->department_position }}</option>
+                                                            @endforeach
+                                                        @endif
                                                     </select>
                                                 </div>
                                             </div>
@@ -307,8 +308,16 @@
                                             <div class="row">
                                                 <div class="col form-group">
                                                     <label for="salary_rate">{{ __('Salary Rate') }}</label>
-                                                    <input wire:model="salary_rate" id="salary_rate" type="number"
-                                                        class="form-control" name="salary_rate" required>
+                                                    <select wire:model="salary_rate" class="form-select" 
+                                                        aria-label="Default select example">
+                                                    <option value="">Salary Rate</option>
+                                                    @if ($rate)
+                                                        @foreach ($rate as $rates)
+                                                            <option value="{{ $rates->name }}">
+                                                                {{ $rates->daily_rate }}</option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
                                                     @error('salary_rate')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>

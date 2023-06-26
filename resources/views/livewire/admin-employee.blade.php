@@ -51,7 +51,7 @@
                             <td>{{ $employee->status }}</td>
                             <td>{{ $employee->salary_rate }}</td>
                             <td>
-                                <a href="" class="fas fa-eye"> </a>
+                                <a> <i class="fas fa-eye" wire:click="viewEmployees({{ $employee->id }})" ></i> </a>
                                 <button class="fa fa-edit border-0" type="button" wire:click="editEmployees({{ $employee->id }})"></button>
                                 <a><i class="fa-solid fa-trash-can" style="color: #e61919;" wire:click="deleteEmpTry({{ $employee->id }})"></i></a>
                             </td>

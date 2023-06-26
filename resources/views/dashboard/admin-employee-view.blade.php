@@ -6,7 +6,7 @@
 
         <div class="content container-fluid py-1" style="width: 100%; height: 100vh;">
             
-
+            <h5 class="shadow border fw-bold p-3 mb-3 bg-white rounded"> <a href="{{route('admin.employee.list')}}">Employees</a>  >  View</h5>
                 {{-- grid --}}
                 <div class="col"> 
 

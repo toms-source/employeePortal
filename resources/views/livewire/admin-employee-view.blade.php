@@ -230,8 +230,8 @@
                                                         class="form-control" id="end_date">
 
                                                 </div>
-                                                <a href="{{ route('admin.profile.edit') }}" type="button"
-                                                    class="btn btn-primary ml-3 mt-3" id="editButton">Edit</a>
+                                                <a href="{{ route('admin.employee.list') }}" type="button"
+                                                    class="btn btn-primary ml-3 mt-3" id="editButton">Back</a>
                                             </div>
                                         </div>
                                     </div>
