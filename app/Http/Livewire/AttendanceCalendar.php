@@ -3,10 +3,10 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\models\Attendance;
+use App\Models\Attendance;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use App\models\Schedule;
+use App\Models\Schedule;
 
 class AttendanceCalendar extends Component
 {    
