@@ -2,7 +2,7 @@
 
 How to run this project:
 
-    1. Clone the github repo git clone https://github.com/toms-source/legislative
+    1. Clone the github repo git clone https://github.com/toms-source/employeePortal
 
     2. Open project in a terminal and go to the root folder
 
