@@ -126,10 +126,10 @@ class GeneratePayroll extends Component
     
             // Perform additional calculations based on the salary types model // Assuming you have only one record in the salary types table
 
-            $grossPay = $regularHoursTotal * $user->salary_rate;
+            $grossPay = $regularHoursTotal * $user->salary_rate + $overtimeAmount;
             $deductions = $this->calculateDeductions($salaryTypes[0]);
             $allowance = $salaryTypes[0]->allowance;
-            $netPay = $grossPay + $overtimeAmount - $deductions + $allowance;
+            $netPay = $grossPay + $overtimeAmount + $allowance - $deductions;
     
             // Create payrollList record
             $payrollList = payrollList::create([
@@ -271,7 +271,7 @@ class GeneratePayroll extends Component
             // Perform additional calculations based on the salary types model
            // Assuming you have only one record in the salary types table
 
-            $grossPay = $regularHoursTotal * $user->salary_rate;
+            $grossPay = $regularHoursTotal * $user->salary_rate + $overtimeAmount;
             $deductions = $this->calculateDeductions2nd($salaryTypes[0]);
             $allowance = $salaryTypes[0]->allowance;
             $netPay = $grossPay + $overtimeAmount + $allowance - $deductions;
