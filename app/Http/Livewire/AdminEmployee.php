@@ -45,6 +45,11 @@ class AdminEmployee extends Component
         return redirect()->to(route('admin.employee.edit') . '?id=' . $id);
     }
 
+    public function viewEmployees($id)
+    {
+        $id = $id;
+        return redirect()->to(route('admin.employee.view') . '?id=' . $id);
+    }
 
     public function deleteEmpConfirm()
     {

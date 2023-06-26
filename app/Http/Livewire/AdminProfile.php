@@ -8,6 +8,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\File;
 use Livewire\WithFileUploads;
 
+
 class AdminProfile extends Component
 {
     use WithFileUploads;
