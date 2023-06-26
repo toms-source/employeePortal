@@ -208,5 +208,9 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         return view('dashboard.admin-employee-edit');
     })->name('admin.employee.edit');
 
+    Route::get('/employee/view', function () {
+        return view('dashboard.admin-employee-view');
+    })->name('admin.employee.view');
+
 });
 
