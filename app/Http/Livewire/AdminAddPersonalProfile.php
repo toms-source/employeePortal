@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use App\Mail\EmployeeAdded;
 use App\Models\Departments;
+use App\Models\salaryTypes;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithFileUploads;
 
@@ -52,7 +53,7 @@ class AdminAddPersonalProfile extends Component
         'last_name' => 'required',
         'middle_name' => 'required',
         'first_name' => 'required',
-        'department' => 'required',
+        'department' => 'nullable',
         'status' => 'required',
         'role' => 'required',
         'gender' => 'required',
@@ -124,6 +125,7 @@ class AdminAddPersonalProfile extends Component
     public function render()
     {
         $departments = Departments::get();
-        return view('livewire.admin-add-personal-profile', compact('departments'));
+        $rate = salaryTypes::get();
+        return view('livewire.admin-add-personal-profile', compact('departments','rate'));
     }
 }
