@@ -22,8 +22,8 @@
                                     Cutoff {{' : '. $payslipRecord[0]->cutoff_from . '-'. $payslipRecord[0]->cutoff_to}}<br><br>
                                     Total Regular Hours {{' : '. $payslipRecord[0]->regular_hours_total}}<br>
                                     Hourly Rate {{' : '. $employee->salary_rate}}<br><br>
-                                    OT Hours {{' : '. $payslipRecord[0]->regular_hours_total}}<br>
-                                    Hourly Rate {{' : '. $salaryRecord[0]->ot_rate}}<br><br>
+                                    OT Hours {{' : '. $payslipRecord[0]->ot_hours_total}}<br>
+                                    OT Rate {{' : '. $salaryRecord[0]->ot_rate}}<br><br>
                                     Total Taxable Income {{' : '. $payslipRecord[0]->gross_pay}}<br>
                                     Non-Taxable Income {{' : '. $salaryRecord[0]->allowance}}<br><br>
                                     <h5 class="fw-bold">Total Gross Income: {{$salaryRecord[0]->allowance + $payslipRecord[0]->gross_pay}}</h5> 

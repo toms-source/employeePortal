@@ -14,6 +14,7 @@ class payrollList extends Model
         'cutoff_to',
         'present_days_total',
         'regular_hours_total',
+        'ot_hours_total',
         'gross_pay',
         'deductions',
         'allowance',

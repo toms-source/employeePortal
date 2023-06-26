@@ -26,6 +26,7 @@
                     <th>Employee Name</th>
                     <th>Present Days Total</th>
                     <th>Regular Hours Total</th>
+                    <th>OT Hours Total</th>
                     <th>Gross Pay</th>
                     <th>Deductions</th>
                     <th>Allowance</th>
@@ -42,6 +43,7 @@
                         <td>{{ $payslip['employee_name'] }}</td>
                         <td>{{ $payslip['present_days_total'] }}</td>
                         <td>{{ $payslip['regular_hours_total'] }}</td>
+                        <td>{{ $payslip['ot_hours_total'] }}</td>
                         <td>{{ $payslip['gross_pay'] }}</td>
                         <td>{{ $payslip['deductions'] }}</td>
                         <td>{{ $payslip['allowance'] }}</td>

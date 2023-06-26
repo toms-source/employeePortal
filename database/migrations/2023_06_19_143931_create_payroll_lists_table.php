@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('cutoff_to');
             $table->integer('present_days_total'); //manggagaling sa sched
             $table->decimal('regular_hours_total', $precision = 8, $scale = 2);
+            $table->decimal('ot_hours_total', $precision = 8, $scale = 2);
             $table->decimal('gross_pay', $precision = 8, $scale = 2);
             $table->decimal('deductions', $precision = 8, $scale = 2);
             $table->decimal('allowance', $precision = 8, $scale = 2);

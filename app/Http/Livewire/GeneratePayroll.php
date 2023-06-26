@@ -29,6 +29,7 @@ class GeneratePayroll extends Component
                     'employee_name' => $payroll->user->first_name . ' ' . $payroll->user->last_name,
                     'present_days_total' => $payroll->present_days_total,
                     'regular_hours_total' => $payroll->regular_hours_total,
+                    'ot_hours_total' => $payroll->ot_hours_total,
                     'gross_pay' => $payroll->gross_pay,
                     'deductions' => $payroll->deductions,
                     'allowance' => $payroll->allowance,
@@ -62,6 +63,7 @@ class GeneratePayroll extends Component
                     'employee_name' => $payroll->user->first_name . ' ' . $payroll->user->last_name,
                     'present_days_total' => $payroll->present_days_total,
                     'regular_hours_total' => $payroll->regular_hours_total,
+                    'ot_hours_total' => $payroll->ot_hours_total,
                     'gross_pay' => $payroll->gross_pay,
                     'deductions' => $payroll->deductions,
                     'allowance' => $payroll->allowance,
@@ -78,10 +80,16 @@ class GeneratePayroll extends Component
             $existingPayroll = payrollList::where('user_id', $user->id)
                 ->where('cutoff_from', $this->getCutoffStartDate())
                 ->where('cutoff_to', $this->getCutoffEndDate())
+                ->where('status', '!=' , "Denied")
                 ->first();
     
             if ($existingPayroll) {
-                continue; // Skip generating the payslip if it already exists
+                if($existingPayroll->status == "Denied"){
+
+                }else{
+                    continue; // Skip generating the payslip if it already exists
+                }
+               
             }
     
             // Retrieve the attendance records for the employee
@@ -138,6 +146,7 @@ class GeneratePayroll extends Component
                 'cutoff_to' => $this->getCutoffEndDate(),
                 'present_days_total' => $presentDaysTotal,
                 'regular_hours_total' => $regularHoursTotal,
+                'ot_hours_total' => $overtimeHoursTotal,
                 'gross_pay' => $grossPay,
                 'deductions' => $deductions,
                 'allowance' => $allowance,
@@ -153,6 +162,7 @@ class GeneratePayroll extends Component
                 'employee_name' => $user->first_name . ' ' . $user->last_name,
                 'present_days_total' => $presentDaysTotal,
                 'regular_hours_total' => $regularHoursTotal,
+                'ot_hours_total' => $overtimeHoursTotal,
                 'gross_pay' => $grossPay,
                 'deductions' => $deductions,
                 'allowance' => $allowance,
@@ -207,6 +217,7 @@ class GeneratePayroll extends Component
                     'employee_name' => $payroll->user->first_name . ' ' . $payroll->user->last_name,
                     'present_days_total' => $payroll->present_days_total,
                     'regular_hours_total' => $payroll->regular_hours_total,
+                    'ot_hours_total' => $payroll->ot_hours_total,
                     'gross_pay' => $payroll->gross_pay,
                     'deductions' => $payroll->deductions,
                     'allowance' => $payroll->allowance,
@@ -223,10 +234,14 @@ class GeneratePayroll extends Component
             $existingPayroll = payrollList::where('user_id', $user->id)
                 ->where('cutoff_from', $this->getCutoffStartDate2nd())
                 ->where('cutoff_to', $this->getCutoffEndDate2nd())
+                ->where('status', '!=' , "Denied")
                 ->first();
     
             if ($existingPayroll) {
-                continue; // Skip generating the payslip if it already exists
+                if($existingPayroll->status == "Denied"){
+                }else{
+                    continue; // Skip generating the payslip if it already exists
+                }
             }
     
             // Retrieve the attendance records for the employee
@@ -283,6 +298,7 @@ class GeneratePayroll extends Component
                 'cutoff_to' => $this->getCutoffEndDate2nd(),
                 'present_days_total' => $presentDaysTotal,
                 'regular_hours_total' => $regularHoursTotal,
+                'ot_hours_total' => $overtimeHoursTotal,
                 'gross_pay' => $grossPay,
                 'deductions' => $deductions,
                 'allowance' => $allowance,
@@ -298,6 +314,7 @@ class GeneratePayroll extends Component
                 'employee_name' => $user->first_name . ' ' . $user->last_name,
                 'present_days_total' => $presentDaysTotal,
                 'regular_hours_total' => $regularHoursTotal,
+                'ot_hours_total' => $overtimeHoursTotal,
                 'gross_pay' => $grossPay,
                 'deductions' => $deductions,
                 'allowance' => $allowance,

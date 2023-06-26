@@ -11,6 +11,7 @@
                         <th>Employee Name</th>
                         <th>Present Days Total</th>
                         <th>Regular Hours Total</th>
+                        <th>OT Hours Total</th>
                         <th>Gross Pay</th>
                         <th>Deductions</th>
                         <th>Allowance</th>
@@ -26,6 +27,7 @@
                             <td>{{ $userstuff->first_name. ' ' .$userstuff->last_name}}</td>
                             <td>{{ $payslips->present_days_total }}</td>
                             <td>{{ $payslips->regular_hours_total }}</td>
+                            <td>{{ $payslips->ot_hours_total }}</td>
                             <td>{{ $payslips->gross_pay }}</td>
                             <td>{{ $payslips->deductions }}</td>
                             <td>{{ $payslips->allowance }}</td>
