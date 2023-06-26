@@ -14,6 +14,9 @@
                 </h5>
                 <div class="shadow border fw-bold p-3 mb-3 bg-white rounded">
                     <h5 class="shadow border fw-bold p-3 mb-3 bg-white rounded">{{ $employee->first_name . ' ' . $employee->last_name }} </h5> 
+                    {{-- @if ($payslipRecord[0]->status == "Pending")
+                              <div>  <button class="btn btn-success" wire:click="editThis">Edit Payroll</button></div>
+                    @endif --}}
                 <div class="card">
                 <div class="card-body">
                     <div class="card-title"><h3>Earnings:</h3></div>
@@ -38,7 +41,7 @@
                         Tax SSS {{' : '. $salaryRecord[0]->tax_sss}}<br><br>
                         Tax Phil Health {{' : '. $salaryRecord[0]->tax_phealth}}<br>
                         Tax Pag Ibig {{' : '. $salaryRecord[0]->tax_pibig}}<br>
-                        Total Deductions {{' : '. $salaryRecord[0]->tax_bir + $salaryRecord[0]->tax_sss + $salaryRecord[0]->tax_phealth + $salaryRecord[0]->tax_pibig}}<br><br>
+                        Total Deductions {{' : '. $payslipRecord[0]->deductions}}<br><br>
                         <h5 class="fw-bold">Total Gross Income: {{$payslipRecord[0]->net_pay}}</h5> 
                     </div>
                 </div>

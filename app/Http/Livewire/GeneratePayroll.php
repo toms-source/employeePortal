@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class GeneratePayroll extends Component
 {
     public $payslips;
+    public $payslipsOld;
     public $selectedRequest;
     public $idDeny;
 
@@ -273,7 +274,7 @@ class GeneratePayroll extends Component
             $grossPay = $regularHoursTotal * $user->salary_rate;
             $deductions = $this->calculateDeductions2nd($salaryTypes[0]);
             $allowance = $salaryTypes[0]->allowance;
-            $netPay = $grossPay + $overtimeAmount - $deductions + $allowance;
+            $netPay = $grossPay + $overtimeAmount + $allowance - $deductions;
     
             // Create payrollList record
             $payrollList = payrollList::create([
@@ -366,5 +367,11 @@ class GeneratePayroll extends Component
         $query  = payrollList::where('id', 'like', $id)->update(['status' => 'Denied']);
         
         $this->emit('newApproved');
+    }
+
+    
+    public function pastMonths(){
+        $payrolls = payrollList::all();
+        
     }
 }
